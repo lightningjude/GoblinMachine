@@ -397,6 +397,7 @@ void autonomous() {}
 // main opcontrol
 void opcontrol() {
 	//1 is turn, 0 is drive
+	/*
 	if (s==1) {
 		chassis.setPose(0,0,0);
 		chassis.turnToHeading(g, 5);
@@ -405,6 +406,7 @@ void opcontrol() {
 		chassis.setPose(0,0,0);
 		chassis.moveToPoint(0, g, 5);
 	}
+		*/
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	while (true) {
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
