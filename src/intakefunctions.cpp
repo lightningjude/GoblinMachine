@@ -29,3 +29,7 @@ void outmiddle() {
     intakehigh.move_velocity(-100);
     scorer.retract();
 }
+void intakestop() {
+    intakelow.move_velocity(0);
+    intakehigh.move_velocity(0);
+}

@@ -234,6 +234,74 @@ void initialize() {
 	*/
 }
 
+/*
+button mapping
+1. R2(Top Score) 
+2. L2(Middle score)
+3. L1(Intake to reservoir)
+3. Left stick fwd/bwd, r stick l/r
+4. R1: ground score(good color send down, bad color descore up)
+*/
+
+void intakethread() {
+	bool ttog = false;
+	bool tlatch = false;
+	bool mtog = false;
+	bool mlatch = false;
+	bool itog = false;
+	bool ilatch = false;
+	bool dtog = false;
+	bool dlatch = false;
+	while (true) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+			if (!ilatch) {
+				if (itog) {
+					intakein();
+				}
+				else {
+					intakestop();
+				}
+				itog = !itog;
+				ilatch = true;
+			}
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+			if (!mlatch) {
+				if (mtog) {
+					outmiddle();
+				}
+				else {
+					intakestop();
+				}
+				mtog = !mtog;
+				mlatch = true;
+			}
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+			if (!dlatch) {
+				if (dtog) {
+					outdown();
+				}
+				else {
+					intakestop();
+				}
+				dtog = !dtog;
+				dlatch = true;
+			}
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
+			outmiddle();
+		}
+		else {
+			intakelow.move_velocity(0);
+			intakehigh.move_velocity(0);
+		}
+		pros::delay(20);
+	}
+}
+
+
+
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
@@ -281,15 +349,15 @@ void autonomous() {}
 
 // main opcontrol
 void opcontrol() {
-	
+	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	while (true) {
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
 		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
 		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);  // Prints status of the emulated screen LCDs
 
 		// Arcade control scheme
-		int leftY = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
-		int rightX = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
+		int leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
+		int rightX = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
 		
 		//last value is called desaturate bias
 		/* desaturateBias has a range of 0 to 1, 

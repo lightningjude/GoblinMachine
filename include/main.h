@@ -24,6 +24,7 @@
  * E_CONTROLLER_MASTER is pedantically correct within the PROS styleguide, but
  * not convenient for most student programmers.
  */
+#include "pros/imu.hpp"
 #define PROS_USE_SIMPLE_NAMES
 
 /**
@@ -70,6 +71,7 @@ void intakein(void);
 void outup(void);
 void outdown(void);
 void outmiddle(void);
+void intakestop(void);
 #ifdef __cplusplus
 }
 #endif
