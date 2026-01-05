@@ -1,5 +1,6 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "pros/misc.h"
 
 
 //Lemlib setup
@@ -176,6 +177,14 @@ std::tuple<double,double,double,double> lattester(int goali,double p, double i, 
 	double ki = i;
 	double kd = d;
 	int g = goali;
+	bool going = false;
+	master.clear();
+	while (going==false) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+			going=true;
+		}
+		
+	}
 	return {g,kp,ki,kd};
 }
 // main opcontrol
