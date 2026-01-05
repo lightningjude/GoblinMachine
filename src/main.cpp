@@ -118,11 +118,14 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 void initialize() {
 	
 	chassis.calibrate();
-	pros::lcd::initialize();
+	//pros::lcd::initialize();
 	
 	pros::Task screen_task([&]() {
-        while (true) {
+        lv_example_buttonmatrix_1();
+		/*
+		while (true) {
             // print robot location to the brain screen
+			
             pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
             pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
             pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
@@ -130,9 +133,11 @@ void initialize() {
 			master.print(0,0,"X: %f",chassis.getPose().x);
 			master.print(1,0,"Y: %f",chassis.getPose().y);
 			master.print(2,0,"Theta: %f",chassis.getPose().theta);
+			
             // delay to save resources
             pros::delay(20);
         }
+		*/
     });
 	
 }
