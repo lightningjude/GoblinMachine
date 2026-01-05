@@ -3,6 +3,70 @@
 #include "pros/misc.h"
 
 
+//tester for now
+pros::Controller master(pros::E_CONTROLLER_MASTER);
+
+
+
+//tester gui for lat
+std::tuple<double,double,double,double> lattester(double g,double p, double d, double i) {
+	double val[4]= {g,p,d,i};
+	double inc[4]= {10,1,1,1};
+	std::string name[4]= {"goal","kp","kd","ki"} ;
+	bool going = false;
+	int sel = 0;
+	bool changed = false;
+	master.clear();
+	master.print(0,0,"goal: %d",val[0]);
+	master.print(1, 0, "kp:%.2,kd:%.2,ki:%.2",val[1],val[2],val[3]);
+	master.print(2,0,"selected: %d",name[sel]);
+	while (going==false) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+			going=true;
+		}
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)){
+			if (sel<3) {
+				sel++;
+			}
+			else {
+				sel=0;
+			}
+			changed=true;
+		}
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)){
+			if (sel>0) {
+				sel--;
+			}
+			else {
+				sel=3;
+			}
+			changed=true;
+		}
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)){
+			val[sel]=val[sel]+inc[sel];
+			changed=true;
+		}
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)){
+			val[sel]=val[sel]-inc[sel];
+			changed=true;
+		}
+		if (changed) {
+			master.clear();
+			master.print(0,0,"goal: %d",val[0]);
+			master.print(1, 0, "kp:%.2,kd:%.2,ki:%.2",val[1],val[2],val[3]);
+			master.print(2,0,"selected: %d",name[sel]);
+			changed = false;
+		}
+	}
+	return {val[0],val[1],val[2],val[3]};
+}
+
+double gdef = 12;
+double pdef = 30;
+double ddef = 1;
+double idef = 0;
+
+const auto [g,p,d,i] = lattester(gdef,pdef,ddef,idef);
 //Lemlib setup
 
 //wheel dim: lemlib::Omniwheel::NEW_325
@@ -35,7 +99,6 @@ lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to null
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
                             &imu // inertial sensor
 );
-
 
 //PID setup
 // lateral PID controller
@@ -169,62 +232,7 @@ void autonomous() {}
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
-pros::Controller master(pros::E_CONTROLLER_MASTER);
 
-
-
-//tester gui for lat
-std::tuple<double,double,double,double> lattester(double g,double p, double d, double i) {
-	double val[4]= {g,p,d,i};
-	double inc[4]= {10,1,1,1};
-	std::string name[4]= {"goal","kp","kd","ki"} ;
-	bool going = false;
-	int sel = 0;
-	bool changed = false;
-	master.clear();
-	master.print(0,0,"goal: %d",val[0]);
-	master.print(1, 0, "kp:%.2,kd:%.2,ki:%.2",val[1],val[2],val[3]);
-	master.print(2,0,"selected: %d",name[sel]);
-	while (going==false) {
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-			going=true;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)){
-			if (sel<3) {
-				sel++;
-			}
-			else {
-				sel=0;
-			}
-			changed=true;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)){
-			if (sel>0) {
-				sel--;
-			}
-			else {
-				sel=3;
-			}
-			changed=true;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)){
-			val[sel]=val[sel]+inc[sel];
-			changed=true;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)){
-			val[sel]=val[sel]-inc[sel];
-			changed=true;
-		}
-		if (changed) {
-			master.clear();
-			master.print(0,0,"goal: %d",val[0]);
-			master.print(1, 0, "kp:%.2,kd:%.2,ki:%.2",val[1],val[2],val[3]);
-			master.print(2,0,"selected: %d",name[sel]);
-			changed = false;
-		}
-	}
-	return {val[0],val[1],val[2],val[3]};
-}
 // main opcontrol
 void opcontrol() {
 	
