@@ -254,6 +254,8 @@ void intakethread() {
 	bool dlatch = false;
 	bool otog = false;
 	bool olatch = false;
+	bool mltog = false;
+	bool mllatch = false;
 	while (true) {
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			if (!ilatch) {
@@ -270,6 +272,9 @@ void intakethread() {
 				ilatch = true;
 			}
 		}
+		else {
+			ilatch = false;
+		}
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			if (!mlatch) {
 				if (mtog) {
@@ -285,6 +290,9 @@ void intakethread() {
 				mlatch = true;
 			}
 		}
+		else {
+			mlatch = false;
+		}
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			if (!dlatch) {
 				if (dtog) {
@@ -299,6 +307,9 @@ void intakethread() {
 				otog=false;
 				dlatch = true;
 			}
+		}
+		else {
+			dlatch = false;
 		}
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			if (!olatch) {
@@ -323,9 +334,24 @@ void intakethread() {
 				olatch = true;
 			}
 		}
-	
-		
-		
+		else {
+			olatch = false;
+		}
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)){
+			if (!mlatch) {
+				if (mltog) {
+					matchload.retract();
+				}
+				else {
+					matchload.extend();
+				}
+				mltog = !mltog;
+				mllatch = true;
+			}
+		}
+		else {
+			mllatch = false;
+		}
 		pros::delay(20);
 	}
 }
