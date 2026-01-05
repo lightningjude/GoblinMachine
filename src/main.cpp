@@ -252,6 +252,8 @@ void intakethread() {
 	bool ilatch = false;
 	bool dtog = false;
 	bool dlatch = false;
+	bool otog = false;
+	bool olatch = false;
 	while (true) {
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			if (!ilatch) {
@@ -262,10 +264,13 @@ void intakethread() {
 					intakestop();
 				}
 				itog = !itog;
+				mtog=false;
+				dtog=false;
+				otog=false;
 				ilatch = true;
 			}
 		}
-		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			if (!mlatch) {
 				if (mtog) {
 					outmiddle();
@@ -274,10 +279,13 @@ void intakethread() {
 					intakestop();
 				}
 				mtog = !mtog;
+				itog=false;
+				dtog=false;
+				otog=false;
 				mlatch = true;
 			}
 		}
-		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			if (!dlatch) {
 				if (dtog) {
 					outdown();
@@ -286,16 +294,38 @@ void intakethread() {
 					intakestop();
 				}
 				dtog = !dtog;
+				itog=false;
+				mtog=false;
+				otog=false;
 				dlatch = true;
 			}
 		}
-		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			outmiddle();
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
+			if (!olatch) {
+				if (otog) {
+					if (mtog) {
+						outmiddle();
+					}
+					else if (dtog) {
+						outdown();
+					}
+					else if (itog) {
+						intakein();
+					}
+					else if (ttog) {
+						outup();
+					}
+				}
+				else {
+					intakestop();
+				}
+				otog = !otog;
+				olatch = true;
+			}
 		}
-		else {
-			intakelow.move_velocity(0);
-			intakehigh.move_velocity(0);
-		}
+	
+		
+		
 		pros::delay(20);
 	}
 }
