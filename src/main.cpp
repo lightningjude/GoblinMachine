@@ -11,118 +11,11 @@
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
-/*
-//tester gui
-std::tuple<double,double,double,double> tester(double g,double p, double d, double i) {
-	double val[4]= {g,p,d,i};
-	double inc[4]= {10,1,1,1};
-	std::string name[4]= {"goal","kp","kd","ki"} ;
-	bool going = false;
-	int sel = 0;
-	bool changed = false;
-	master.clear();
-	master.print(0,0,"goal: %d",val[0]);
-	master.print(1, 0, "kp:%.2,kd:%.2,ki:%.2",val[1],val[2],val[3]);
-	master.print(2,0,"selected: %d",name[sel]);
-	while (going==false) {
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-			going=true;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)){
-			if (sel<3) {
-				sel++;
-			}
-			else {
-				sel=0;
-			}
-			changed=true;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)){
-			if (sel>0) {
-				sel--;
-			}
-			else {
-				sel=3;
-			}
-			changed=true;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)){
-			val[sel]=val[sel]+inc[sel];
-			changed=true;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)){
-			val[sel]=val[sel]-inc[sel];
-			changed=true;
-		}
-		if (changed) {
-			master.clear();
-			master.print(0,0,"goal: %d",val[0]);
-			master.print(1, 0, "kp:%.2,kd:%.2,ki:%.2",val[1],val[2],val[3]);
-			master.print(2,0,"selected: %d",name[sel]);
-			changed = false;
-		}
-		pros::delay(20);
-	}
-	return {val[0],val[1],val[2],val[3]};
-}
-
-*/
-std::tuple<double,double,double,double> tester(double g,double p, double d, double i) {
-	return {g,p,d,i};
-}
-std::tuple<int,double,double,double,double> gettest() {
-	double gldef = 12;
-	double pldef = 30;
-	double dldef = 1;
-	double ildef = 0;
-
-	double gtdef = 90;
-	double ptdef = 30;
-	double dtdef = 1;
-	double itdef = 0;
-
-	
-	master.clear();
-	master.print(1, 0, "Left for turn, right for drive");
-	/*bool press = false;
-	// 1 is drive, 0 is turn, 2 will error
-	int dort = 2;
-	while (press==false) {
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-			//turn
-			dort=0;
-			press=true;
-		}
-		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-			//drive
-			dort=1;
-			press=true;
-		}
-		pros::delay(20);
-	}
-	if (dort==1) {
-		const auto [g,p,d,i] = tester(gldef,pldef,dldef,ildef);
-		return {dort,g,p,d,i};
-	}
-	else if (dort==0) {
-		const auto [g,p,d,i] = tester(gtdef,ptdef,dtdef,itdef);
-		return {dort,g,p,d,i};
-	} 
-	else {
-
-	
-	return {0,20,20,0,0};
-	} */
-	return {1,12,20,1,0};
-}
-
-const auto [s,g,p,d,i] = gettest();
-
-/*double s=0;
+double s=0;
 double g=12;
 double p=20;
 double d=1;
-double i=0; */
+double i=0;
 
 //Lemlib setup
 
@@ -385,7 +278,7 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() {
-	
+
 }
 
 /**
