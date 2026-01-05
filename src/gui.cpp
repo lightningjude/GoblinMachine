@@ -47,10 +47,9 @@ static void color_event_handler(lv_event_t * e)
             c=pros::Color::blue;
             cp=1;
         }
-    lv_obj_t * label4=lv_label_create(lv_screen_active());
-    lv_label_set_text(label4,"color picked");
-    lv_obj_align(label4, LV_ALIGN_CENTER, 0, 0);
-    //lv_obj_delete(obj);
+        lv_obj_t * label4=lv_label_create(lv_screen_active());
+        lv_label_set_text(label4,"color picked");
+        lv_obj_align(label4, LV_ALIGN_CENTER, 0, 0);
 }
 }
 static void side_event_handler(lv_event_t * e)
@@ -72,7 +71,6 @@ static void side_event_handler(lv_event_t * e)
         lv_obj_t * label3=lv_label_create(lv_screen_active());
         lv_label_set_text(label3,"side picked");
         lv_obj_align(label3, LV_ALIGN_CENTER, 0, 0);
-        lv_obj_delete(obj);
 
     
 }
@@ -95,7 +93,6 @@ static void mode_event_handler(lv_event_t * e)
     lv_obj_t * label4=lv_label_create(lv_screen_active());
     lv_label_set_text(label4,"mode picked");
     lv_obj_align(label4, LV_ALIGN_CENTER, 0, 0);
-    lv_obj_delete(obj);     
 }
 }
 static const char * btnm_map[] = {"1", "2", "3", "4", "5", "\n",
@@ -111,7 +108,7 @@ void lv_example_buttonmatrix_1(void)
     lv_obj_t * btnm1 = lv_buttonmatrix_create(lv_screen_active());
     lv_buttonmatrix_set_map(btnm1, btnm_map);
     lv_buttonmatrix_set_button_width(btnm1, 10, 2);        /*Make "Action1" twice as wide as "Action2"*/
-    lv_buttonmatrix_set_button_ctrl_all(btnm1, LV_BUTTONMATRIX_CTRL_CHECKABLE);
+    //lv_buttonmatrix_set_button_ctrl_all(btnm1, LV_BUTTONMATRIX_CTRL_CHECKABLE);
 
    
     lv_obj_align(btnm1, LV_ALIGN_CENTER, 0, 0);
@@ -121,8 +118,8 @@ void lv_color_buttonmatrix(void)
 {
     lv_obj_t * color_btnm = lv_buttonmatrix_create(lv_screen_active());
     lv_buttonmatrix_set_map(color_btnm, color_btnm_map);
-    lv_buttonmatrix_set_button_ctrl_all(color_btnm, LV_BUTTONMATRIX_CTRL_CHECKABLE);
-    lv_buttonmatrix_set_one_checked(color_btnm, true);
+    //lv_buttonmatrix_set_button_ctrl_all(color_btnm, LV_BUTTONMATRIX_CTRL_CHECKABLE);
+    //lv_buttonmatrix_set_one_checked(color_btnm, true);
    
     lv_obj_align(color_btnm, LV_ALIGN_CENTER, 0, 60);
     lv_obj_add_event_cb(color_btnm, color_event_handler, LV_EVENT_PRESSED, NULL);
@@ -131,8 +128,8 @@ void lv_side_buttonmatrix(void)
 {
     lv_obj_t * side_btnm = lv_buttonmatrix_create(lv_screen_active());
     lv_buttonmatrix_set_map(side_btnm, side_btnm_map);
-    lv_buttonmatrix_set_button_ctrl_all(side_btnm, LV_BUTTONMATRIX_CTRL_CHECKABLE);
-    lv_buttonmatrix_set_one_checked(side_btnm, true);
+    //lv_buttonmatrix_set_button_ctrl_all(side_btnm, LV_BUTTONMATRIX_CTRL_CHECKABLE);
+    //lv_buttonmatrix_set_one_checked(side_btnm, true);
    
     lv_obj_align(side_btnm, LV_ALIGN_CENTER, 0, 120);
     lv_obj_add_event_cb(side_btnm, side_event_handler, LV_EVENT_PRESSED, NULL);
@@ -141,8 +138,8 @@ void lv_mode_buttonmatrix(void)
 {
     lv_obj_t * mode_btnm = lv_buttonmatrix_create(lv_screen_active());
     lv_buttonmatrix_set_map(mode_btnm, mode_btnm_map);
-    lv_buttonmatrix_set_button_ctrl_all(mode_btnm, LV_BUTTONMATRIX_CTRL_CHECKABLE);
-    lv_buttonmatrix_set_one_checked(mode_btnm, true);
+    //lv_buttonmatrix_set_button_ctrl_all(mode_btnm, LV_BUTTONMATRIX_CTRL_CHECKABLE);
+    //lv_buttonmatrix_set_one_checked(mode_btnm, true);
    
     lv_obj_align(mode_btnm, LV_ALIGN_CENTER, 0, -60);
     lv_obj_add_event_cb(mode_btnm, mode_event_handler, LV_EVENT_PRESSED, NULL);
@@ -177,9 +174,9 @@ void lv_display_selection(void) {
 
 std::tuple<pros::Color,int,int,int> gui() {
     
-    /*lv_color_buttonmatrix();
+    lv_color_buttonmatrix();
     lv_side_buttonmatrix();
-    lv_mode_buttonmatrix();*/
+    lv_mode_buttonmatrix();
     lv_display_selection();
     return std::make_tuple(c,cp,side,skills);
 }
