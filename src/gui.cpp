@@ -35,5 +35,5 @@ void lv_example_buttonmatrix_1(void)
     
    
     lv_obj_align(btnm1, LV_ALIGN_CENTER, 0, 0);
-    lv_obj_add_event_cb(btnm1, event_handler, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(btnm1, event_handler, LV_EVENT_PRESSED, NULL);
 }
