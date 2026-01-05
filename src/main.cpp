@@ -173,7 +173,7 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
 
-//tester gui
+//tester gui for lat
 std::tuple<double,double,double,double> lattester(double g,double p, double d, double i) {
 	double val[4]= {g,p,d,i};
 	double inc[4]= {10,1,1,1};
