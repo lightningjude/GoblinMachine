@@ -83,7 +83,7 @@ std::tuple<int,double,double,double,double> gettest() {
 	
 	master.clear();
 	master.print(1, 0, "Left for turn, right for drive");
-	bool press = false;
+	/*bool press = false;
 	// 1 is drive, 0 is turn, 2 will error
 	int dort = 2;
 	while (press==false) {
@@ -106,9 +106,15 @@ std::tuple<int,double,double,double,double> gettest() {
 	else if (dort==0) {
 		const auto [g,p,d,i] = tester(gtdef,ptdef,dtdef,itdef);
 		return {dort,g,p,d,i};
-	}
+	} 
+	else {
+
+	
 	return {0,20,20,0,0};
+	} */
+	return {1,12,20,1,0};
 }
+
 const auto [s,g,p,d,i] = gettest();
 
 /*double s=0;
