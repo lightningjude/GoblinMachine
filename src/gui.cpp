@@ -58,6 +58,7 @@ static void side_event_handler(lv_event_t * e)
             //right pressed
             side=1;
         }
+        
     
 }
 }
@@ -127,4 +128,10 @@ void lv_mode_buttonmatrix(void)
    
     lv_obj_align(mode_btnm, LV_ALIGN_CENTER, 0, -60);
     lv_obj_add_event_cb(mode_btnm, mode_event_handler, LV_EVENT_PRESSED, NULL);
+}
+
+void gui() {
+    lv_color_buttonmatrix();
+    lv_side_buttonmatrix();
+    lv_mode_buttonmatrix();
 }
