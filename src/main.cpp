@@ -171,8 +171,12 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
 //tester gui
-void lattester() {
-	
+std::tuple<double,double,double,double> lattester(int goali,double p, double i, double d) {
+	double kp = p;
+	double ki = i;
+	double kd = d;
+	int g = goali;
+	return {g,kp,ki,kd};
 }
 // main opcontrol
 void opcontrol() {
