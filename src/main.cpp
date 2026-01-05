@@ -220,6 +220,8 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+
+
 void initialize() {
 	
 	chassis.calibrate();
@@ -382,7 +384,9 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
+void competition_initialize() {
+	
+}
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -395,7 +399,9 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+	pros::Task intakethread_task(intakethread);
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
