@@ -34,8 +34,14 @@ static void color_event_handler(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target_obj(e);
+    uint32_t id = lv_buttonmatrix_get_selected_button(obj);
+    std::string txt=lv_buttonmatrix_get_button_text(obj, id);
+    lv_obj_t * label4=lv_label_create(lv_screen_active());
+    std::string labeltxt="color picked"+txt;
+    lv_label_set_text(label4,labeltxt.c_str());
+    lv_obj_align(label4, LV_ALIGN_CENTER, 0, 20);
     if(code == LV_EVENT_VALUE_CHANGED) {
-        uint32_t id = lv_buttonmatrix_get_selected_button(obj);
+        
         if (id==0) {
             //red pressed
             c=pros::Color::red;
@@ -47,9 +53,7 @@ static void color_event_handler(lv_event_t * e)
             c=pros::Color::blue;
             cp=1;
         }
-        lv_obj_t * label4=lv_label_create(lv_screen_active());
-        lv_label_set_text(label4,"color picked");
-        lv_obj_align(label4, LV_ALIGN_CENTER, 0, 0);
+        
 }
 }
 static void side_event_handler(lv_event_t * e)
