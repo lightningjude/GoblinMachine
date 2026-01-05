@@ -8,8 +8,8 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
 
-//tester gui for lat
-std::tuple<double,double,double,double> lattester(double g,double p, double d, double i) {
+//tester gui
+std::tuple<double,double,double,double> tester(double g,double p, double d, double i) {
 	double val[4]= {g,p,d,i};
 	double inc[4]= {10,1,1,1};
 	std::string name[4]= {"goal","kp","kd","ki"} ;
@@ -61,12 +61,51 @@ std::tuple<double,double,double,double> lattester(double g,double p, double d, d
 	return {val[0],val[1],val[2],val[3]};
 }
 
-double gdef = 12;
-double pdef = 30;
-double ddef = 1;
-double idef = 0;
 
-const auto [g,p,d,i] = lattester(gdef,pdef,ddef,idef);
+std::tuple<int,double,double,double,double> gettest() {
+	double gldef = 12;
+	double pldef = 30;
+	double dldef = 1;
+	double ildef = 0;
+
+	double gtdef = 90;
+	double ptdef = 30;
+	double dtdef = 1;
+	double itdef = 0;
+
+	
+	master.clear();
+	master.print(1, 0, "Left for turn, right for drive");
+	bool press = false;
+	// 1 is drive, 0 is turn, 2 will error
+	int dort = 2;
+	while (press==false) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+			//turn
+			dort=0;
+			press=true;
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+			//drive
+			dort=1;
+			press=true;
+		}
+	}
+	if (dort==1) {
+		const auto [g,p,d,i] = tester(gldef,pldef,dldef,ildef);
+		return {dort,g,p,d,i};
+	}
+	else if (dort==0) {
+		const auto [g,p,d,i] = tester(gtdef,ptdef,dtdef,itdef);
+		return {dort,g,p,d,i};
+	}
+	return {0,0,0,0,0};
+}
+const auto [s,g,p,d,i] = gettest();
+
+
+
+
 //Lemlib setup
 
 //wheel dim: lemlib::Omniwheel::NEW_325
@@ -102,21 +141,21 @@ lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to null
 
 //PID setup
 // lateral PID controller
-lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
-                                              0, // integral gain (kI)
-                                              3, // derivative gain (kD)
-                                              3, // anti windup
-                                              1, // small error range, in inches
-                                              100, // small error range timeout, in milliseconds
-                                              3, // large error range, in inches
-                                              500, // large error range timeout, in milliseconds
-                                              20 // maximum acceleration (slew)
+lemlib::ControllerSettings lateral_controller(p, // proportional gain (kP)
+                                              i, // integral gain (kI)
+                                              d, // derivative gain (kD)
+                                              0, // anti windup: 3
+                                              0, // small error range, in inches: 1
+                                              0, // small error range timeout, in milliseconds: 100
+                                              0, // large error range, in inches: 3
+                                              0, // large error range timeout, in milliseconds: 500
+                                              0 // maximum acceleration (slew): 20, but tune last starting from 127 down
 );
 
 // angular PID controller
-lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
-                                              0, // integral gain (kI)
-                                              10, // derivative gain (kD)
+lemlib::ControllerSettings angular_controller(p, // proportional gain (kP)
+                                              i, // integral gain (kI)
+                                              d, // derivative gain (kD)
                                               0, // anti windup
                                               0, // small error range, in degrees
                                               0, // small error range timeout, in milliseconds
@@ -172,8 +211,17 @@ void on_center_button() {
 void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
-	chassis.calibrate();
 	pros::lcd::register_btn1_cb(on_center_button);
+	chassis.calibrate();
+	//1 is turn, 0 is drive
+	if (s==1) {
+		chassis.setPose(0,0,0);
+		chassis.turnToHeading(g, 5);
+	}
+	else if (s==0) {
+		chassis.setPose(0,0,0);
+		chassis.moveToPoint(0, g, 5);
+	}	
 	/** 
 	pros::Task screen_task([&]() {
         while (true) {
