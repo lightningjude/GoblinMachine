@@ -176,9 +176,10 @@ void lv_display_selection(void) {
 }
 
 std::tuple<pros::Color,int,int,int> gui() {
-    lv_color_buttonmatrix();
+    
+    /*lv_color_buttonmatrix();
     lv_side_buttonmatrix();
-    lv_mode_buttonmatrix();
+    lv_mode_buttonmatrix();*/
     lv_display_selection();
     return std::make_tuple(c,cp,side,skills);
 }
