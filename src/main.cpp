@@ -65,7 +65,10 @@ std::tuple<double,double,double,double> tester(double g,double p, double d, doub
 	return {val[0],val[1],val[2],val[3]};
 }
 
-
+*/
+std::tuple<double,double,double,double> tester(double g,double p, double d, double i) {
+	return {g,p,d,i};
+}
 std::tuple<int,double,double,double,double> gettest() {
 	double gldef = 12;
 	double pldef = 30;
@@ -107,12 +110,12 @@ std::tuple<int,double,double,double,double> gettest() {
 	return {0,0,0,0,0};
 }
 const auto [s,g,p,d,i] = gettest();
-*/
-double s=0;
+
+/*double s=0;
 double g=12;
 double p=20;
 double d=1;
-double i=0;
+double i=0; */
 
 //Lemlib setup
 
