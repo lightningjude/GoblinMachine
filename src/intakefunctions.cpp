@@ -3,12 +3,7 @@
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 #include "pros/motors.hpp"
-//needed definitions
-pros::Motor intakelow(7, pros::MotorGearset::green);
-pros::Motor intakehigh(8, pros::MotorGearset::green);
-//pneumatics
-pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
-pros::adi::Pneumatics scorer=pros::adi::Pneumatics('b',true);
+
 
 void intakein() {
     intakelow.move_velocity(100);

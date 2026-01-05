@@ -72,6 +72,13 @@ void outup(void);
 void outdown(void);
 void outmiddle(void);
 void intakestop(void);
+//needed definitions across cpp files
+//intake motors
+pros::Motor intakelow(7, pros::MotorGearset::green);
+pros::Motor intakehigh(8, pros::MotorGearset::green);
+//pneumatics
+pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+pros::adi::Pneumatics scorer=pros::adi::Pneumatics('b',true);
 #ifdef __cplusplus
 }
 #endif

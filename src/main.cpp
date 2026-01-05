@@ -122,12 +122,9 @@ double twi = 16;
 pros::MotorGroup left_motors({1, 2, 3}, pros::MotorGearset::blue); // left motors use 600 RPM cartridges
 pros::MotorGroup right_motors({-4, -5, -6}, pros::MotorGearset::blue); // right motors use 200 RPM cartridges
  
-pros::Motor intakelow(7, pros::MotorGearset::green);
-pros::Motor intakehigh(8, pros::MotorGearset::green);
-//pneumatics
-pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
-pros::adi::Pneumatics scorer=pros::adi::Pneumatics('b',true);
-//lemlib drivetrain
+//intake motors and pneumatics defined in main.h
+
+
 // drivetrain settings
 lemlib::Drivetrain drivetrain(&left_motors, // left motor group
                               &right_motors, // right motor group
