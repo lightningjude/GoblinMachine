@@ -35,69 +35,54 @@ static void color_event_handler(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target_obj(e);
     uint32_t id = lv_buttonmatrix_get_selected_button(obj);
-    std::string txt=lv_buttonmatrix_get_button_text(obj, id);
     lv_obj_t * label4=lv_label_create(lv_screen_active());
-    std::string labeltxt="color picked"+txt;
-    lv_label_set_text(label4,labeltxt.c_str());
-    lv_obj_align(label4, LV_ALIGN_CENTER, 0, 20);
-    if(code == LV_EVENT_VALUE_CHANGED) {
-        
-        if (id==0) {
+    std::string txt=lv_buttonmatrix_get_button_text(obj, id);
+    if (id==0) {
             //red pressed
             c=pros::Color::red;
             cp=0;
         
     }
-        else if (id==1) {
-            //blue pressed
-            c=pros::Color::blue;
-            cp=1;
-        }
-        
-}
+    else if (id==1) {
+        //blue pressed
+        c=pros::Color::blue;
+        cp=1;
+    }
+    lv_obj_delete(obj);
 }
 static void side_event_handler(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target_obj(e);
-    if(code == LV_EVENT_VALUE_CHANGED) {
-        uint32_t id = lv_buttonmatrix_get_selected_button(obj);
+    uint32_t id = lv_buttonmatrix_get_selected_button(obj);
         
-        if (id==0) {
-            //left pressed
-            side=0;
+    if (id==0) {
+        //left pressed
+        side=0;
         
     }
-        else if (id==1) {
-            //right pressed
-            side=1;
-        }
-        lv_obj_t * label3=lv_label_create(lv_screen_active());
-        lv_label_set_text(label3,"side picked");
-        lv_obj_align(label3, LV_ALIGN_CENTER, 0, 0);
+    else if (id==1) {
+        //right pressed
+        side=1;
+    }
+    lv_obj_delete(obj);
 
-    
-}
 }
 static void mode_event_handler(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target_obj(e);
-    if(code == LV_EVENT_VALUE_CHANGED) {
-        uint32_t id = lv_buttonmatrix_get_selected_button(obj);
-        if (id==0) {
-            //match pressed
-            skills=0;
-        
+    uint32_t id = lv_buttonmatrix_get_selected_button(obj);
+    if (id==0) {
+        //match pressed
+        skills=0;
+    
     }
-        else if (id==1) {
-            //skills pressed
-            skills=1;
-        }
-    lv_obj_t * label4=lv_label_create(lv_screen_active());
-    lv_label_set_text(label4,"mode picked");
-    lv_obj_align(label4, LV_ALIGN_CENTER, 0, 0);
-}
+    else if (id==1) {
+        //skills pressed
+        skills=1;
+    }
+    lv_obj_delete(obj);
 }
 static const char * btnm_map[] = {"1", "2", "3", "4", "5", "\n",
                                   "6", "7", "8", "9", "0", "\n",
@@ -125,7 +110,7 @@ void lv_color_buttonmatrix(void)
     //lv_buttonmatrix_set_button_ctrl_all(color_btnm, LV_BUTTONMATRIX_CTRL_CHECKABLE);
     //lv_buttonmatrix_set_one_checked(color_btnm, true);
    
-    lv_obj_align(color_btnm, LV_ALIGN_CENTER, 0, 60);
+    lv_obj_align(color_btnm, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_event_cb(color_btnm, color_event_handler, LV_EVENT_PRESSED, NULL);
 }
 void lv_side_buttonmatrix(void)
@@ -135,7 +120,7 @@ void lv_side_buttonmatrix(void)
     //lv_buttonmatrix_set_button_ctrl_all(side_btnm, LV_BUTTONMATRIX_CTRL_CHECKABLE);
     //lv_buttonmatrix_set_one_checked(side_btnm, true);
    
-    lv_obj_align(side_btnm, LV_ALIGN_CENTER, 0, 120);
+    lv_obj_align(side_btnm, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_event_cb(side_btnm, side_event_handler, LV_EVENT_PRESSED, NULL);
 }
 void lv_mode_buttonmatrix(void)
@@ -145,7 +130,7 @@ void lv_mode_buttonmatrix(void)
     //lv_buttonmatrix_set_button_ctrl_all(mode_btnm, LV_BUTTONMATRIX_CTRL_CHECKABLE);
     //lv_buttonmatrix_set_one_checked(mode_btnm, true);
    
-    lv_obj_align(mode_btnm, LV_ALIGN_CENTER, 0, -60);
+    lv_obj_align(mode_btnm, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_event_cb(mode_btnm, mode_event_handler, LV_EVENT_PRESSED, NULL);
 }
 void lv_display_selection(void) {
