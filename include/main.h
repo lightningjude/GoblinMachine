@@ -66,6 +66,10 @@ void initialize(void);
 void disabled(void);
 void competition_initialize(void);
 void opcontrol(void);
+void intakein(void);
+void outup(void);
+void outdown(void);
+void outmiddle(void);
 #ifdef __cplusplus
 }
 #endif
