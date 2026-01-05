@@ -9,9 +9,9 @@
 #include <cstdint>
 
 pros::Color c=pros::Color::black;
-int cp=NULL;
-int side=NULL;
-int skills=NULL;
+int cp=-1;
+int side=-1;
+int skills=-1;
 
 
 static void event_handler(lv_event_t * e)
@@ -135,21 +135,46 @@ void lv_mode_buttonmatrix(void)
     lv_obj_add_event_cb(mode_btnm, mode_event_handler, LV_EVENT_PRESSED, NULL);
 }
 void lv_display_selection(void) {
-
+    lv_obj_t * label = lv_label_create(lv_screen_active());
+    std::string color_str;
+    if (c==pros::Color::red) {
+        color_str="Red";
+    }
+    else if (c==pros::Color::blue) {
+        color_str="Blue";
+    }
+    std::string side_str;
+    if (side==0) {
+        side_str="Left";
+    }
+    else if (side==1) {
+        side_str="Right";
+    }
+    std::string mode_str;
+    if (skills==0) {
+        mode_str="Match";
+    }
+    else if (skills==1) {
+        mode_str="Skills";
+    }
+    std::string display_str="Color: "+color_str+"\nStarting Side: "+side_str+"\nMode: "+mode_str;
+    lv_label_set_text(label,display_str.c_str());
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 }
 
-std::tuple<pros::Color,int,int> gui() {
+std::tuple<pros::Color,int,int,int> gui() {
     lv_color_buttonmatrix();
-    while (cp==NULL) {
+    while (cp==-1) {
         pros::delay(20);
     }
     lv_side_buttonmatrix();
-    while (side==NULL) {
+    while (side==-1) {
         pros::delay(20);
     }
     lv_mode_buttonmatrix();
-    while (skills==NULL) {
+    while (skills==-1) {
         pros::delay(20);
     }
-
+    lv_display_selection();
+    return std::make_tuple(c,cp,side,skills);
 }
