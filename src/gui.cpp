@@ -177,17 +177,8 @@ void lv_display_selection(void) {
 
 std::tuple<pros::Color,int,int,int> gui() {
     lv_color_buttonmatrix();
-    while (cp==-1) {
-        pros::delay(20);
-    }
     lv_side_buttonmatrix();
-    while (side==-1) {
-        pros::delay(20);
-    }
     lv_mode_buttonmatrix();
-    while (skills==-1) {
-        pros::delay(20);
-    }
     lv_display_selection();
     return std::make_tuple(c,cp,side,skills);
 }
