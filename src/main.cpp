@@ -1,5 +1,6 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "liblvgl/llemu.hpp"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 
@@ -222,7 +223,7 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 void initialize() {
 	
 	chassis.calibrate();
-	
+	pros::lcd::initialize();
 	
 	pros::Task screen_task([&]() {
         while (true) {
