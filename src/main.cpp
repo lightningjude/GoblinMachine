@@ -178,12 +178,15 @@ std::tuple<double,double,double,double> lattester(int goali,double p, double i, 
 	double kd = d;
 	int g = goali;
 	bool going = false;
+	int sel = 1;
 	master.clear();
+	master.print(0,0,"goal: %d",g);
+	master.print(0, 1, "kp:%.2,kd:%.2,ki:%.2",kp,kd,ki);
 	while (going==false) {
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
 			going=true;
 		}
-		
+
 	}
 	return {g,kp,ki,kd};
 }
