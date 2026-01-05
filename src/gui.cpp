@@ -50,7 +50,7 @@ static void color_event_handler(lv_event_t * e)
     lv_obj_t * label4=lv_label_create(lv_screen_active());
     lv_label_set_text(label4,"color picked");
     lv_obj_align(label4, LV_ALIGN_CENTER, 0, 0);
-    lv_obj_delete(obj);
+    //lv_obj_delete(obj);
 }
 }
 static void side_event_handler(lv_event_t * e)
