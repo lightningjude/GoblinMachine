@@ -111,6 +111,7 @@ void initialize() {
 	pros::lcd::set_text(1, "Hello PROS User!");
 	chassis.calibrate();
 	pros::lcd::register_btn1_cb(on_center_button);
+	/** 
 	pros::Task screen_task([&]() {
         while (true) {
             // print robot location to the brain screen
@@ -121,6 +122,7 @@ void initialize() {
             pros::delay(20);
         }
     });
+	*/
 }
 
 /**
@@ -186,7 +188,9 @@ std::tuple<double,double,double,double> lattester(int goali,double p, double i, 
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
 			going=true;
 		}
-		
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)){
+			
+		}
 	}
 	return {g,kp,ki,kd};
 }
