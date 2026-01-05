@@ -1,5 +1,9 @@
+#include "liblvgl/core/lv_obj_pos.h"
 #include "liblvgl/core/lv_obj_tree.h"
+#include "liblvgl/display/lv_display.h"
+#include "liblvgl/misc/lv_types.h"
 #include "liblvgl/widgets/buttonmatrix/lv_buttonmatrix.h"
+#include "liblvgl/widgets/label/lv_label.h"
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "liblvgl/llemu.hpp"
@@ -43,6 +47,9 @@ static void color_event_handler(lv_event_t * e)
             c=pros::Color::blue;
             cp=1;
         }
+    lv_obj_t * label4=lv_label_create(lv_screen_active());
+    lv_label_set_text(label4,"color picked");
+    lv_obj_align(label4, LV_ALIGN_CENTER, 0, 0);
     lv_obj_delete(obj);
 }
 }
@@ -62,6 +69,9 @@ static void side_event_handler(lv_event_t * e)
             //right pressed
             side=1;
         }
+        lv_obj_t * label3=lv_label_create(lv_screen_active());
+        lv_label_set_text(label3,"side picked");
+        lv_obj_align(label3, LV_ALIGN_CENTER, 0, 0);
         lv_obj_delete(obj);
 
     
@@ -82,7 +92,10 @@ static void mode_event_handler(lv_event_t * e)
             //skills pressed
             skills=1;
         }
-     lv_obj_delete(obj);     
+    lv_obj_t * label4=lv_label_create(lv_screen_active());
+    lv_label_set_text(label4,"mode picked");
+    lv_obj_align(label4, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_delete(obj);     
 }
 }
 static const char * btnm_map[] = {"1", "2", "3", "4", "5", "\n",
