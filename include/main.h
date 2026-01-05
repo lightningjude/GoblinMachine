@@ -74,6 +74,7 @@ void outmiddle(void);
 void intakestop(void);
 int* screengui(void);
 void lv_example_buttonmatrix_1(void);
+std::tuple<pros::Color,int,int,int> gui(void);
 #ifdef __cplusplus
 }
 #endif

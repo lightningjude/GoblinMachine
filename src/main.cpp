@@ -121,7 +121,7 @@ void initialize() {
 	//pros::lcd::initialize();
 	
 	pros::Task screen_task([&]() {
-        lv_example_buttonmatrix_1();
+        const auto [c,cp,side,skills] = gui();
 		/*
 		while (true) {
             // print robot location to the brain screen
