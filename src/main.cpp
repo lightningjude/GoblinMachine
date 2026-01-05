@@ -125,8 +125,8 @@ pros::MotorGroup right_motors({-4, -5, -6}, pros::MotorGearset::blue); // right 
 pros::Motor intakelow(7, pros::MotorGearset::green);
 pros::Motor intakehigh(8, pros::MotorGearset::green);
 //pneumatics
-pros::adi::Pneumatics piston=pros::adi::Pneumatics('a',false);
-
+pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+pros::adi::Pneumatics scorer=pros::adi::Pneumatics('b',true);
 //lemlib drivetrain
 // drivetrain settings
 lemlib::Drivetrain drivetrain(&left_motors, // left motor group
