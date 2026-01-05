@@ -1,6 +1,8 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "pros/adi.hpp"
 #include "pros/misc.h"
+#include "pros/motors.hpp"
 
 
 //tester for now
@@ -119,6 +121,11 @@ double twi = 16;
 // motor config
 pros::MotorGroup left_motors({1, 2, 3}, pros::MotorGearset::blue); // left motors use 600 RPM cartridges
 pros::MotorGroup right_motors({-4, -5, -6}, pros::MotorGearset::blue); // right motors use 200 RPM cartridges
+ 
+pros::Motor intakelow(7, pros::MotorGearset::green);
+pros::Motor intakehigh(8, pros::MotorGearset::green);
+//pneumatics
+pros::adi::Pneumatics piston=pros::adi::Pneumatics('a',false);
 
 //lemlib drivetrain
 // drivetrain settings
