@@ -223,7 +223,7 @@ void initialize() {
 	
 	chassis.calibrate();
 	
-	/** 
+	
 	pros::Task screen_task([&]() {
         while (true) {
             // print robot location to the brain screen
@@ -234,7 +234,7 @@ void initialize() {
             pros::delay(20);
         }
     });
-	*/
+	
 }
 
 /*
