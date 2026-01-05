@@ -168,6 +168,13 @@ void autonomous() {}
  */
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 
+
+
+//tester gui
+void lattester() {
+	
+}
+// main opcontrol
 void opcontrol() {
 	
 	while (true) {
