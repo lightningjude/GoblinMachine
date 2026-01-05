@@ -11,7 +11,7 @@
 pros::Color c=pros::Color::black;
 int cp=NULL;
 int side=NULL;
-int skills=0;
+int skills=NULL;
 
 
 static void event_handler(lv_event_t * e)
@@ -43,7 +43,7 @@ static void color_event_handler(lv_event_t * e)
             c=pros::Color::blue;
             cp=1;
         }
-    
+    lv_obj_delete(obj);
 }
 }
 static void side_event_handler(lv_event_t * e)
@@ -82,7 +82,7 @@ static void mode_event_handler(lv_event_t * e)
             //skills pressed
             skills=1;
         }
-          
+     lv_obj_delete(obj);     
 }
 }
 static const char * btnm_map[] = {"1", "2", "3", "4", "5", "\n",
@@ -134,9 +134,22 @@ void lv_mode_buttonmatrix(void)
     lv_obj_align(mode_btnm, LV_ALIGN_CENTER, 0, -60);
     lv_obj_add_event_cb(mode_btnm, mode_event_handler, LV_EVENT_PRESSED, NULL);
 }
+void lv_display_selection(void) {
 
-void gui() {
+}
+
+std::tuple<pros::Color,int,int> gui() {
     lv_color_buttonmatrix();
+    while (cp==NULL) {
+        pros::delay(20);
+    }
     lv_side_buttonmatrix();
+    while (side==NULL) {
+        pros::delay(20);
+    }
     lv_mode_buttonmatrix();
+    while (skills==NULL) {
+        pros::delay(20);
+    }
+
 }
