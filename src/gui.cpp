@@ -35,8 +35,6 @@ static void color_event_handler(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * obj = lv_event_get_target_obj(e);
     uint32_t id = lv_buttonmatrix_get_selected_button(obj);
-    lv_obj_t * label4=lv_label_create(lv_screen_active());
-    std::string txt=lv_buttonmatrix_get_button_text(obj, id);
     if (id==0) {
             //red pressed
             c=pros::Color::red;
