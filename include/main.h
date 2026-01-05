@@ -71,6 +71,7 @@ void outup(void);
 void outdown(void);
 void outmiddle(void);
 void intakestop(void);
+int* screengui(void);
 #ifdef __cplusplus
 }
 #endif
