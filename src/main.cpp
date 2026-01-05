@@ -57,6 +57,7 @@ std::tuple<double,double,double,double> tester(double g,double p, double d, doub
 			master.print(2,0,"selected: %d",name[sel]);
 			changed = false;
 		}
+		pros::delay(20);
 	}
 	return {val[0],val[1],val[2],val[3]};
 }
@@ -90,6 +91,7 @@ std::tuple<int,double,double,double,double> gettest() {
 			dort=1;
 			press=true;
 		}
+		pros::delay(20);
 	}
 	if (dort==1) {
 		const auto [g,p,d,i] = tester(gldef,pldef,dldef,ildef);
