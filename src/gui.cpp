@@ -21,6 +21,8 @@ static const char * btnm_map[] = {"1", "2", "3", "4", "5", "\n",
                                   "6", "7", "8", "9", "0", "\n",
                                   "Action1", "Action2", ""
                                  };
+static const char * btnm_map2[] = {"Red", "Blue" 
+                                 };
 
 void lv_example_buttonmatrix_1(void)
 {
