@@ -186,7 +186,7 @@ std::tuple<double,double,double,double> lattester(int goali,double p, double i, 
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
 			going=true;
 		}
-
+		
 	}
 	return {g,kp,ki,kd};
 }
