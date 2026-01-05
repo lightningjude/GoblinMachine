@@ -10,7 +10,7 @@
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
-
+/*
 //tester gui
 std::tuple<double,double,double,double> tester(double g,double p, double d, double i) {
 	double val[4]= {g,p,d,i};
@@ -107,9 +107,12 @@ std::tuple<int,double,double,double,double> gettest() {
 	return {0,0,0,0,0};
 }
 const auto [s,g,p,d,i] = gettest();
-
-
-
+*/
+double s=0;
+double g=12;
+double p=20;
+double d=1;
+double i=0;
 
 //Lemlib setup
 
