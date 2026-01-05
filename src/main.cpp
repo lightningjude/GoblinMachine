@@ -174,25 +174,56 @@ pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
 //tester gui
-std::tuple<double,double,double,double> lattester(int goali,double p, double i, double d) {
-	double kp = p;
-	double ki = i;
-	double kd = d;
-	int g = goali;
+std::tuple<double,double,double,double> lattester(double g,double p, double d, double i) {
+	double val[4]= {g,p,d,i};
+	double inc[4]= {10,1,1,1};
+	std::string name[4]= {"goal","kp","kd","ki"} ;
 	bool going = false;
-	int sel = 1;
+	int sel = 0;
+	bool changed = false;
 	master.clear();
-	master.print(0,0,"goal: %d",g);
-	master.print(0, 1, "kp:%.2,kd:%.2,ki:%.2",kp,kd,ki);
+	master.print(0,0,"goal: %d",val[0]);
+	master.print(1, 0, "kp:%.2,kd:%.2,ki:%.2",val[1],val[2],val[3]);
+	master.print(2,0,"selected: %d",name[sel]);
 	while (going==false) {
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
 			going=true;
 		}
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)){
-			
+			if (sel<3) {
+				sel++;
+			}
+			else {
+				sel=0;
+			}
+			changed=true;
+		}
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)){
+			if (sel>0) {
+				sel--;
+			}
+			else {
+				sel=3;
+			}
+			changed=true;
+		}
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)){
+			val[sel]=val[sel]+inc[sel];
+			changed=true;
+		}
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)){
+			val[sel]=val[sel]-inc[sel];
+			changed=true;
+		}
+		if (changed) {
+			master.clear();
+			master.print(0,0,"goal: %d",val[0]);
+			master.print(1, 0, "kp:%.2,kd:%.2,ki:%.2",val[1],val[2],val[3]);
+			master.print(2,0,"selected: %d",name[sel]);
+			changed = false;
 		}
 	}
-	return {g,kp,ki,kd};
+	return {val[0],val[1],val[2],val[3]};
 }
 // main opcontrol
 void opcontrol() {
