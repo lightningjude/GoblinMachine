@@ -107,7 +107,7 @@ std::tuple<int,double,double,double,double> gettest() {
 		const auto [g,p,d,i] = tester(gtdef,ptdef,dtdef,itdef);
 		return {dort,g,p,d,i};
 	}
-	return {0,0,0,0,0};
+	return {0,20,20,0,0};
 }
 const auto [s,g,p,d,i] = gettest();
 
