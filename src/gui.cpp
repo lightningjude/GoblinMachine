@@ -1,3 +1,4 @@
+#include "liblvgl/core/lv_obj_tree.h"
 #include "liblvgl/widgets/buttonmatrix/lv_buttonmatrix.h"
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
@@ -23,6 +24,7 @@ static void event_handler(lv_event_t * e)
         LV_UNUSED(txt);
         LV_LOG_USER("%s was pressed\n", txt);
     }
+    
 }
 static void color_event_handler(lv_event_t * e)
 {
@@ -41,7 +43,7 @@ static void color_event_handler(lv_event_t * e)
             c=pros::Color::blue;
             cp=1;
         }
-          
+    
 }
 }
 static void side_event_handler(lv_event_t * e)
@@ -50,6 +52,7 @@ static void side_event_handler(lv_event_t * e)
     lv_obj_t * obj = lv_event_get_target_obj(e);
     if(code == LV_EVENT_VALUE_CHANGED) {
         uint32_t id = lv_buttonmatrix_get_selected_button(obj);
+        
         if (id==0) {
             //left pressed
             side=0;
@@ -59,6 +62,7 @@ static void side_event_handler(lv_event_t * e)
             //right pressed
             side=1;
         }
+        lv_obj_delete(obj);
 
     
 }
