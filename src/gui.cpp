@@ -31,10 +31,9 @@ void lv_example_buttonmatrix_1(void)
     lv_obj_t * btnm1 = lv_buttonmatrix_create(lv_screen_active());
     lv_buttonmatrix_set_map(btnm1, btnm_map);
     lv_buttonmatrix_set_button_width(btnm1, 10, 2);        /*Make "Action1" twice as wide as "Action2"*/
-    for (int i = 0; i < 7; i++) {
-        lv_buttonmatrix_set_button_ctrl(btnm1, i, LV_BUTTONMATRIX_CTRL_CHECKABLE);
-    }
-    lv_buttonmatrix_set_button_ctrl(btnm1, 5, LV_BUTTONMATRIX_CTRL_CHECKED);
+    lv_buttonmatrix_set_button_ctrl_all(btnm1, LV_BUTTONMATRIX_CTRL_CHECKABLE);
+    
+   
     lv_obj_align(btnm1, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_event_cb(btnm1, event_handler, LV_EVENT_ALL, NULL);
 }
