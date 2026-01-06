@@ -121,6 +121,7 @@ void initialize() {
 	
 	chassis.calibrate();
 	const auto [color,colorid,sp,sorm] = gui();
+	pros::Task intakethread_task(intakethread);
 	//pros::lcd::initialize();
 	
 	/*pros::Task screen_task([&]() {
@@ -169,7 +170,8 @@ int sorm;
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
-void disabled() {}
+void disabled() {
+}
 
 /**
  * Runs after initialize(), and before autonomous when connected to the Field
@@ -196,7 +198,7 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
-	pros::Task intakethread_task(intakethread);
+	
 	/*
 	Key ideas
 	c is the color as pros::Color
@@ -205,6 +207,7 @@ void autonomous() {
 	sorm is skills or match(0 for match, 1 for skills)
 	If using paths, pick paths based on these variables, or use them in if statements if doing it by hand instead
 	*/
+	
 }
 
 /**
@@ -234,6 +237,8 @@ void opcontrol() {
 		chassis.moveToPoint(0, g, 5);
 	}
 		*/
+	
+	
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	
 	while (true) {
@@ -253,4 +258,5 @@ void opcontrol() {
 		chassis.arcade(leftY, rightX, false, 0.5);
 		pros::delay(20);                               // Run for 20 ms then update
 	}
+	
 }
