@@ -19,28 +19,26 @@ void intakein() {
     lv_obj_t * intakel=lv_label_create(lv_screen_active());
     lv_label_set_text(intakel, "Intaking");
     lv_obj_align(intakel, LV_ALIGN_CENTER, 0, 5);
-    //intakelow.move_velocity(100);
-    //intakehigh.move_velocity(-100);
     intakelow.move(127);
     intakehigh.move(127);
     scorer.extend();
 }
 void outup() {
-    intakelow.move_velocity(100);
-    intakehigh.move_velocity(100);
+    intakelow.move(127);
+    intakehigh.move(127);
     scorer.extend();
 }
 void outdown() {
-    intakelow.move_velocity(-100);
-    intakehigh.move_velocity(-100);
+    intakelow.move(-127);
+    intakehigh.move(-127);
     scorer.extend();
 }
 void outmiddle() {
-    intakelow.move_velocity(100);
-    intakehigh.move_velocity(-100);
+    intakelow.move(127);
+    intakehigh.move(-127);
     scorer.retract();
 }
 void intakestop() {
-    intakelow.move_velocity(0);
-    intakehigh.move_velocity(0);
+    intakelow.move(0);
+    intakehigh.move(0);
 }
