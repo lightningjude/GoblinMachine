@@ -24,7 +24,7 @@ void intakethread() {
 	bool mllatch = false;
 	while (true) {
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			if (!ilatch) {
+			if (ilatch==false) {
 				if (itog) {
 					intakein();
 				}
@@ -42,7 +42,7 @@ void intakethread() {
 			ilatch = false;
 		}
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-			if (!mlatch) {
+			if (mlatch==false) {
 				if (mtog) {
 					outmiddle();
 				}
@@ -60,7 +60,7 @@ void intakethread() {
 			mlatch = false;
 		}
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-			if (!dlatch) {
+			if (dlatch==false) {
 				if (dtog) {
 					outdown();
 				}
@@ -78,7 +78,7 @@ void intakethread() {
 			dlatch = false;
 		}
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			if (!olatch) {
+			if (olatch==false) {
 				if (otog) {
 					if (mtog) {
 						outmiddle();
@@ -104,7 +104,7 @@ void intakethread() {
 			olatch = false;
 		}
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)){
-			if (!mlatch) {
+			if (mllatch==false) {
 				if (mltog) {
 					matchload.retract();
 				}
