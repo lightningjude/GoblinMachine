@@ -82,7 +82,7 @@ std::tuple<pros::Color,int,int,int> gui(void);
 #endif
 
 #ifdef __cplusplus
-pros::Controller master(pros::E_CONTROLLER_MASTER);
+
 /**
  * You can add C++-only headers here
  */

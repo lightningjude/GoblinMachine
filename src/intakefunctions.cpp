@@ -5,6 +5,7 @@
 #include "pros/motors.hpp"
 
 //intake motors
+pros::Controller master(pros::E_CONTROLLER_MASTER);
 pros::Motor intakelow(7, pros::MotorGearset::green);
 pros::Motor intakehigh(8, pros::MotorGearset::green);
 //pneumatics
