@@ -31,7 +31,7 @@ pros::MotorGroup right_motors({-4, -5, -6}, pros::MotorGearset::blue); // right 
  
 //intake motors and pneumatics defined intakefunctions.cpp
 //matchload is in intakemain.cpp
-pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+
 
 // drivetrain settings
 lemlib::Drivetrain drivetrain(&left_motors, // left motor group
