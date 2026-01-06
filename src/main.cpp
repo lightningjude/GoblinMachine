@@ -120,9 +120,9 @@ void initialize() {
 	chassis.calibrate();
 	//pros::lcd::initialize();
 	
-	pros::Task screen_task([&]() {
-        const auto [c,cp,side,skills] = gui();
-		/*
+	/*pros::Task screen_task([&]() {
+
+		
 		while (true) {
             // print robot location to the brain screen
 			
@@ -137,9 +137,9 @@ void initialize() {
             // delay to save resources
             pros::delay(20);
         }
-		*/
+		
     });
-	
+	*/
 }
 
 /*
@@ -150,6 +150,12 @@ button mapping
 3. Left stick fwd/bwd, r stick l/r
 4. R1: ground score(good color send down, bad color descore up)
 */
+
+//variables for later
+pros::Color color;
+int colorid;
+int sp;
+int sorm;
 
 void intakethread() {
 	bool ttog = false;
@@ -283,7 +289,8 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() {
-
+	//variables for input, color as a color, color as a #(0 for red, 1 for blue), starting position(0 for left, 1 for right), skills or match(0 for match, 1 for skills)
+	const auto [color,colorid,sp,sorm] = gui();
 }
 
 /**
@@ -299,6 +306,14 @@ void competition_initialize() {
  */
 void autonomous() {
 	pros::Task intakethread_task(intakethread);
+	/*
+	Key ideas
+	c is the color as pros::Color
+	colorid is the color as int(0 for red, 1 for blue)
+	sp is starting position(0 for left, 1 for right)
+	sorm is skills or match(0 for match, 1 for skills)
+	If using paths, pick paths based on these variables, or use them in if statements if doing it by hand instead
+	*/
 }
 
 /**
