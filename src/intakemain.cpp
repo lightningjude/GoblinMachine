@@ -22,6 +22,8 @@ void intakethread() {
 	bool olatch = false;
 	bool mltog = false;
 	bool mllatch = false;
+    intakein();
+    itog=true;
 	while (true) {
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			if (ilatch==false) {
