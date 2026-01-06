@@ -5,9 +5,11 @@
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 
-pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+
 
 void intakethread() {
+    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+    pros::Controller master(pros::E_CONTROLLER_MASTER);
 	bool ttog = false;
 	bool tlatch = false;
 	bool mtog = false;
