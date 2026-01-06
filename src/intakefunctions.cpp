@@ -12,8 +12,10 @@ pros::Motor intakehigh(8, pros::MotorGearset::green);
 pros::adi::Pneumatics scorer=pros::adi::Pneumatics('b',true);
 pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
 void intakein() {
-    intakelow.move_velocity(100);
-    intakehigh.move_velocity(-100);
+    //intakelow.move_velocity(100);
+    //intakehigh.move_velocity(-100);
+    intakelow.move(127);
+    intakehigh.move(127);
     scorer.extend();
 }
 void outup() {
