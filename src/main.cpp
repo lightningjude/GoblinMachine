@@ -3,6 +3,7 @@
 #include "liblvgl/llemu.hpp"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
+#include "pros/rtos.hpp"
 
 
 
@@ -234,10 +235,16 @@ void opcontrol() {
 	}
 		*/
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	left_front.move(127);
+	
+	pros::delay(500);
+	left_front.move(0);
+	pros::delay(500);
+	left_front.move_velocity(100);
+	pros::delay(500);
+	left_front.move_velocity(0);
 	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);  // Prints status of the emulated screen LCDs
+		
 
 		// Arcade control scheme
 		int leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
