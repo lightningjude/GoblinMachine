@@ -118,6 +118,7 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 void initialize() {
 	
 	chassis.calibrate();
+	const auto [color,colorid,sp,sorm] = gui();
 	//pros::lcd::initialize();
 	
 	/*pros::Task screen_task([&]() {
@@ -290,7 +291,6 @@ void disabled() {}
  */
 void competition_initialize() {
 	//variables for input, color as a color, color as a #(0 for red, 1 for blue), starting position(0 for left, 1 for right), skills or match(0 for match, 1 for skills)
-	const auto [color,colorid,sp,sorm] = gui();
 }
 
 /**
