@@ -235,14 +235,7 @@ void opcontrol() {
 	}
 		*/
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	left_front.move(127);
 	
-	pros::delay(500);
-	left_front.move(0);
-	pros::delay(2000);
-	left_front.move_velocity(100);
-	pros::delay(1000);
-	left_front.move_velocity(0);
 	while (true) {
 		
 
