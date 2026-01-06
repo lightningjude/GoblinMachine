@@ -59,6 +59,7 @@
  * that they can be called from user code (i.e. calling autonomous from a
  * button press in opcontrol() for testing purposes).
  */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -75,12 +76,13 @@ void outmiddle(void);
 void intakestop(void);
 void lv_example_buttonmatrix_1(void);
 std::tuple<pros::Color,int,int,int> gui(void);
-pros::Controller master(pros::E_CONTROLLER_MASTER);
+
 #ifdef __cplusplus
 }
 #endif
 
 #ifdef __cplusplus
+pros::Controller master(pros::E_CONTROLLER_MASTER);
 /**
  * You can add C++-only headers here
  */
