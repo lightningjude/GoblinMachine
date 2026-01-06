@@ -67,6 +67,7 @@ void initialize(void);
 void disabled(void);
 void competition_initialize(void);
 void opcontrol(void);
+void intakethread(void);
 void intakein(void);
 void outup(void);
 void outdown(void);
@@ -74,6 +75,7 @@ void outmiddle(void);
 void intakestop(void);
 void lv_example_buttonmatrix_1(void);
 std::tuple<pros::Color,int,int,int> gui(void);
+pros::Controller master(pros::E_CONTROLLER_MASTER);
 #ifdef __cplusplus
 }
 #endif

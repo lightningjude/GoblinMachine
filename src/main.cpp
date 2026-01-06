@@ -8,7 +8,7 @@
 
 
 //tester for now
-pros::Controller master(pros::E_CONTROLLER_MASTER);
+
 
 
 double s=0;
@@ -29,8 +29,8 @@ double twi = 16;
 pros::MotorGroup left_motors({1, 2, 3}, pros::MotorGearset::blue); // left motors use 600 RPM cartridges
 pros::MotorGroup right_motors({-4, -5, -6}, pros::MotorGearset::blue); // right motors use 200 RPM cartridges
  
-//intake motors and pneumatics defined in main.h
-//matchload is here tho
+//intake motors and pneumatics defined intakefunctions.cpp
+//matchload is in intakemain.cpp
 pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
 
 // drivetrain settings
@@ -158,118 +158,7 @@ int colorid;
 int sp;
 int sorm;
 
-void intakethread() {
-	bool ttog = false;
-	bool tlatch = false;
-	bool mtog = false;
-	bool mlatch = false;
-	bool itog = false;
-	bool ilatch = false;
-	bool dtog = false;
-	bool dlatch = false;
-	bool otog = false;
-	bool olatch = false;
-	bool mltog = false;
-	bool mllatch = false;
-	while (true) {
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			if (!ilatch) {
-				if (itog) {
-					intakein();
-				}
-				else {
-					intakestop();
-				}
-				itog = !itog;
-				mtog=false;
-				dtog=false;
-				otog=false;
-				ilatch = true;
-			}
-		}
-		else {
-			ilatch = false;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-			if (!mlatch) {
-				if (mtog) {
-					outmiddle();
-				}
-				else {
-					intakestop();
-				}
-				mtog = !mtog;
-				itog=false;
-				dtog=false;
-				otog=false;
-				mlatch = true;
-			}
-		}
-		else {
-			mlatch = false;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-			if (!dlatch) {
-				if (dtog) {
-					outdown();
-				}
-				else {
-					intakestop();
-				}
-				dtog = !dtog;
-				itog=false;
-				mtog=false;
-				otog=false;
-				dlatch = true;
-			}
-		}
-		else {
-			dlatch = false;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			if (!olatch) {
-				if (otog) {
-					if (mtog) {
-						outmiddle();
-					}
-					else if (dtog) {
-						outdown();
-					}
-					else if (itog) {
-						intakein();
-					}
-					else if (ttog) {
-						outup();
-					}
-				}
-				else {
-					intakestop();
-				}
-				otog = !otog;
-				olatch = true;
-			}
-		}
-		else {
-			olatch = false;
-		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)){
-			if (!mlatch) {
-				if (mltog) {
-					matchload.retract();
-				}
-				else {
-					matchload.extend();
-				}
-				mltog = !mltog;
-				mllatch = true;
-			}
-		}
-		else {
-			mllatch = false;
-		}
-		pros::delay(20);
-	}
-}
+
 
 
 
