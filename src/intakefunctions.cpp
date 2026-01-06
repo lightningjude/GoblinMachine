@@ -13,7 +13,7 @@ pros::adi::Pneumatics scorer=pros::adi::Pneumatics('b',true);
 pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
 void intakein() {
     intakelow.move_velocity(100);
-    intakehigh.move_velocity(100);
+    intakehigh.move_velocity(-100);
     scorer.extend();
 }
 void outup() {
@@ -24,6 +24,7 @@ void outup() {
 void outdown() {
     intakelow.move_velocity(-100);
     intakehigh.move_velocity(-100);
+    scorer.extend();
 }
 void outmiddle() {
     intakelow.move_velocity(100);
