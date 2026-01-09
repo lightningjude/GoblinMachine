@@ -6,10 +6,10 @@
 #include "liblvgl/widgets/label/lv_label.h"
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
-//#include "liblvgl/llemu.hpp"
+#include "liblvgl/llemu.hpp"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
-//#include "liblvgl/lvgl.h"
+#include "liblvgl/lvgl.h"
 #include <cstdint>
 
 pros::Color c=pros::Color::black;
