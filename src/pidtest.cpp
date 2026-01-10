@@ -109,6 +109,16 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
                 complete=true;
                 
             }
+            if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+                master.clear();
+                pros::delay(50);
+                master.print(0, 0, test.c_str());
+                master.clear_line(1);
+                pros::delay(50);
+                master.print(1, 0,"Cancelled");
+                pros::delay(1000);
+                return;
+            }
             
         }
         master.clear_line(3);
