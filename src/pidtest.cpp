@@ -54,13 +54,18 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         inc[2]=0.1;
         inc[3]=10;
     }
-    bool complete=false;
-    bool changed=true;
+    bool complete;
+    bool changed;
+    std::string valstr;
+    std::string selstr;
+    again:
+    complete=false;
+    changed=true;
         while (!complete) {
             //draw gui
             if (changed) {
-            std::string valstr="p:"+strtrim(rtp(val[0],3))+" i:"+strtrim(rtp(val[1],3))+" d:"+strtrim(rtp(val[2],3))+" g:"+strtrim(rtp(val[3],3));
-            std::string selstr="Selected:"+valsstr[s];
+            valstr="p:"+strtrim(rtp(val[0],3))+" i:"+strtrim(rtp(val[1],3))+" d:"+strtrim(rtp(val[2],3))+" g:"+strtrim(rtp(val[3],3));
+            selstr="Selected:"+valsstr[s];
             master.clear_line(1);
             pros::delay(50);
             master.clear_line(2);
@@ -122,7 +127,6 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
                 pros::delay(20);
             }
             delete &newchassis;
-            
 
 
         }
@@ -141,6 +145,8 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
                 pros::delay(20);
             }
             delete &newchassis;
+            
         }
+        goto again;
 
 }

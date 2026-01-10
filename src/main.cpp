@@ -270,6 +270,10 @@ void testgui()	{
         }
         pros::delay(20);
     }
+	master.clear();
+	master.print(0,0,"Done");
+	pros::delay(50);
+	
 }
 void opcontrol() {
 	//1 is turn, 0 is drive
