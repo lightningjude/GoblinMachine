@@ -291,7 +291,20 @@ void opcontrol() {
 	
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
-	testgui();
+	master.clear();
+	pros::delay(50);
+	master.print(0,0,"PID Test? y to confirm, x to skip");
+	bool chosen=false;
+	while (!chosen) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+			chosen=true;
+			testgui();
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+			chosen=true;
+		}
+		pros::delay(20);
+	}
 	
 
 
