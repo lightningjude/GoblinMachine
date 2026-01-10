@@ -250,6 +250,24 @@ void autonomous() {
  */
 
 // main opcontrol
+void testgui()	{
+	pros::Controller master(pros::E_CONTROLLER_MASTER);
+    master.clear();
+    master.print(0,0,"Choose type:");
+    master.print(1,0,"L: Drive");
+    master.print(2,0,"R: Turn");
+    while (true) {
+        if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+            pidtest(drivetrain,sensors,throttle_curve,steer_curve,"drive");
+            
+        }
+        else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+            pidtest(drivetrain,sensors,throttle_curve,steer_curve,"turn");
+            
+        }
+        pros::delay(20);
+    }
+}
 void opcontrol() {
 	//1 is turn, 0 is drive
 	/*
@@ -263,9 +281,9 @@ void opcontrol() {
 	}
 		*/
 	
-	
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	
+	//comment out when needed
+	testgui();
 	while (true) {
 		
 
