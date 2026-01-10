@@ -103,7 +103,7 @@ void intakethread() {
 		else {
 			olatch = false;
 		}
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)){
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){
 			if (mllatch==false) {
 				if (mltog) {
 					matchload.retract();
