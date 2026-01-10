@@ -141,8 +141,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             newchassis.cancelAllMotions();
             master.clear_line(2);
             pros::delay(50);
-            master.print(2,0,"Done");
-            delete &newchassis;
+            
            
 
         }
@@ -161,10 +160,11 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             newchassis.cancelAllMotions();
             master.clear_line(2);
             pros::delay(50);
-            master.print(2,0,"Done");
             delete &newchassis;
             
+            
         }
+        master.print(2,0,"Done");
         goto again;
 
 }
