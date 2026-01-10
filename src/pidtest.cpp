@@ -35,7 +35,11 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         val[2]=1;
         val[3]=12;
         //increments for p,i,d,goal
-        double inc[] = {1,0.1,0.1,1};
+        // 0 is p, 1 is i, 2 is d, 3 is goal
+        inc[0]=1;
+        inc[1]=0.1;
+        inc[2]=0.1;
+        inc[3]=1;
     }
     else if (type=="turn") {
         val[0]=10;
@@ -43,8 +47,11 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         val[2]=0.5;
         val[3]=90;
         //increments for p,i,d,goal
-        double inc[] = {1,0.1,0.1,10};
-        
+        // 0 is p, 1 is i, 2 is d, 3 is goal
+        inc[0]=1;
+        inc[1]=0.1;
+        inc[2]=0.1;
+        inc[3]=10;
     }
     bool complete=false;
     bool changed=true;
@@ -110,6 +117,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             );
             newchassis.setPose(0,0,0);
             newchassis.moveToPoint(0, val[3], 5);
+            
         }
         else if (type=="turn") {
             lemlib::ControllerSettings angular_controller(val[0],val[1],val[2],0,0,0,0,0,0);
