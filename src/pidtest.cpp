@@ -21,6 +21,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         i=0;
         d=1;
         g=12;
+        lemlib::ControllerSettings drive_controller(p,i,d,0,0,0,0,0);
     }
     else if (type=="turn") {
         p=10;
@@ -28,4 +29,5 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         d=0.5;
         g=90;
     }
+
 }
