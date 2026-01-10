@@ -207,6 +207,31 @@ void autonomous() {
 	sorm is skills or match(0 for match, 1 for skills)
 	If using paths, pick paths based on these variables, or use them in if statements if doing it by hand instead
 	*/
+	if (sorm==0) {
+		//match
+		if (sp==0) {
+			//left
+			if (colorid==0) {
+				//red
+			}
+			else {
+				//blue
+			}
+		}
+		else {
+			//right
+			if (colorid==0) {
+				//red
+			}
+			else {
+				//blue
+			}
+		}
+	}
+	else {
+		
+		//skills
+	}
 	
 }
 

@@ -24,7 +24,8 @@
  * E_CONTROLLER_MASTER is pedantically correct within the PROS styleguide, but
  * not convenient for most student programmers.
  */
-#include "pros/imu.hpp"
+
+#include "lemlib/api.hpp" // IWYU pragma: keep
 #define PROS_USE_SIMPLE_NAMES
 
 /**
@@ -75,6 +76,11 @@ void outdown(void);
 void outmiddle(void);
 void intakestop(void);
 void lv_example_buttonmatrix_1(void);
+void autonlb(lemlib::Chassis chassis);
+void autonrb(lemlib::Chassis chassis);
+void autonlr(lemlib::Chassis chassis);
+void autonrr(lemlib::Chassis chassis);
+void autonskills(lemlib::Chassis chassis);
 std::tuple<pros::Color,int,int,int> gui(void);
 
 #ifdef __cplusplus
