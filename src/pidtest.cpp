@@ -11,9 +11,10 @@ double rtp(double value, int places) {
     value = std::round(value * factor) / factor;
     return value;
 }
-std::string strtrim(std::string value) {
-    value.erase ( value.find_last_not_of('0') + 1, std::string::npos );
-    return value;
+std::string strtrim(double value) {
+    std::string valuestr = std::to_string(value);
+    valuestr.erase ( valuestr.find_last_not_of('0') + 1, std::string::npos );
+    return valuestr;
 }
 void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::ExpoDriveCurve throttle_curve,lemlib::ExpoDriveCurve steer_curve, std::string type){
     pros::Controller master(pros::E_CONTROLLER_MASTER);
@@ -50,7 +51,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         while (!complete) {
             //draw gui
             if (changed) {
-            std::string valstr="p:"+strtrim(rtp(val[0],3))+" i:"+strtrim(rtp(val[1],3))+" d:"+strtrim(rtp(val[2],3))+" g:"+std::to_string(rtp(val[3],3));
+            std::string valstr="p:"+strtrim(rtp(val[0],3))+" i:"+strtrim(rtp(val[1],3))+" d:"+strtrim(rtp(val[2],3))+" g:"+strtrim(rtp(val[3],3));
             std::string selstr="Selected:"+valstr[s];
             master.clear_line(1);
             pros::delay(50);
