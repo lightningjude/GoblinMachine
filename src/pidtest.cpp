@@ -137,14 +137,13 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             );
             newchassis.setPose(0,0,0);
             newchassis.moveToPoint(0, val[3], 5);
-            while (newchassis.isInMotion()) {
-                pros::delay(20);
-            }
-            master.clear_line(3);
+            pros::delay(5000); //give time to update
+            newchassis.cancelAllMotions();
+            master.clear_line(2);
             pros::delay(50);
-            master.print(3,0,"Done");
+            master.print(2,0,"Done");
             delete &newchassis;
-
+           
 
         }
         else if (type=="turn") {
@@ -158,12 +157,11 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             );
             newchassis.setPose(0,0,0);
             newchassis.turnToHeading(val[3], 5);
-            while (newchassis.isInMotion()) {
-                pros::delay(20);
-            }
-            master.clear_line(3);
+            pros::delay(5000); //give time to update
+            newchassis.cancelAllMotions();
+            master.clear_line(2);
             pros::delay(50);
-            master.print(3,0,"Done");
+            master.print(2,0,"Done");
             delete &newchassis;
             
         }
