@@ -25,7 +25,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
     //add stuff later
     //0 is p, 1 is i, 2 is d, 3 is g
     double val[] = {0,0,0,0};
-    std::string valstr[]={"p ","i ","d ","goal"};
+    std::string valsstr[]={" p"," i"," d"," goal"};
     double inc[] = {0,0,0,0};
     int s=0;
     //defaults
@@ -52,7 +52,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             //draw gui
             if (changed) {
             std::string valstr="p:"+strtrim(rtp(val[0],3))+" i:"+strtrim(rtp(val[1],3))+" d:"+strtrim(rtp(val[2],3))+" g:"+strtrim(rtp(val[3],3));
-            std::string selstr="Selected:"+std::to_string(valstr[s]);
+            std::string selstr="Selected:"+valsstr[s];
             master.clear_line(1);
             pros::delay(50);
             master.clear_line(2);
