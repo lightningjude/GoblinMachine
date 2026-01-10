@@ -121,7 +121,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             while (newchassis.isInMotion()) {
                 pros::delay(20);
             }
-            newchassis.
+            delete &newchassis;
             
 
 
@@ -140,6 +140,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             while (newchassis.isInMotion()) {
                 pros::delay(20);
             }
+            delete &newchassis;
         }
 
 }
