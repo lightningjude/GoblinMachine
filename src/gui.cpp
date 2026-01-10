@@ -157,7 +157,6 @@ void lv_display_selection(void) {
     std::string display_str="Color: "+color_str+"\nStarting Side: "+side_str+"\nMode: "+mode_str;
     lv_label_set_text(label,display_str.c_str());
     lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
-
 }
 
 std::tuple<pros::Color,int,int,int> selectgui() {
