@@ -15,5 +15,17 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
     double i=0;
     double d=0;
     double g=0;
-    
+    //defaults
+    if (type=="drive") {
+        p=20;
+        i=0;
+        d=1;
+        g=12;
+    }
+    else if (type=="turn") {
+        p=10;
+        i=0;
+        d=0.5;
+        g=90;
+    }
 }
