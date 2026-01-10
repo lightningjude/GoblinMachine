@@ -21,13 +21,15 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         i=0;
         d=1;
         g=12;
-        lemlib::ControllerSettings g_controller(p,i,d,0,0,0,0,0);
+        lemlib::ControllerSettings angular_controller(10,0,0.5,0,0,0,0,0,0);
     }
     else if (type=="turn") {
         p=10;
         i=0;
         d=0.5;
         g=90;
+        lemlib::ControllerSettings lateral_controller(20,0,1,0,0,0,0,0,0);
     }
+    
 
 }
