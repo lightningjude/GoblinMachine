@@ -6,6 +6,12 @@
 #include <cmath>
 #include <string>
 
+double rtp(double value, int places) {
+    double factor = std::pow(10.0, places);
+    value = std::round(value * factor) / factor;
+    return value;
+}
+
 void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::ExpoDriveCurve throttle_curve,lemlib::ExpoDriveCurve steer_curve, std::string type){
     pros::Controller master(pros::E_CONTROLLER_MASTER);
     std::string test = "PID Test: " + type;
@@ -41,7 +47,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         while (!complete) {
             //draw gui
             if (changed) {
-            std::string valstr="p:"+std::to_string(round(val[0]))+" i:"+std::to_string(val[1])+" d:"+std::to_string(val[2])+" g:"+std::to_string(val[3]);
+            std::string valstr="p:"+std::to_string(rtp(val[0],3))+" i:"+std::to_string(rtp(val[1],3))+" d:"+std::to_string(rtp(val[2],3))+" g:"+std::to_string(rtp(val[3],3));
             std::string selstr="Selected:"+valstr[s];
             master.clear_line(1);
             pros::delay(50);
