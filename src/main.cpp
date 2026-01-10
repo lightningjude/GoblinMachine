@@ -120,6 +120,8 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 void initialize() {
 	
 	chassis.calibrate();
+	//uncomment below while testing
+	pros::Task intakethread_task(intakethread);
 	//pros::lcd::initialize();
 	
 	/*pros::Task screen_task([&]() {
@@ -181,10 +183,8 @@ void disabled() {
  * starts.
  */
 void competition_initialize() {
-	//variables for input, color as a color, color as a #(0 for red, 1 for blue), starting position(0 for left, 1 for right), skills or match(0 for match, 1 for skills)
 	const auto [color,colorid,sp,sorm] = gui();
-	//uncomment below while testing
-	pros::Task intakethread_task(intakethread);
+	//variables for input, color as a color, color as a #(0 for red, 1 for blue), starting position(0 for left, 1 for right), skills or match(0 for match, 1 for skills)
 }
 
 /**
@@ -291,7 +291,12 @@ void opcontrol() {
 	
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
-	testgui();
+	if (!pros::competition::is_connected()) {
+		const auto [color,colorid,sp,sorm] = gui();
+	}
+	
+
+
 	while (true) {
 		
 
