@@ -50,7 +50,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         while (!complete) {
             //draw gui
             if (changed) {
-            std::string valstr="p:"+strtrim(rtp(val[0],3))+" i:"+std::to_string(rtp(val[1],3))+" d:"+std::to_string(rtp(val[2],3))+" g:"+std::to_string(rtp(val[3],3));
+            std::string valstr="p:"+strtrim(rtp(val[0],3))+" i:"+strtrim(rtp(val[1],3))+" d:"+strtrim(rtp(val[2],3))+" g:"+std::to_string(rtp(val[3],3));
             std::string selstr="Selected:"+valstr[s];
             master.clear_line(1);
             pros::delay(50);
