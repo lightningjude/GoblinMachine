@@ -52,7 +52,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             //draw gui
             if (changed) {
             std::string valstr="p:"+strtrim(rtp(val[0],3))+" i:"+strtrim(rtp(val[1],3))+" d:"+strtrim(rtp(val[2],3))+" g:"+strtrim(rtp(val[3],3));
-            std::string selstr="Selected:"+valstr[s];
+            std::string selstr="Selected:"+std::to_string(valstr[s]);
             master.clear_line(1);
             pros::delay(50);
             master.clear_line(2);
@@ -60,7 +60,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             master.print(1, 0,valstr.c_str());
             pros::delay(50);
             master.print(2, 0,selstr.c_str());
-            pros::delay(20);
+            pros::delay(50);
             }
             
             //controls
