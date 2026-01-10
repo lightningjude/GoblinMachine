@@ -3,6 +3,7 @@
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 #include "pros/rtos.hpp"
+#include <cmath>
 #include <string>
 
 void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::ExpoDriveCurve throttle_curve,lemlib::ExpoDriveCurve steer_curve, std::string type){
@@ -40,7 +41,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         while (!complete) {
             //draw gui
             if (changed) {
-            std::string valstr="p:"+std::to_string(val[0])+" i:"+std::to_string(val[1])+" d:"+std::to_string(val[2])+" g:"+std::to_string(val[3]);
+            std::string valstr="p:"+std::to_string(round(val[0]))+" i:"+std::to_string(val[1])+" d:"+std::to_string(val[2])+" g:"+std::to_string(val[3]);
             std::string selstr="Selected:"+valstr[s];
             master.clear_line(1);
             pros::delay(50);
