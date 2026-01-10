@@ -4,9 +4,11 @@
 #include "pros/misc.h"
 #include "pros/rtos.hpp"
 
-void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::ExpoDriveCurve throttle_curve,lemlib::ExpoDriveCurve steer_curve, std::string type);
-std::tuple<pros::Color,int,int,int> gui(void) {
-    
+void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::ExpoDriveCurve throttle_curve,lemlib::ExpoDriveCurve steer_curve, std::string type){
+    pros::Controller master(pros::E_CONTROLLER_MASTER);
+    std::string test = "PID Test: " + type;
+    master.clear();
+    master.print(0,0,"%s",test.c_str());
     //add stuff later
 
 }
