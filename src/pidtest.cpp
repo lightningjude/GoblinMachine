@@ -122,10 +122,10 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             
         }
         pros::delay(100); //give time to update
-        master.clear_line(3);
+        master.clear_line(2);
         pros::delay(50);
         std::string report="Running...";
-        master.print(3,0,report.c_str());
+        master.print(2,0,report.c_str());
         if (type=="drive") {
             lemlib::ControllerSettings lateral_controller(val[0],val[1],val[2],0,0,0,0,0,0);
             lemlib::Chassis newchassis(drivetrain, // drivetrain settings
