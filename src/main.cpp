@@ -296,7 +296,7 @@ void opcontrol() {
 	master.print(0,0,"PID Test? y to confirm, x to skip");
 	bool chosen=false;
 	while (!chosen) {
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
 			chosen=true;
 			testgui();
 		}
