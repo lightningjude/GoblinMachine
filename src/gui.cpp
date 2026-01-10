@@ -159,7 +159,7 @@ void lv_display_selection(void) {
     lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
 }
 
-std::tuple<pros::Color,int,int,int> gui() {
+std::tuple<pros::Color,int,int,int> selectgui() {
     
     lv_color_buttonmatrix();
     while (cp==-1) {

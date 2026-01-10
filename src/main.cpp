@@ -183,7 +183,7 @@ void disabled() {
  * starts.
  */
 void competition_initialize() {
-	const auto [color,colorid,sp,sorm] = gui();
+	const auto [color,colorid,sp,sorm] = selectgui();
 	//variables for input, color as a color, color as a #(0 for red, 1 for blue), starting position(0 for left, 1 for right), skills or match(0 for match, 1 for skills)
 }
 
@@ -302,6 +302,20 @@ void opcontrol() {
 		}
 		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
 			chosen=true;
+		}
+		pros::delay(20);
+	}
+	master.clear();
+	pros::delay(50);
+	master.print(0,0,"auton select? y to confirm, x to skip");
+	bool chosenn=false;
+	while (!chosenn) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
+			chosenn=true;
+			selectgui();
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+			chosenn=true;
 		}
 		pros::delay(20);
 	}

@@ -82,7 +82,7 @@ void autonlr(lemlib::Chassis chassis);
 void autonrr(lemlib::Chassis chassis);
 void autonskills(lemlib::Chassis chassis);
 void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::ExpoDriveCurve throttle_curve,lemlib::ExpoDriveCurve steer_curve, std::string type);
-std::tuple<pros::Color,int,int,int> gui(void);
+std::tuple<pros::Color,int,int,int> selectgui(void);
 
 #ifdef __cplusplus
 }
