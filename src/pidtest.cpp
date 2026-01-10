@@ -55,12 +55,11 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         inc[3]=10;
     }
     bool complete;
-    bool changed;
+    bool changed = true;
     std::string valstr;
     std::string selstr;
     again:
     complete=false;
-    changed=true;
         while (!complete) {
             //draw gui
             if (changed) {
@@ -126,6 +125,9 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             while (newchassis.isInMotion()) {
                 pros::delay(20);
             }
+            master.clear_line(3);
+            pros::delay(50);
+            master.print(3,0,"Done");
             delete &newchassis;
 
 
@@ -144,6 +146,9 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             while (newchassis.isInMotion()) {
                 pros::delay(20);
             }
+            master.clear_line(3);
+            pros::delay(50);
+            master.print(3,0,"Done");
             delete &newchassis;
             
         }
