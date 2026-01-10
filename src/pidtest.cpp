@@ -17,6 +17,7 @@ std::string strtrim(double value) {
     return valuestr;
 }
 void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::ExpoDriveCurve throttle_curve,lemlib::ExpoDriveCurve steer_curve, std::string type){
+    
     pros::Controller master(pros::E_CONTROLLER_MASTER);
     std::string test = "PID Test: " + type;
     master.clear();
@@ -120,6 +121,8 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             while (newchassis.isInMotion()) {
                 pros::delay(20);
             }
+            newchassis.
+            
 
 
         }
