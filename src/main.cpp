@@ -253,7 +253,7 @@ void autonomous() {
 void testgui()	{
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
     master.clear();
-    master.print(0,0,"Choose type:");
+    master.print(0,0,"Choose type");
     master.print(1,0,"L: Drive");
     master.print(2,0,"R: Turn");
     while (true) {
