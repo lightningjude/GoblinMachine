@@ -26,7 +26,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
     //0 is p, 1 is i, 2 is d, 3 is g
     double val[] = {0,0,0,0};
     std::string valsstr[]={" p"," i"," d"," goal"};
-    double inc[] = {0,0,0,0};
+    double inc[4];
     int s=0;
     //defaults
     if (type=="drive") {
@@ -65,12 +65,12 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             
             //controls
             if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
-                val[s]+=inc[s];
+                val[s]=val[s]+inc[s];
                 changed=true;
                
             }
             else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
-                val[s]-=inc[s];
+                val[s]=val[s]-inc[s];
                 changed=true;
                 
             }
