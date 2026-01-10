@@ -321,14 +321,16 @@ void opcontrol() {
 	}
 	
 
-
+	bool reversed=false;
+	bool revlatch=false;
 	while (true) {
 		
 
 		// Arcade control scheme
 		int leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int rightX = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
-		
+		int negLeftY = -leftY;
+		int negRightX = -rightX;
 		//last value is called desaturate bias
 		/* desaturateBias has a range of 0 to 1, 
 		and only has an effect if motor output would be above 127. 
@@ -336,7 +338,21 @@ void opcontrol() {
 		leaving throttle alone, and vice versa for a value 1. 
 		The default is 0.5, where steering and throttle have the same priority.
 		*/
-		chassis.arcade(leftY, rightX, false, 0.5);
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+			if (!revlatch) {
+				reversed=!reversed;
+				revlatch=true;
+			}
+		}
+		else {
+			revlatch=false;
+		}
+		if (reversed) {
+			chassis.arcade(negLeftY, negRightX, false, 0.5);
+		}
+		else {
+			chassis.arcade(leftY, rightX, false, 0.5);
+		}
 		pros::delay(20);                               // Run for 20 ms then update
 	}
 	
