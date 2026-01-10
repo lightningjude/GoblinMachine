@@ -111,6 +111,9 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             }
             
         }
+        master.clear_line(3);
+        pros::delay(50);
+        master.print(3,0,"Running...");
         if (type=="drive") {
             lemlib::ControllerSettings lateral_controller(val[0],val[1],val[2],0,0,0,0,0,0);
             lemlib::Chassis newchassis(drivetrain, // drivetrain settings
