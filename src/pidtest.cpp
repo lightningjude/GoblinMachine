@@ -11,5 +11,9 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
     pros::delay(50);
     master.print(0, 0, test.c_str());
     //add stuff later
-
+    double p=0;
+    double i=0;
+    double d=0;
+    double g=0;
+    
 }
