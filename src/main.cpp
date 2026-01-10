@@ -253,8 +253,11 @@ void autonomous() {
 void testgui()	{
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
     master.clear();
+	pros::delay(50);
     master.print(0,0,"Choose type");
+	pros::delay(50);
     master.print(1,0,"L: Drive");
+	pros::delay(50);
     master.print(2,0,"R: Turn");
     while (true) {
         if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {

@@ -8,6 +8,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
     pros::Controller master(pros::E_CONTROLLER_MASTER);
     std::string test = "PID Test: " + type;
     master.clear();
+    pros::delay(50);
     master.print(0, 0, test.c_str());
     //add stuff later
 
