@@ -25,7 +25,6 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         val[3]=12;
         //increments for p,i,d,goal
         double inc[] = {1,0.1,0.1,1};
-        lemlib::ControllerSettings angular_controller(10,0,0.5,0,0,0,0,0,0);
     }
     else if (type=="turn") {
         val[0]=10;
@@ -34,7 +33,7 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         val[3]=90;
         //increments for p,i,d,goal
         double inc[] = {1,0.1,0.1,10};
-        lemlib::ControllerSettings lateral_controller(20,0,1,0,0,0,0,0,0);
+        
     }
     bool complete=false;
     bool changed=true;
@@ -44,6 +43,8 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
             std::string valstr="p:"+std::to_string(val[0])+" i:"+std::to_string(val[1])+" d:"+std::to_string(val[2])+" g:"+std::to_string(val[3]);
             std::string selstr="Selected:"+valstr[s];
             master.clear_line(1);
+            pros::delay(50);
+            master.clear_line(2);
             pros::delay(50);
             master.print(1, 0,valstr.c_str());
             pros::delay(50);
@@ -89,27 +90,27 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         }
         if (type=="drive") {
             lemlib::ControllerSettings lateral_controller(val[0],val[1],val[2],0,0,0,0,0,0);
-            lemlib::Chassis chassis(drivetrain, // drivetrain settings
+            lemlib::Chassis newchassis(drivetrain, // drivetrain settings
                                     lateral_controller, // lateral PID settings
                                     lemlib::ControllerSettings(10,0,0.5,0,0,0,0,0,0), // angular PID settings
                                     sensors, // odometry sensors
                                     &throttle_curve,
                                     &steer_curve
             );
-            chassis.setPose(0,0,0);
-            chassis.moveToPoint(0, val[3], 5);
+            newchassis.setPose(0,0,0);
+            newchassis.moveToPoint(0, val[3], 5);
         }
         else if (type=="turn") {
             lemlib::ControllerSettings angular_controller(val[0],val[1],val[2],0,0,0,0,0,0);
-            lemlib::Chassis chassis(drivetrain, // drivetrain settings
+            lemlib::Chassis newchassis(drivetrain, // drivetrain settings
                                     lemlib::ControllerSettings(20,0,1,0,0,0,0,0,0), // lateral PID settings
                                     angular_controller, // angular PID settings
                                     sensors, // odometry sensors
                                     &throttle_curve,
                                     &steer_curve
             );
-            chassis.setPose(0,0,0);
-            chassis.turnToHeading(val[3], 5);
+            newchassis.setPose(0,0,0);
+            newchassis.turnToHeading(val[3], 5);
         }
 
 }
