@@ -291,9 +291,7 @@ void opcontrol() {
 	
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
-	if (!pros::competition::is_connected()) {
-		const auto [color,colorid,sp,sorm] = gui();
-	}
+	testgui();
 	
 
 
