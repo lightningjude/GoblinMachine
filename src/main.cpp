@@ -322,8 +322,8 @@ void opcontrol() {
 		pros::delay(20);
 	}
 	
-	
-	
+	pros::delay(50);
+	master.clear();
 
 	bool reversed=false;
 	bool revlatch=false;
