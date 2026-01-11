@@ -293,6 +293,20 @@ void opcontrol() {
 	//comment out when needed
 	master.clear();
 	pros::delay(50);
+	master.print(0,0,"auton select? y to confirm, x to skip");
+	bool chosenn=false;
+	while (!chosenn) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
+			chosenn=true;
+			const auto [color,colorid,sp,sorm,txt] = selectgui();
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+			chosenn=true;
+		}
+		pros::delay(20);
+	}
+	master.clear();
+	pros::delay(50);
 	master.print(0,0,"PID Test? y to confirm, x to skip");
 	bool chosen=false;
 	while (!chosen) {
@@ -305,20 +319,7 @@ void opcontrol() {
 		}
 		pros::delay(20);
 	}
-	master.clear();
-	pros::delay(50);
-	master.print(0,0,"auton select? y to confirm, x to skip");
-	bool chosenn=false;
-	while (!chosenn) {
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
-			chosenn=true;
-			selectgui();
-		}
-		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
-			chosenn=true;
-		}
-		pros::delay(20);
-	}
+	
 	
 
 	bool reversed=false;
