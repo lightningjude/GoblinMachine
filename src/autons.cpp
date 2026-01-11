@@ -61,6 +61,7 @@ void autonskills(lemlib::Chassis chassis) {
     outup();
     pros::delay(5000);
     intakestop();
-    //stop, retract match load  to prep for driver control
+    //stop, retract match load  to prep for parking clear
     matchload.retract();
+    
 }
