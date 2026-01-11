@@ -3,6 +3,7 @@
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "pros/adi.hpp"
 #include "pros/misc.h"
+#include "pros/rtos.h"
 #include "pros/rtos.hpp"
 #include <ctime>
 
@@ -73,6 +74,8 @@ void autonskills(lemlib::Chassis chassis) {
     intakestop();
     //stop, retract match load  to prep for parking clear
     matchload.retract();
-    timefunc(2000,&matchextend);
+    int* t;
+    t=new int(2000);
+    //pros::Task time_task(timefunc, (*t)(*t), "time task", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT, "time task");
     chassis.follow(skillsp5_txt, 10, 10000);
 }
