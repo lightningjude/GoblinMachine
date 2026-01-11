@@ -27,9 +27,29 @@ void autonrr(lemlib::Chassis chassis) {
     chassis.moveToPose(0, 10, 0, 1000);
 }
 
-ASSET(example_txt);
+ASSET(skillsp1_txt);
+ASSET(skillsp2_txt);
+ASSET(skillsp3_txt);
+ASSET(skillsp4_txt);
 void autonskills(lemlib::Chassis chassis) {
     //skills
+    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
     chassis.setPose(0,0,0);
-    chassis.follow(example_txt, 10, 2000);
+    matchload.extend();
+    chassis.follow(skillsp1_txt, 10, 10000);
+    intakein();
+    pros::delay(5000);
+    intakestop();
+    chassis.follow(skillsp2_txt, 10, 10000);
+    outup();
+    pros::delay(5000);
+    intakestop();
+    chassis.follow(skillsp3_txt, 10, 10000);
+    intakein();
+    pros::delay(5000);
+    intakestop();
+    chassis.follow(skillsp4_txt, 10, 10000);
+    outup();
+    pros::delay(5000);
+    intakestop();
 }
