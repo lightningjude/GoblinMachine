@@ -10,8 +10,8 @@
 
 //intake motors
 
-pros::Motor intakelow(-7, pros::MotorGearset::green);
-pros::Motor intakehigh(8, pros::MotorGearset::green);
+pros::Motor intakelow(-7, pros::MotorGearset::blue);
+pros::Motor intakehigh(8, pros::MotorGearset::blue);
 //pneumatics
 pros::adi::Pneumatics scorer=pros::adi::Pneumatics('b',true);
 pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
