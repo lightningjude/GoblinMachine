@@ -10,6 +10,10 @@
 void intakethread() {
     pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
     pros::Controller master(pros::E_CONTROLLER_MASTER);
+	lv_obj_t* intaketxt;
+	intaketxt = lv_label_create(lv_screen_active());
+	lv_label_set_text(intaketxt, "Intake Thread Running");
+	lv_obj_align(intaketxt, LV_ALIGN_TOP_LEFT, 0, 0);
 	bool ttog = false;
 	bool tlatch = false;
 	bool mtog = false;

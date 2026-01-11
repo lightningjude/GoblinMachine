@@ -309,6 +309,9 @@ void opcontrol() {
 	}
 	master.clear();
 	pros::delay(50);
+	while (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)|master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+		pros::delay(20);
+	}
 	master.print(0,0,"PID Test? y to confirm, x to skip");
 	bool chosen=false;
 	while (!chosen) {
