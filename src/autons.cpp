@@ -31,6 +31,7 @@ ASSET(skillsp1_txt);
 ASSET(skillsp2_txt);
 ASSET(skillsp3_txt);
 ASSET(skillsp4_txt);
+ASSET(skillsp5_txt);
 void autonskills(lemlib::Chassis chassis) {
     //skills
     pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
@@ -64,4 +65,5 @@ void autonskills(lemlib::Chassis chassis) {
     //stop, retract match load  to prep for parking clear
     matchload.retract();
     
+    chassis.follow(skillsp5_txt, 10, 10000);
 }
