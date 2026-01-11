@@ -1,6 +1,5 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
-#include "liblvgl/llemu.hpp"
 #include "liblvgl/misc/lv_types.h"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
@@ -41,7 +40,7 @@ pros::Motor left_front(1, pros::MotorGearset::blue);
 lemlib::Drivetrain drivetrain(&left_motors, // left motor group
                               &right_motors, // right motor group
                               twi, // 10 inch track width
-                              lemlib::Omniwheel::NEW_325, // using new 4" omnis
+                              lemlib::Omniwheel::NEW_325, // using new 3.25" omnis
                               360, // drivetrain rpm is 360
                               2 // horizontal drift is 2 (for now)
 );
@@ -50,9 +49,9 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
 // create an imu on port 10
 pros::Imu imu(20);
 
-lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to null
+lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to nullptr
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
-                            nullptr, // horizontal tracking wheel 1
+                            nullptr, // horizontal tracking wheel 1, set to nullptr as we are using IMEs
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
                             &imu // inertial sensor
 );
