@@ -14,17 +14,17 @@ void autonlb(lemlib::Chassis chassis) {
 void autonrb(lemlib::Chassis chassis) {
     //right blue
     chassis.setPose(0,0,0);
-    chassis.moveToPose(0, 10, 0, 1000);
+    
 }
 void autonlr(lemlib::Chassis chassis) {
     //left red
     chassis.setPose(0,0,0);
-    chassis.moveToPose(0, 10, 0, 1000);
+    
 }
 void autonrr(lemlib::Chassis chassis) {
     //right red
     chassis.setPose(0,0,0);
-    chassis.moveToPose(0, 10, 0, 1000);
+    
 }
 
 ASSET(skillsp1_txt);
