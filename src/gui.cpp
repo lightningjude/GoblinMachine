@@ -1,4 +1,5 @@
 #include "liblvgl/core/lv_obj_pos.h"
+#include "liblvgl/core/lv_obj_private.h"
 #include "liblvgl/core/lv_obj_tree.h"
 #include "liblvgl/display/lv_display.h"
 #include "liblvgl/misc/lv_types.h"
@@ -131,7 +132,7 @@ void lv_mode_buttonmatrix(void)
     lv_obj_align(mode_btnm, LV_ALIGN_CENTER, 0, 0);
     lv_obj_add_event_cb(mode_btnm, mode_event_handler, LV_EVENT_PRESSED, NULL);
 }
-void lv_display_selection(void) {
+lv_obj_t* lv_display_selection(void) {
     lv_obj_t * label = lv_label_create(lv_screen_active());
     std::string color_str;
     if (c==pros::Color::red) {
@@ -157,9 +158,11 @@ void lv_display_selection(void) {
     std::string display_str="Color: "+color_str+"\nStarting Side: "+side_str+"\nMode: "+mode_str;
     lv_label_set_text(label,display_str.c_str());
     lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+    return label;
+    
 }
 
-std::tuple<pros::Color,int,int,int> selectgui() {
+std::tuple<pros::Color,int,int,int,lv_obj_t*> selectgui() {
     
     lv_color_buttonmatrix();
     while (cp==-1) {
@@ -173,6 +176,7 @@ std::tuple<pros::Color,int,int,int> selectgui() {
     while (skills==-1) {
         pros::delay(20);
     }
-    lv_display_selection();
-    return std::make_tuple(c,cp,side,skills);
+    lv_obj_t* txt;
+    txt = lv_display_selection();
+    return std::make_tuple(c,cp,side,skills,txt);
 }

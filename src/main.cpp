@@ -183,7 +183,7 @@ void disabled() {
  * starts.
  */
 void competition_initialize() {
-	const auto [color,colorid,sp,sorm] = selectgui();
+	const auto [color,colorid,sp,sorm,txt] = selectgui();
 	//variables for input, color as a color, color as a #(0 for red, 1 for blue), starting position(0 for left, 1 for right), skills or match(0 for match, 1 for skills)
 }
 
