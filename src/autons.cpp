@@ -38,8 +38,11 @@ void matchextend() {
     pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
     matchload.extend();
 }
-void timefunc(int time, FunctionPointer func) {
-    pros::delay(time);
+FunctionPointer func=&matchextend;
+int timed=2000;
+void timefunc() {
+    
+    pros::delay(timed);
     func();
 }
 void autonskills(lemlib::Chassis chassis) {
@@ -74,8 +77,7 @@ void autonskills(lemlib::Chassis chassis) {
     intakestop();
     //stop, retract match load  to prep for parking clear
     matchload.retract();
-    int* t;
-    t=new int(2000);
-    //pros::Task time_task(timefunc, (*t)(*t), "time task", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT, "time task");
+    int timew=2000;
+    pros::Task time_task(timefunc);
     chassis.follow(skillsp5_txt, 10, 10000);
 }
