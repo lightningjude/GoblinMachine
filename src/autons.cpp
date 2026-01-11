@@ -77,7 +77,6 @@ void autonskills(lemlib::Chassis chassis) {
     intakestop();
     //stop, retract match load  to prep for parking clear
     matchload.retract();
-    int timew=2000;
     pros::Task time_task(timefunc);
     chassis.follow(skillsp5_txt, 10, 10000);
 }
