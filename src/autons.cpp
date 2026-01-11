@@ -4,6 +4,7 @@
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 #include "pros/rtos.hpp"
+#include <ctime>
 
 
 void autonlb(lemlib::Chassis chassis) {
@@ -26,12 +27,20 @@ void autonrr(lemlib::Chassis chassis) {
     chassis.setPose(0,0,0);
     
 }
-
+using FunctionPointer = void (*)();
 ASSET(skillsp1_txt);
 ASSET(skillsp2_txt);
 ASSET(skillsp3_txt);
 ASSET(skillsp4_txt);
 ASSET(skillsp5_txt);
+void matchextend() {
+    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+    matchload.extend();
+}
+void timefunc(int time, FunctionPointer func) {
+    pros::delay(time);
+    func();
+}
 void autonskills(lemlib::Chassis chassis) {
     //skills
     pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
@@ -64,6 +73,6 @@ void autonskills(lemlib::Chassis chassis) {
     intakestop();
     //stop, retract match load  to prep for parking clear
     matchload.retract();
-    
+    timefunc(2000,&matchextend);
     chassis.follow(skillsp5_txt, 10, 10000);
 }
