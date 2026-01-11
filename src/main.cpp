@@ -1,9 +1,11 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "liblvgl/llemu.hpp"
+#include "liblvgl/misc/lv_types.h"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 #include "pros/rtos.hpp"
+#include <new>
 
 
 
@@ -288,7 +290,7 @@ void opcontrol() {
 		chassis.moveToPoint(0, g, 5);
 	}
 		*/
-	
+	lv_obj_t* txt;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
 	master.clear();
@@ -321,12 +323,14 @@ void opcontrol() {
 	}
 	
 	
+	
 
 	bool reversed=false;
 	bool revlatch=false;
+	delete txt;
 	while (true) {
-		
 
+		
 		// Arcade control scheme
 		int leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int rightX = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
