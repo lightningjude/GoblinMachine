@@ -83,18 +83,7 @@ void intakethread() {
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			if (olatch==false) {
 				if (!otog) {
-					if (mtog) {
-						outmiddle();
-					}
-					else if (dtog) {
-						outdown();
-					}
-					else if (itog) {
-						intakein();
-					}
-					else if (ttog) {
-						outup();
-					}
+					outup();
 				}
 				else {
 					intakestop();
