@@ -34,6 +34,13 @@ VERSION:=1.0.0
 # this line excludes opcontrol.c and similar files
 EXCLUDE_SRC_FROM_LIB+=$(foreach file, $(SRCDIR)/main,$(foreach cext,$(CEXTS),$(file).$(cext)) $(foreach cxxext,$(CXXEXTS),$(file).$(cxxext)))
 EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/intakefunctions.cpp
+EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/intakemain.cpp
+EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/main.cpp
+EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/autons.cpp
+EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/gui.cpp
+EXCLUDE_SRC_FROM_LIB+=$(SRCDIR)/pidtest.cpp
+
+
 # files that get distributed to every user (beyond your source archive) - add
 # whatever files you want here. This line is configured to add all header files
 # that are in the directory include/LIBNAME
