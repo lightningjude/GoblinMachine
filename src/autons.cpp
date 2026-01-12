@@ -17,6 +17,8 @@ void timefuncdscore(void* delay) {
 
 
 ASSET(leftsideautons_txt);
+ASSET(rightsideautons1_txt);
+ASSET(rightsideautons2_txt);
 void autonlb(lemlib::Chassis robot) {
     //left blue
     robot.setPose(0,0,0);
@@ -32,7 +34,14 @@ void autonlb(lemlib::Chassis robot) {
 void autonrb(lemlib::Chassis robot) {
     //right blue
     robot.setPose(0,0,0);
-    
+    robot.follow(rightsideautons1_txt, 10, 10000);
+    intakein();
+    pros::delay(5000);
+    intakestop();
+    robot.follow(rightsideautons2_txt, 10, 10000);
+    outup();
+    pros::delay(5000);
+    intakestop();    
 }
 void autonlr(lemlib::Chassis robot) {
     //left red
@@ -50,7 +59,14 @@ void autonlr(lemlib::Chassis robot) {
 void autonrr(lemlib::Chassis robot) {
     //right red
     robot.setPose(0,0,0);
-    
+    robot.follow(rightsideautons1_txt, 10, 10000);
+    intakein();
+    pros::delay(5000);
+    intakestop();
+    robot.follow(rightsideautons2_txt, 10, 10000);
+    outup();
+    pros::delay(5000);
+    intakestop();  
 }
 using FunctionPointer = void (*)();
 ASSET(skillsp1_txt);
