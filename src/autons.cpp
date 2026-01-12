@@ -10,24 +10,24 @@
 #include <ctime>
 
 
-void autonlb(lemlib::Chassis chassis) {
+void autonlb(lemlib::Chassis robot) {
     //left blue
-    chassis.setPose(0,0,0);
+    robot.setPose(0,0,0);
     
 }
-void autonrb(lemlib::Chassis chassis) {
+void autonrb(lemlib::Chassis robot) {
     //right blue
-    chassis.setPose(0,0,0);
+    robot.setPose(0,0,0);
     
 }
-void autonlr(lemlib::Chassis chassis) {
+void autonlr(lemlib::Chassis robot) {
     //left red
-    chassis.setPose(0,0,0);
+    robot.setPose(0,0,0);
     
 }
-void autonrr(lemlib::Chassis chassis) {
+void autonrr(lemlib::Chassis robot) {
     //right red
-    chassis.setPose(0,0,0);
+    robot.setPose(0,0,0);
     
 }
 using FunctionPointer = void (*)();
@@ -59,32 +59,32 @@ void timefuncrt(void* delay) {
     pros::delay(timed);
     matchretract();
 }
-void autonskills(lemlib::Chassis chassisptr) {
+void autonskills(lemlib::Chassis robot) {
     pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
     //setup
-    chassisptr.setPose(0,0,0);
+    robot.setPose(0,0,0);
     //prep for load
     matchload.extend();
     //drive to match loader
-    chassisptr.follow(skillsp1_txt, 10, 10000);
+    robot.follow(skillsp1_txt, 10, 10000);
     //intake in blobks for 5 sec
     intakein();
     pros::delay(5000);
     intakestop();
     //stop, then drive to opposite side of big goal
-    chassisptr.follow(skillsp2_txt, 10, 10000);
+    robot.follow(skillsp2_txt, 10, 10000);
     //score blocks in big goal for 5 sec
     outup();
     pros::delay(5000);
     intakestop();
     //stop, then back up to opposite match loader
-    chassisptr.follow(skillsp3_txt, 10, 10000);
+    robot.follow(skillsp3_txt, 10, 10000);
     //intake in blocks for 5 sec
     intakein();
     pros::delay(5000);
     intakestop();
     //stop, then drive to big goal again
-    chassisptr.follow(skillsp4_txt, 10, 10000);
+    robot.follow(skillsp4_txt, 10, 10000);
     outup();
     pros::delay(5000);
     intakestop();
@@ -93,26 +93,26 @@ void autonskills(lemlib::Chassis chassisptr) {
     //drive across parking, matchload extends on a 2 sec delay
     int timed=2000;
     pros::Task time_task (timefuncext,(void*)timed,"Extend1");
-    chassisptr.follow(skillsp5_txt, 10, 10000);
+    robot.follow(skillsp5_txt, 10, 10000);
     //intake from match load for 5 sec
     intakein();
     pros::delay(5000);
     intakestop();
     //drive across to opposite long goal side
-    chassisptr.follow(skillsp6_txt, 10, 10000);
+    robot.follow(skillsp6_txt, 10, 10000);
     outup();
     pros::delay(5000);
     intakestop();
     //back up to opposite mobile goal
-    chassisptr.follow(skillsp7_txt, 10, 10000);
+    robot.follow(skillsp7_txt, 10, 10000);
     intakein();
     pros::delay(5000);
     intakestop();
     //go back to long goal
-    chassisptr.follow(skillsp8_txt, 10,10000);
+    robot.follow(skillsp8_txt, 10,10000);
     outup();
     pros::delay(5000);
     intakestop();
     //drive through parking, then around and back in
-    chassisptr.follow(skillsp9_txt,10,10000);
+    robot.follow(skillsp9_txt,10,10000);
 }
