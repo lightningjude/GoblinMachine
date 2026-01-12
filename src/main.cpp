@@ -284,6 +284,7 @@ void testgui()	{
 	pros::delay(50);
 
 }
+
 void opcontrol() {
 	lv_obj_t* txt;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
