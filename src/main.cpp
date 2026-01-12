@@ -104,7 +104,7 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 						&steer_curve
 
 );
-lemlib::Chassis* copy=&chassis;
+lemlib::Chassis* chassisptr=&chassis;
 /**
  * A callback function for LLEMU's center button.
  *
@@ -217,27 +217,27 @@ void autonomous() {
 			//left
 			if (colorid==0) {
 				//red
-				autonlr(copy);
+				autonlr(chassisptr);
 			}
 			else {
 				//blue
-				autonlb(copy);
+				autonlb(chassisptr);
 			}
 		}
 		else {
 			//right
 			if (colorid==0) {
 				//red
-				autonrr(copy);
+				autonrr(chassisptr);
 			}
 			else {
 				//blue
-				autonrb(copy);
+				autonrb(chassisptr);
 			}
 		}
 	}
 	else {
-		autonskills(copy);
+		autonskills(chassisptr);
 		//skills
 	}
 	
