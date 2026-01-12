@@ -5,6 +5,7 @@
 #include "pros/misc.h"
 #include "pros/rtos.h"
 #include "pros/rtos.hpp"
+#include <cstdint>
 #include <ctime>
 
 
@@ -34,16 +35,28 @@ ASSET(skillsp2_txt);
 ASSET(skillsp3_txt);
 ASSET(skillsp4_txt);
 ASSET(skillsp5_txt);
+ASSET(skillsp6_txt);
+ASSET(skillsp7_txt);
+ASSET(skillsp8_txt);
+ASSET(skillsp9_txt);
 void matchextend() {
     pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
     matchload.extend();
 }
-FunctionPointer func=&matchextend;
-int timed=2000;
-void timefunc(void* param) {
-    FunctionPointer runner = (FunctionPointer)param;
+void matchretract() {
+    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+    matchload.retract();
+}
+void timefuncext(void* delay) {
+    int timed = *((int*)delay);
     pros::delay(timed);
-    runner();
+    
+    matchextend();
+}
+void timefuncrt(void* delay) {
+    int timed = *((int*)delay);
+    pros::delay(timed);
+    matchretract();
 }
 void autonskills(lemlib::Chassis chassis) {
     //skills
@@ -77,6 +90,29 @@ void autonskills(lemlib::Chassis chassis) {
     intakestop();
     //stop, retract match load  to prep for parking clear
     matchload.retract();
-    pros::Task time_task (timefunc,(void*)func,"Time Task");
+    //drive across parking, matchload extends on a 2 sec delay
+    int timed=2000;
+    pros::Task time_task (timefuncext,(void*)timed,"Extend1");
     chassis.follow(skillsp5_txt, 10, 10000);
+    //intake from match load for 5 sec
+    intakein();
+    pros::delay(5000);
+    intakestop();
+    //drive across to opposite long goal side
+    chassis.follow(skillsp6_txt, 10, 10000);
+    outup();
+    pros::delay(5000);
+    intakestop();
+    //back up to opposite mobile goal
+    chassis.follow(skillsp7_txt, 10, 10000);
+    intakein();
+    pros::delay(5000);
+    intakestop();
+    //go back to long goal
+    chassis.follow(skillsp8_txt, 10,10000);
+    outup();
+    pros::delay(5000);
+    intakestop();
+    //drive through parking, then around and back in
+    chassis.follow(skillsp9_txt,10,10000);
 }
