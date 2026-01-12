@@ -40,10 +40,10 @@ void matchextend() {
 }
 FunctionPointer func=&matchextend;
 int timed=2000;
-void timefunc() {
-    
+void timefunc(void* param) {
+    FunctionPointer runner = (FunctionPointer)param;
     pros::delay(timed);
-    func();
+    runner();
 }
 void autonskills(lemlib::Chassis chassis) {
     //skills
@@ -77,6 +77,6 @@ void autonskills(lemlib::Chassis chassis) {
     intakestop();
     //stop, retract match load  to prep for parking clear
     matchload.retract();
-    pros::Task time_task(timefunc);
+    pros::Task time_task (timefunc,(void*)func,"Time Task");
     chassis.follow(skillsp5_txt, 10, 10000);
 }
