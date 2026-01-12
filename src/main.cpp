@@ -285,17 +285,6 @@ void testgui()	{
 
 }
 void opcontrol() {
-	//1 is turn, 0 is drive
-	/*
-	if (s==1) {
-		chassis.setPose(0,0,0);
-		chassis.turnToHeading(g, 5);
-	}
-	else if (s==0) {
-		chassis.setPose(0,0,0);
-		chassis.moveToPoint(0, g, 5);
-	}
-		*/
 	lv_obj_t* txt;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
