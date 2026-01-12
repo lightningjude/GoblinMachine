@@ -1,5 +1,6 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "lemlib/chassis/chassis.hpp"
 #include "liblvgl/misc/lv_types.h"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
@@ -103,6 +104,7 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 						&steer_curve
 
 );
+lemlib::Chassis* copy=&chassis;
 /**
  * A callback function for LLEMU's center button.
  *
@@ -231,7 +233,7 @@ void autonomous() {
 		}
 	}
 	else {
-		
+		autonskills(copy);
 		//skills
 	}
 	
