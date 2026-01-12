@@ -9,11 +9,25 @@
 #include <cstdint>
 #include <ctime>
 
+void timefuncdscore(void* delay) {
+    int timed=*((int*)delay);
+    pros::delay(timed);
+    outdown();
+}
 
+
+ASSET(leftsideautons_txt);
 void autonlb(lemlib::Chassis robot) {
     //left blue
     robot.setPose(0,0,0);
-    
+    intakein();
+    int bruh = 2000;
+    pros::Task wait_task (timefuncdscore, (void*)bruh,"dude");
+    robot.follow(leftsideautons_txt, 10, 10000);
+    intakestop();
+    float prev = robot.getPose().theta;
+    robot.setPose(0,0,prev);
+    robot.moveToPose(0, -4, 0, 3000);
 }
 void autonrb(lemlib::Chassis robot) {
     //right blue
@@ -23,6 +37,14 @@ void autonrb(lemlib::Chassis robot) {
 void autonlr(lemlib::Chassis robot) {
     //left red
     robot.setPose(0,0,0);
+    intakein();
+    int bruh = 2000;
+    pros::Task wait_task (timefuncdscore, (void*)bruh,"dude");
+    robot.follow(leftsideautons_txt, 10, 10000);
+    intakestop();
+    float prev = robot.getPose().theta;
+    robot.setPose(0,0,prev);
+    robot.moveToPose(0, -4, 0, 3000);
     
 }
 void autonrr(lemlib::Chassis robot) {
