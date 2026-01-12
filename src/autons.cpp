@@ -63,7 +63,7 @@ void autonrr(lemlib::Chassis robot) {
     intakein();
     pros::delay(5000);
     intakestop();
-    robot.follow(rightsideautons2_txt, 10, 10000);
+    robot.follow(rightsideautons2_txt, 10, 10000,false);
     outup();
     pros::delay(5000);
     intakestop();  
@@ -110,7 +110,7 @@ void autonskills(lemlib::Chassis robot) {
     pros::delay(5000);
     intakestop();
     //stop, then drive to opposite side of big goal
-    robot.follow(skillsp2_txt, 10, 10000);
+    robot.follow(skillsp2_txt, 10, 10000,false);
     //score blocks in big goal for 5 sec
     outup();
     pros::delay(5000);
@@ -122,7 +122,7 @@ void autonskills(lemlib::Chassis robot) {
     pros::delay(5000);
     intakestop();
     //stop, then drive to big goal again
-    robot.follow(skillsp4_txt, 10, 10000);
+    robot.follow(skillsp4_txt, 10, 10000,false);
     outup();
     pros::delay(5000);
     intakestop();
@@ -137,17 +137,17 @@ void autonskills(lemlib::Chassis robot) {
     pros::delay(5000);
     intakestop();
     //drive across to opposite long goal side
-    robot.follow(skillsp6_txt, 10, 10000);
+    robot.follow(skillsp6_txt, 10, 10000,false);
     outup();
     pros::delay(5000);
     intakestop();
-    //back up to opposite mobile goal
+    //drive forward to opposite mobile goal
     robot.follow(skillsp7_txt, 10, 10000);
     intakein();
     pros::delay(5000);
     intakestop();
     //go back to long goal
-    robot.follow(skillsp8_txt, 10,10000);
+    robot.follow(skillsp8_txt, 10,10000,false);
     outup();
     pros::delay(5000);
     intakestop();
