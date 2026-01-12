@@ -217,18 +217,22 @@ void autonomous() {
 			//left
 			if (colorid==0) {
 				//red
+				autonlr(copy);
 			}
 			else {
 				//blue
+				autonlb(copy);
 			}
 		}
 		else {
 			//right
 			if (colorid==0) {
 				//red
+				autonrr(copy);
 			}
 			else {
 				//blue
+				autonrb(copy);
 			}
 		}
 	}
