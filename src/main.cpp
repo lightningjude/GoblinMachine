@@ -4,6 +4,7 @@
 #include "liblvgl/misc/lv_types.h"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
+#include "pros/misc.hpp"
 #include "pros/rtos.hpp"
 #include <new>
 
@@ -298,26 +299,39 @@ void opcontrol() {
 	lv_obj_t* txt;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
-	master.clear();
-	pros::delay(50);
-	master.print(0,0,"auton select? y to confirm, x to skip");
-	bool chosenn=false;
-	while (!chosenn) {
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
-			chosenn=true;
-			const auto [color,colorid,sp,sorm,txt] = selectgui();
+	if (!pros::competition::is_connected())
+	{
+		master.clear();
+		pros::delay(50);
+		master.print(0,0,"auton select?");
+		pros::delay(50); 
+		master.print(1, 0,"y to confirm"); 
+		pros::delay(50);
+		master.print(2,0,"x to skip");
+		bool chosenn=false;
+		while (!chosenn) {
+			if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
+				chosenn=true;
+				const auto [color,colorid,sp,sorm,txt] = selectgui();
+			}
+			else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+				chosenn=true;
+			}
+			pros::delay(20);
 		}
-		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
-			chosenn=true;
-		}
-		pros::delay(20);
+		master.clear();
 	}
-	master.clear();
 	pros::delay(50);
 	while (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)|master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
 		pros::delay(20);
 	}
-	master.print(0,0,"PID Test? y to confirm, x to skip");
+	master.clear();
+	pros::delay(50);
+	master.print(0,0,"PID test?");
+	pros::delay(50); 
+	master.print(1, 0,"y to confirm"); 
+	pros::delay(50);
+	master.print(2,0,"x to skip");
 	bool chosen=false;
 	while (!chosen) {
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
