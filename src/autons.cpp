@@ -47,7 +47,7 @@ void autonlr(lemlib::Chassis robot) {
     //left red
     robot.setPose(0,0,0);
     intakein();
-    int bruh = 2000;
+    int bruh = 4000;
     pros::Task wait_task (timefuncdscore, (void*)bruh,"dude");
     robot.follow(leftsideautons_txt, 10, 10000);
     intakestop();
