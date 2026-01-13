@@ -340,8 +340,8 @@ void opcontrol() {
 		// Arcade control scheme
 		int leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int rightX = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
-		int negLeftY = -leftY;
-		int negRightX = -rightX;
+		int negleftY = -leftY;
+		int negrightX = -rightX;
 		//last value is called desaturate bias
 		/* desaturateBias has a range of 0 to 1, 
 		and only has an effect if motor output would be above 127. 
@@ -359,7 +359,7 @@ void opcontrol() {
 			revlatch=false;
 		}
 		if (reversed) {
-			chassis.arcade(negLeftY, negRightX, false, 0.5);
+			chassis.arcade(negleftY, rightX, false, 0.5);
 		}
 		else {
 			chassis.arcade(leftY, rightX, false, 0.5);

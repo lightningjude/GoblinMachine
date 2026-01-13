@@ -7,7 +7,7 @@
 
 
 void intakethread() {
-    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',false);
     pros::Controller master(pros::E_CONTROLLER_MASTER);
 	lv_obj_t* intaketxt;
 	intaketxt = lv_label_create(lv_screen_active());

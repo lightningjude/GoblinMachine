@@ -79,11 +79,11 @@ ASSET(skillsp7_txt);
 ASSET(skillsp8_txt);
 ASSET(skillsp9_txt);
 void matchextend() {
-    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',false);
     matchload.extend();
 }
 void matchretract() {
-    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',false);
     matchload.retract();
 }
 void timefuncext(void* delay) {
@@ -98,7 +98,7 @@ void timefuncrt(void* delay) {
     matchretract();
 }
 void autonskills(lemlib::Chassis robot) {
-    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',true);
+    pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',false);
     //setup
     robot.setPose(0,0,0);
     //prep for load
