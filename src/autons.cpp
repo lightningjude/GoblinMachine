@@ -99,6 +99,7 @@ void timefuncrt(void* delay) {
 }
 void autonskills(lemlib::Chassis robot) {
     pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',false);
+    bool revpaths = true;
     //setup
     robot.setPose(0,0,0);
     //prep for load
@@ -110,7 +111,7 @@ void autonskills(lemlib::Chassis robot) {
     pros::delay(5000);
     intakestop();
     //stop, then drive to opposite side of big goal
-    robot.follow(skillsp2_txt, 10, 10000,false);
+    robot.follow(skillsp2_txt, 10, 10000,!revpaths);
     //score blocks in big goal for 5 sec
     outup();
     pros::delay(5000);
@@ -122,7 +123,7 @@ void autonskills(lemlib::Chassis robot) {
     pros::delay(5000);
     intakestop();
     //stop, then drive to big goal again
-    robot.follow(skillsp4_txt, 10, 10000,false);
+    robot.follow(skillsp4_txt, 10, 10000,!revpaths);
     outup();
     pros::delay(5000);
     intakestop();
@@ -137,7 +138,7 @@ void autonskills(lemlib::Chassis robot) {
     pros::delay(5000);
     intakestop();
     //drive across to opposite long goal side
-    robot.follow(skillsp6_txt, 10, 10000,false);
+    robot.follow(skillsp6_txt, 10, 10000,!revpaths);
     outup();
     pros::delay(5000);
     intakestop();
@@ -147,7 +148,7 @@ void autonskills(lemlib::Chassis robot) {
     pros::delay(5000);
     intakestop();
     //go back to long goal
-    robot.follow(skillsp8_txt, 10,10000,false);
+    robot.follow(skillsp8_txt, 10,10000,!revpaths);
     outup();
     pros::delay(5000);
     intakestop();
