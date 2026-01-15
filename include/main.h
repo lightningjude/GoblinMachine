@@ -77,11 +77,11 @@ void outdown(void);
 void outmiddle(void);
 void intakestop(void);
 void lv_example_buttonmatrix_1(void);
-void autonlb(lemlib::Chassis* chassisptr);
-void autonrb(lemlib::Chassis* chassisptr);
-void autonlr(lemlib::Chassis* chassisptr);
-void autonrr(lemlib::Chassis* chassisptr);
-void autonskills(lemlib::Chassis* chassisptr);
+void autonlb(lemlib::Chassis*);
+void autonrb(lemlib::Chassis*);
+void autonlr(lemlib::Chassis*);
+void autonrr(lemlib::Chassis*);
+void autonskills(lemlib::Chassis*);
 void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::ExpoDriveCurve throttle_curve,lemlib::ExpoDriveCurve steer_curve, std::string type);
 std::tuple<pros::Color,int,int,int,lv_obj_t*> selectgui(void);
 

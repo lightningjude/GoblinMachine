@@ -86,15 +86,15 @@ lemlib::ControllerSettings angular_controller(p, // proportional gain (kP)
 //Drive curves
 
 // input curve for throttle input during driver control
-lemlib::ExpoDriveCurve throttle_curve(3, // joystick deadband out of 127
+lemlib::ExpoDriveCurve throttle_curve(6, // joystick deadband out of 127
                                      10, // minimum output where drivetrain will move out of 127
                                      1.019 // expo curve gain
 );
 
 // input curve for steer input during driver control
-lemlib::ExpoDriveCurve steer_curve(3, // joystick deadband out of 127
+lemlib::ExpoDriveCurve steer_curve(6, // joystick deadband out of 127
                                   10, // minimum output where drivetrain will move out of 127
-                                  1.019 // expo curve gain
+                                  1.035 // expo curve gain
 );
 // create the chassis
 lemlib::Chassis chassis(drivetrain, // drivetrain settings
@@ -197,7 +197,7 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
-	
+
 	/*
 	Key ideas
 	c is the color as pros::Color
