@@ -359,10 +359,10 @@ void opcontrol() {
 			revlatch=false;
 		}
 		if (reversed) {
-			chassis.arcade(negleftY, rightX, false, 0.5);
+			chassis.arcade(negleftY, negrightX, false, 0.5);
 		}
 		else {
-			chassis.arcade(leftY, rightX, false, 0.5);
+			chassis.arcade(leftY, negrightX, false, 0.5);
 		}
 		pros::delay(20);                               // Run for 20 ms then update
 	}
