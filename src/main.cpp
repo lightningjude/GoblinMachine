@@ -85,6 +85,8 @@ lemlib::ControllerSettings angular_controller(p, // proportional gain (kP)
 
 //Drive curves
 
+//desmos of curves: https://www.desmos.com/calculator/umicbymbnl
+
 // input curve for throttle input during driver control
 lemlib::ExpoDriveCurve throttle_curve(6, // joystick deadband out of 127
                                      10, // minimum output where drivetrain will move out of 127
