@@ -16,10 +16,11 @@
 
 
 double s=0;
-double g=12;
-double p=20;
-double d=1;
+double g=90;
+double p=0;
+double d=0;
 double i=0;
+
 
 //Lemlib setup
 
@@ -49,7 +50,7 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
 
 //inertial sensor
 // create an imu on port 10
-pros::Imu imu(20);
+pros::Imu imu(18);
 
 lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to nullptr
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
@@ -60,9 +61,9 @@ lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to nullpt
 
 //PID setup
 // lateral PID controller
-lemlib::ControllerSettings lateral_controller(p, // proportional gain (kP)
-                                              i, // integral gain (kI)
-                                              d, // derivative gain (kD)
+lemlib::ControllerSettings lateral_controller(0, // proportional gain (kP)
+                                              0, // integral gain (kI)
+                                              0, // derivative gain (kD)
                                               0, // anti windup: 3
                                               0, // small error range, in inches: 1
                                               0, // small error range timeout, in milliseconds: 100
@@ -72,9 +73,9 @@ lemlib::ControllerSettings lateral_controller(p, // proportional gain (kP)
 );
 
 // angular PID controller
-lemlib::ControllerSettings angular_controller(p, // proportional gain (kP)
-                                              i, // integral gain (kI)
-                                              d, // derivative gain (kD)
+lemlib::ControllerSettings angular_controller(1, // proportional gain (kP)
+                                              0, // integral gain (kI)
+                                              75, // derivative gain (kD)
                                               0, // anti windup
                                               0, // small error range, in degrees
                                               0, // small error range timeout, in milliseconds
@@ -96,7 +97,7 @@ lemlib::ExpoDriveCurve throttle_curve(6, // joystick deadband out of 127
 // input curve for steer input during driver control
 lemlib::ExpoDriveCurve steer_curve(6, // joystick deadband out of 127
                                   10, // minimum output where drivetrain will move out of 127
-                                  1.035 // expo curve gain
+                                  1.06 // expo curve gain
 );
 // create the chassis
 lemlib::Chassis chassis(drivetrain, // drivetrain settings
@@ -115,6 +116,7 @@ lemlib::Chassis* chassisptr=&chassis;
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+
 
 
 void initialize() {
@@ -285,6 +287,7 @@ void opcontrol() {
 	lv_obj_t* txt;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
+	/*
 	if (!pros::competition::is_connected())
 	{
 		master.clear();
@@ -312,6 +315,8 @@ void opcontrol() {
 		pros::delay(20);
 	}
 	master.clear();
+	*/
+	/*
 	pros::delay(50);
 	master.print(0,0,"PID test?");
 	pros::delay(50); 
@@ -329,6 +334,7 @@ void opcontrol() {
 		}
 		pros::delay(20);
 	}
+		*/
 	
 	pros::delay(50);
 	master.clear();
@@ -336,8 +342,11 @@ void opcontrol() {
 	bool reversed=false;
 	bool revlatch=false;
 	delete txt;
+	lemlib::Chassis* chassisptr2 = &chassis;
+	chassis.setPose(0,0,0);
+	pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
+	chassis.moveToPose(0, 0, g, 5000);
 	while (true) {
-
 		
 		// Arcade control scheme
 		int leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
