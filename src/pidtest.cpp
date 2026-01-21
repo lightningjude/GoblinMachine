@@ -26,7 +26,7 @@ std::string strtrim(double value) {
     return valuestr;
 }
 void prtheading(void* ptr) {
-    lemlib::Chassis* bot = ((lemlib::Chassis*)ptr);
+    lemlib::Chassis* bot = (lemlib::Chassis*)ptr;
     lv_obj_t*disp = lv_label_create(lv_screen_active());
     std::string goalstr = "Goal:" + std::to_string(val[3]);
     lv_label_set_text(disp, goalstr.c_str());
@@ -47,7 +47,7 @@ void prtheading(void* ptr) {
 
 }
 void prtdrive(void* ptr) {
-    lemlib::Chassis* bot = ((lemlib::Chassis*)ptr);
+    lemlib::Chassis* bot = (lemlib::Chassis*)ptr;
     lv_obj_t*disp = lv_label_create(lv_screen_active());
     std::string goalstr = "Goal:" + std::to_string(val[3]);
     lv_label_set_text(disp, goalstr.c_str());
