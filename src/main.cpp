@@ -291,7 +291,6 @@ void opcontrol() {
 	lv_obj_t* txt;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
-	/*
 	if (!pros::competition::is_connected())
 	{
 		master.clear();
@@ -319,7 +318,7 @@ void opcontrol() {
 		pros::delay(20);
 	}
 	master.clear();
-	*/
+	
 	/*
 	pros::delay(50);
 	master.print(0,0,"PID test?");
