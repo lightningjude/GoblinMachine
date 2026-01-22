@@ -26,7 +26,7 @@ double i=0;
 
 //wheel dim: lemlib::Omniwheel::NEW_325
 //trackwidth inches
-double twi = 16;
+
 
 
 
@@ -42,7 +42,7 @@ pros::Motor left_front(1, pros::MotorGearset::blue);
 // drivetrain settings
 lemlib::Drivetrain drivetrain(&left_motors, // left motor group
                               &right_motors, // right motor group
-                              twi, // 10 inch track width
+                              10, // 10 inch track width
                               lemlib::Omniwheel::NEW_325, // using new 3.25" omnis
                               360, // drivetrain rpm is 360
                               2 // horizontal drift is 2 (for now)
