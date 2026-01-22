@@ -349,7 +349,7 @@ void opcontrol() {
 	//lemlib::Chassis* chassisptr2 = &chassis;
 	chassis.setPose(0,0,0);
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
-	chassis.moveToPose(0, 0, g, 5000);
+	chassis.moveToPose(0, 12, 0*g, 5000);
 	while (true) {
 		
 		// Arcade control scheme
