@@ -73,9 +73,9 @@ lemlib::ControllerSettings lateral_controller(0, // proportional gain (kP)
 );
 
 // angular PID controller
-lemlib::ControllerSettings angular_controller(4, // proportional gain (kP)
+lemlib::ControllerSettings angular_controller(0.1, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              20, // derivative gain (kD)
+                                              10, // derivative gain (kD)
                                               0, // anti windup
                                               0, // small error range, in degrees
                                               0, // small error range timeout, in milliseconds
@@ -291,6 +291,7 @@ void opcontrol() {
 	lv_obj_t* txt;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
+	/*
 	if (!pros::competition::is_connected())
 	{
 		master.clear();
@@ -318,7 +319,7 @@ void opcontrol() {
 		pros::delay(20);
 	}
 	master.clear();
-	
+	*/
 	/*
 	pros::delay(50);
 	master.print(0,0,"PID test?");
