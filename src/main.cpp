@@ -75,7 +75,7 @@ lemlib::ControllerSettings lateral_controller(0, // proportional gain (kP)
 // angular PID controller
 lemlib::ControllerSettings angular_controller(0.5, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              30, // derivative gain (kD)
+                                              45, // derivative gain (kD)
                                               0, // anti windup
                                               0, // small error range, in degrees
                                               0, // small error range timeout, in milliseconds
@@ -346,9 +346,9 @@ void opcontrol() {
 	bool reversed=false;
 	bool revlatch=false;
 	delete txt;
-	lemlib::Chassis* chassisptr2 = &chassis;
+	//lemlib::Chassis* chassisptr2 = &chassis;
 	chassis.setPose(0,0,0);
-	pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
+	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
 	chassis.moveToPose(0, 0, g, 5000);
 	while (true) {
 		
