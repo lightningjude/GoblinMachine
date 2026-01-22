@@ -73,9 +73,9 @@ lemlib::ControllerSettings lateral_controller(0, // proportional gain (kP)
 );
 
 // angular PID controller
-lemlib::ControllerSettings angular_controller(1, // proportional gain (kP)
+lemlib::ControllerSettings angular_controller(0.5, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              75, // derivative gain (kD)
+                                              20, // derivative gain (kD)
                                               0, // anti windup
                                               0, // small error range, in degrees
                                               0, // small error range timeout, in milliseconds
@@ -122,6 +122,9 @@ lemlib::Chassis* chassisptr=&chassis;
 void initialize() {
 	
 	chassis.calibrate();
+	while (imu.is_calibrating()) {
+		pros::delay(20);
+	}
 	//uncomment below while testing
 	pros::Task intakethread_task(intakethread);
 	//pros::lcd::initialize();
