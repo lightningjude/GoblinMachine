@@ -64,7 +64,7 @@ lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to nullpt
 // lateral PID controller
 lemlib::ControllerSettings lateral_controller( 60, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              115, // derivative gain (kD)
+                                              111, // derivative gain (kD)
                                               0.15, // anti windup: 3
                                               0, // small error range, in inches: 1
                                               0, // small error range timeout, in milliseconds: 100
@@ -362,10 +362,8 @@ void opcontrol() {
 		master.print(1, 1, "Poses not =");
 	}
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
-	//chassis.moveToPose(0, -24, 0, 5000);
-	//chassis.moveToPoint(0, 24, 5000);
-	//chassis.moveToPose(0, -12,0, 10000,{.forwards=false});
-	chassis.moveToPose(0,12,0,10000,{.forwards=true});
+	chassis.moveToPose(0, -12,0, 10000,{.forwards=false});
+	//chassis.moveToPose(0,12,0,10000,{.forwards=true});
 	while (chassis.isInMotion()) {
 		lemlib::Pose after2 = chassis.getPose();
 		pros::delay(50);
