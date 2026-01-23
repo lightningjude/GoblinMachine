@@ -370,9 +370,9 @@ void opcontrol() {
 	*/
 	
 	//templates for moving backward and forward 12 inches, the .forwards matters
-	//chassis.setPose(0,0,0);
+	chassis.setPose(0,0,0);
 	//chassis.moveToPose(0, -12,0, 10000,{.forwards=false});
-	//chassis.moveToPose(0,12,0,10000,{.forwards=true});
+	chassis.moveToPose(0,12,0,10000,{.forwards=true});
 
 	//how to turn 90 degrees clockwise
 	//chassis.setPose(0,0,0);
@@ -393,7 +393,7 @@ void opcontrol() {
 		pros::delay(20);
 	} 
 	*/
-	autonlb(chassisptr);
+	//autonlb(chassisptr);
 	while (true) {
 	
 		// Arcade control scheme
