@@ -45,7 +45,7 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
                               10, // 10 inch track width
                               lemlib::Omniwheel::NEW_325, // using new 3.25" omnis
                               360, // drivetrain rpm is 360
-                              2 // horizontal drift is 2 (for now)
+                              8 // horizontal drift is 2 (for now)
 );
 
 //inertial sensor
