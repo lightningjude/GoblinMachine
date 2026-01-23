@@ -20,7 +20,7 @@ ASSET(leftsideautons_txt);
 ASSET(rightsideautons1_txt);
 ASSET(rightsideautons2_txt);
 void autonlb(lemlib::Chassis* robot) {
-    robot->setPose(-47.085,15.685,90);
+    robot->setPose(-47.085,15.685,270);
     //left blue
     robot->follow(leftsideautons_txt, 3, 10000);
     intakein();
