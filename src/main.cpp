@@ -74,9 +74,9 @@ lemlib::ControllerSettings lateral_controller( 60, // proportional gain (kP)
 );
 
 // angular PID controller
-lemlib::ControllerSettings angular_controller(-9.7, // proportional gain (kP)
+lemlib::ControllerSettings angular_controller(9.7, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              -66.5, // derivative gain (kD)
+                                              66.5, // derivative gain (kD)
                                               1, // anti windup
                                               0, // small error range, in degrees
                                               0, // small error range timeout, in milliseconds
@@ -404,10 +404,10 @@ void opcontrol() {
 			revlatch=false;
 		}
 		if (reversed) {
-			chassis.arcade(leftY, negrightX, false, 0.5);
+			chassis.arcade(leftY, rightX, false, 0.5);
 		}
 		else {
-			chassis.arcade(negleftY, negrightX, false, 0.5);
+			chassis.arcade(negleftY, rightX, false, 0.5);
 		}
 		pros::delay(20);                               // Run for 20 ms then update
 	}
