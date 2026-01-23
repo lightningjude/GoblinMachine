@@ -178,11 +178,11 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
         std::string report="Running...";
         master.print(2,0,report.c_str());
         if (type=="drive") {
-            lemlib::ControllerSettings angular_controller(0,0,0,0,0,0,0,0,0);
-            lemlib::ControllerSettings lateral_controller(val[0],val[1],val[2],0,0,0,0,0,0);
+            lemlib::ControllerSettings angular_contr(0,0,0,0,0,0,0,0,0);
+            lemlib::ControllerSettings lateral_contr(val[0],val[1],val[2],0,0,0,0,0,0);
             lemlib::Chassis newchassis(drivetrain, // drivetrain settings
-                                    lateral_controller, // lateral PID settings
-                                    angular_controller, // angular PID settings
+                                    lateral_contr, // lateral PID settings
+                                    angular_contr, // angular PID settings
                                     sensors, // odometry sensors
                                     &throttle_curve,
                                     &steer_curve
@@ -201,11 +201,11 @@ void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::E
 
         }
         else if (type=="turn") {
-            lemlib::ControllerSettings angular_controller(val[0],val[1],val[2],0,0,0,0,0,0);
-            lemlib::ControllerSettings lateral_controller(0,0,0,0,0,0,0,0,0);
+            lemlib::ControllerSettings angular_cont(val[0],val[1],val[2],0,0,0,0,0,0);
+            lemlib::ControllerSettings lateral_cont(0,0,0,0,0,0,0,0,0);
             lemlib::Chassis newchassis(drivetrain, // drivetrain settings
-                                    lateral_controller, // lateral PID settings
-                                    angular_controller, // angular PID settings
+                                    lateral_cont, // lateral PID settings
+                                    angular_cont, // angular PID settings
                                     sensors, // odometry sensors
                                     &throttle_curve,
                                     &steer_curve
