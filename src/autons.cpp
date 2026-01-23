@@ -33,8 +33,9 @@ void autonlb(lemlib::Chassis* robot) {
     }
     intakestop();
     float prev = robot->getPose().theta;
-    //robot->setPose(0,0,prev);
-    //robot->moveToPose(0, -4, prev, 3000,{.forwards=false});
+    pros::delay(1000);
+    robot->setPose(0,0,prev);
+    robot->moveToPose(0, -4, prev, 3000,{.forwards=false});
 }
 void autonrb(lemlib::Chassis* robot) {
     robot->setPose(-49.085,-17.685,180);
