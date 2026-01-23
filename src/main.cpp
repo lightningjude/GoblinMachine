@@ -77,8 +77,8 @@ lemlib::ControllerSettings angular_controller(-9.7, // proportional gain (kP)
                                               0, // integral gain (kI)
                                               -66.5, // derivative gain (kD)
                                               1, // anti windup
-                                              0, // small error range, in degrees
-                                              0, // small error range timeout, in milliseconds
+                                              1, // small error range, in degrees
+                                              5, // small error range timeout, in milliseconds
                                               0, // large error range, in degrees
                                               0, // large error range timeout, in milliseconds
                                               0 // maximum acceleration (slew)
@@ -349,7 +349,7 @@ void opcontrol() {
 	//lemlib::Chassis* chassisptr2 = &chassis;
 	chassis.setPose(0,0,0);
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
-	chassis.moveToPose(0, 24, 0, 5000);
+	chassis.moveToPose(0, -24, 0, 5000);
 	while (true) {
 		
 		// Arcade control scheme
