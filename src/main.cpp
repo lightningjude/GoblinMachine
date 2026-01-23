@@ -32,8 +32,8 @@ double i=0;
 
 
 // motor config
-pros::MotorGroup left_motors({1, 2, 3}, pros::MotorGearset::blue); // left motors use 600 RPM cartridges
-pros::MotorGroup right_motors({-4, -5, -6}, pros::MotorGearset::blue); // right motors use 200 RPM cartridges
+pros::MotorGroup right_motors({1, 2, 3}, pros::MotorGearset::blue); // left motors use 600 RPM cartridges
+pros::MotorGroup left_motors({-4, -5, -6}, pros::MotorGearset::blue); // right motors use 200 RPM cartridges
  
 pros::Motor left_front(1, pros::MotorGearset::blue);
 //intake motors and pneumatics defined intakefunctions.cpp
@@ -404,10 +404,10 @@ void opcontrol() {
 			revlatch=false;
 		}
 		if (reversed) {
-			chassis.arcade(negleftY, negrightX, false, 0.5);
+			chassis.arcade(leftY, negrightX, false, 0.5);
 		}
 		else {
-			chassis.arcade(leftY, negrightX, false, 0.5);
+			chassis.arcade(negleftY, negrightX, false, 0.5);
 		}
 		pros::delay(20);                               // Run for 20 ms then update
 	}
