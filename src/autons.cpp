@@ -23,7 +23,7 @@ void autonlb(lemlib::Chassis* robot) {
     robot->setPose(-47.085,15.685,90);
     //left blue
 
-    robot->follow(leftsideautons_txt, 2, 10000);
+    robot->follow(leftsideautons_txt, 3, 10000);
     intakein();
     int bruh = 4000;
     pros::delay(bruh); 
@@ -33,8 +33,8 @@ void autonlb(lemlib::Chassis* robot) {
     }
     intakestop();
     float prev = robot->getPose().theta;
-    robot->setPose(0,0,prev);
-    robot->moveToPose(0, -4, prev, 3000,{.forwards=false});
+    //robot->setPose(0,0,prev);
+    //robot->moveToPose(0, -4, prev, 3000,{.forwards=false});
 }
 void autonrb(lemlib::Chassis* robot) {
     robot->setPose(-49.085,-17.685,180);
