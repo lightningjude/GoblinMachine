@@ -287,7 +287,7 @@ void testgui()	{
 	pros::delay(50);
 
 }
-
+ASSET(skillsp1_txt);
 void opcontrol() {
 	lv_obj_t* txt;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
@@ -361,9 +361,11 @@ void opcontrol() {
 		pros::delay(50);
 		master.print(1, 1, "Poses not =");
 	}
+	
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
-	chassis.moveToPose(0, -12,0, 10000,{.forwards=false});
+	//chassis.moveToPose(0, -12,0, 10000,{.forwards=false});
 	//chassis.moveToPose(0,12,0,10000,{.forwards=true});
+	chassis.follow(skillsp1_txt, 10, 10000);
 	while (chassis.isInMotion()) {
 		lemlib::Pose after2 = chassis.getPose();
 		pros::delay(50);
