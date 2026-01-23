@@ -98,6 +98,7 @@ void timefuncrt(void* delay) {
     matchretract();
 }
 void autonskills(lemlib::Chassis* robot) {
+    robot->setPose(-47.085,0,0);
     pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',false);
     bool revpaths = true;
     //setup
