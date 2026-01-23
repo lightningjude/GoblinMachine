@@ -366,7 +366,7 @@ void opcontrol() {
 	//chassis.moveToPose(0, -12,0, 10000,{.forwards=false});
 	//chassis.moveToPose(0,12,0,10000,{.forwards=true});
 	chassis.setPose(-47.085,0,0);
-	chassis.follow(skillsp1_txt, 1, 10000);
+	chassis.follow(skillsp1_txt, 5, 10000);
 	while (chassis.isInMotion()) {
 		lemlib::Pose after2 = chassis.getPose();
 		pros::delay(50);
