@@ -22,15 +22,15 @@ ASSET(rightsideautons2_txt);
 void autonlb(lemlib::Chassis* robot) {
     robot->setPose(-47.085,15.685,90);
     //left blue
-    robot->setPose(0,0,0);
+
+    robot->follow(leftsideautons_txt, 5, 10000);
     intakein();
-    int bruh = 2000;
+    int bruh = 6000;
     pros::delay(bruh); 
     outdown();
     while (robot->isInMotion()) {
         pros::delay(20);
     }
-    robot->follow(leftsideautons_txt, 5, 10000);
     intakestop();
     float prev = robot->getPose().theta;
     robot->setPose(0,0,prev);
@@ -39,7 +39,7 @@ void autonlb(lemlib::Chassis* robot) {
 void autonrb(lemlib::Chassis* robot) {
     robot->setPose(-49.085,-17.685,180);
     //right blue
-    robot->setPose(0,0,0);
+    
     robot->follow(rightsideautons1_txt, 5, 10000);
     intakein();
     pros::delay(5000);
@@ -52,12 +52,14 @@ void autonrb(lemlib::Chassis* robot) {
 void autonlr(lemlib::Chassis* robot) {
     robot->setPose(-47.085,15.685,90);
     //left red
-    robot->setPose(0,0,0);
+    robot->follow(leftsideautons_txt, 5, 10000);
     intakein();
-    int bruh = 4000;
+    int bruh = 6000;
     pros::delay(bruh);
     outdown(); 
-    robot->follow(leftsideautons_txt, 5, 10000);
+    while (robot->isInMotion()) {
+        pros::delay(20);
+    }
     intakestop();
     float prev = robot->getPose().theta;
     robot->setPose(0,0,prev);
@@ -67,7 +69,6 @@ void autonlr(lemlib::Chassis* robot) {
 void autonrr(lemlib::Chassis* robot) {
     robot->setPose(-49.085,-17.685,180);
     //right red
-    robot->setPose(0,0,0);
     robot->follow(rightsideautons1_txt, 5, 10000);
     intakein();
     pros::delay(5000);
@@ -106,6 +107,10 @@ void timefuncrt(void* delay) {
     pros::delay(timed);
     matchretract();
 }
+
+
+//HEYY, replace all tasks that involve delayed whatver with just that code in main task, as drive tasks run asyn anyway
+
 void autonskills(lemlib::Chassis* robot) {
     robot->setPose(-47.085,0,0);
     pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',false);
