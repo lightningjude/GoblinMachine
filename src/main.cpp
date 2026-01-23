@@ -365,6 +365,12 @@ void opcontrol() {
 	//chassis.moveToPose(0, -24, 0, 5000);
 	//chassis.moveToPoint(0, 24, 5000);
 	chassis.moveToPose(0, 12,0, 5000);
+	while (chassis.isInMotion()) {
+		lemlib::Pose after2 = chassis.getPose();
+		master.clear();
+		pros::delay(50);
+		master.print(1, 1, "Poses X:%f,Y:%f,Theta:%f",after2.x,after2.y,after2.theta);
+	}
 	while (true) {
 		
 		// Arcade control scheme
