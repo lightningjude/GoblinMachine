@@ -347,7 +347,10 @@ void opcontrol() {
 	bool reversed=false;
 	bool revlatch=false;
 	delete txt;
-	//lemlib::Chassis* chassisptr2 = &chassis;
+	
+	//this checks the chassis is actually setting position right
+
+	/*
 	lemlib::Pose bruhbefore(0,0,0);
 	chassis.setPose(bruhbefore);
 	lemlib::Pose bruhafter= chassis.getPose();
@@ -361,12 +364,19 @@ void opcontrol() {
 		pros::delay(50);
 		master.print(1, 1, "Poses not =");
 	}
+	*/
 	
-	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
+	//templates for moving backward and forward 12 inches, the .forwards matters
+	//chassis.setPose(0,0,0);
 	//chassis.moveToPose(0, -12,0, 10000,{.forwards=false});
 	//chassis.moveToPose(0,12,0,10000,{.forwards=true});
-	chassis.setPose(0,0,0);
-	chassis.moveToPose(0, 0, 90, 10000);
+
+	//how to turn 90 degrees clockwise
+	//chassis.setPose(0,0,0);
+	//chassis.moveToPose(0, 0, 90, 10000);
+
+	// this is used to report final position afterward
+	/*
 	while (chassis.isInMotion()) {
 		lemlib::Pose after2 = chassis.getPose();
 		pros::delay(50);
@@ -379,7 +389,8 @@ void opcontrol() {
 		master.print(2, 0, "theta:%f",after2.theta);
 		pros::delay(20);
 	} 
-	//autonlb(chassisptr);
+	*/
+	autonlb(chassisptr);
 	while (true) {
 	
 		// Arcade control scheme
