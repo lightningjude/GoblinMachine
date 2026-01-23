@@ -369,10 +369,10 @@ void opcontrol() {
 		lemlib::Pose after2 = chassis.getPose();
 		master.clear();
 		pros::delay(50);
-		master.print(1, 1, "Poses X:%f,Y:%f,Theta:%f",after2.x,after2.y,after2.theta);
+		master.print(0, 0, "Poses X:%f\n Y:%f\n Theta:%f",after2.x,after2.y,after2.theta);
 	}
 	while (true) {
-		
+	
 		// Arcade control scheme
 		int leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int rightX = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
