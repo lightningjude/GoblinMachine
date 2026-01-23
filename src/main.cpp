@@ -348,8 +348,9 @@ void opcontrol() {
 	bool revlatch=false;
 	delete txt;
 	//lemlib::Chassis* chassisptr2 = &chassis;
-	lemlib::Pose bruh(0,0,0);
-	chassis.setPose(0,0,0);
+	lemlib::Pose bruhbefore(0,0,0);
+	chassis.setPose(bruhbefore);
+	lemlib::Pose bruhafter= chassis.getPose();
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
 	//chassis.moveToPose(0, -24, 0, 5000);
 	//chassis.moveToPoint(0, 24, 5000);
