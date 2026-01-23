@@ -365,7 +365,7 @@ void opcontrol() {
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
 	//chassis.moveToPose(0, -12,0, 10000,{.forwards=false});
 	//chassis.moveToPose(0,12,0,10000,{.forwards=true});
-	chassis.follow(skillsp1_txt, 10, 10000);
+	chassis.follow(skillsp1_txt, 1, 10000);
 	while (chassis.isInMotion()) {
 		lemlib::Pose after2 = chassis.getPose();
 		pros::delay(50);
@@ -376,7 +376,7 @@ void opcontrol() {
 		master.print(1, 0, "Y:%f",after2.y);
 		pros::delay(50);
 		master.print(2, 0, "theta:%f",after2.theta);
-		
+		pros::delay(20);
 	}
 	while (true) {
 	
