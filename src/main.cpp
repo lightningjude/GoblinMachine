@@ -367,9 +367,10 @@ void opcontrol() {
 	chassis.moveToPose(0, 12,0, 5000);
 	while (chassis.isInMotion()) {
 		lemlib::Pose after2 = chassis.getPose();
+		pros::delay(50);
 		master.clear();
 		pros::delay(50);
-		master.print(0, 0, "Poses X:%f\n Y:%f\n Theta:%f",after2.x,after2.y,after2.theta);
+		master.print(0, 0, "Poses X:%f \n Y:%f \n Theta:%f",after2.x,after2.y,after2.theta);
 	}
 	while (true) {
 	
