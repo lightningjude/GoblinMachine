@@ -63,14 +63,14 @@ lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to nullpt
 //PID setup
 // lateral PID controller
 lemlib::ControllerSettings lateral_controller( 60, // proportional gain (kP)
-                                              0, // integral gain (kI)
+                                              1, // integral gain (kI)
                                               110, // derivative gain (kD)
-                                              0, // anti windup: 3
+                                              0.05, // anti windup: 3
                                               0, // small error range, in inches: 1
                                               0, // small error range timeout, in milliseconds: 100
                                               0, // large error range, in inches: 3
                                               0, // large error range timeout, in milliseconds: 500
-                                              63 // maximum acceleration (slew): 20, but tune last starting from 127 down
+                                              0 // maximum acceleration (slew): 20, but tune last starting from 127 down
 );
 
 // angular PID controller
@@ -364,7 +364,7 @@ void opcontrol() {
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
 	//chassis.moveToPose(0, -24, 0, 5000);
 	//chassis.moveToPoint(0, 24, 5000);
-	chassis.moveToPose(0, 12,0, 5000,{.forwards=true});
+	chassis.moveToPose(0, 12,0, 10000,{.forwards=true});
 	while (chassis.isInMotion()) {
 		lemlib::Pose after2 = chassis.getPose();
 		pros::delay(50);
