@@ -61,9 +61,9 @@ lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to nullpt
 
 //PID setup
 // lateral PID controller
-lemlib::ControllerSettings lateral_controller(1000, // proportional gain (kP)
+lemlib::ControllerSettings lateral_controller( 10, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              -10, // derivative gain (kD)
+                                              10, // derivative gain (kD)
                                               0, // anti windup: 3
                                               0, // small error range, in inches: 1
                                               0, // small error range timeout, in milliseconds: 100
@@ -73,10 +73,10 @@ lemlib::ControllerSettings lateral_controller(1000, // proportional gain (kP)
 );
 
 // angular PID controller
-lemlib::ControllerSettings angular_controller(-9.7, // proportional gain (kP)
+lemlib::ControllerSettings angular_controller(0, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              -66.5, // derivative gain (kD)
-                                              1, // anti windup
+                                              0, // derivative gain (kD)
+                                              0, // anti windup
                                               0, // small error range, in degrees
                                               0, // small error range timeout, in milliseconds
                                               0, // large error range, in degrees
@@ -349,7 +349,7 @@ void opcontrol() {
 	//lemlib::Chassis* chassisptr2 = &chassis;
 	chassis.setPose(0,0,0);
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
-	chassis.moveToPose(0, 24, 0*g, 5000);
+	chassis.moveToPose(0, 24, 0, 5000);
 	while (true) {
 		
 		// Arcade control scheme
