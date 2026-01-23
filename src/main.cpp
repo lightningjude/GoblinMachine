@@ -364,7 +364,7 @@ void opcontrol() {
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
 	//chassis.moveToPose(0, -24, 0, 5000);
 	//chassis.moveToPoint(0, 24, 5000);
-	chassis.moveToPose(0, 12,0, 5000);
+	chassis.moveToPose(0, 12,0, 5000,{.forwards=false});
 	while (chassis.isInMotion()) {
 		lemlib::Pose after2 = chassis.getPose();
 		pros::delay(50);
