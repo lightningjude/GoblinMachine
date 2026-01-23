@@ -351,6 +351,16 @@ void opcontrol() {
 	lemlib::Pose bruhbefore(0,0,0);
 	chassis.setPose(bruhbefore);
 	lemlib::Pose bruhafter= chassis.getPose();
+	if (bruhafter.x==bruhbefore.x|bruhafter.y==bruhbefore.y|bruhbefore.theta==bruhafter.theta) {
+		master.clear();
+		pros::delay(50);
+		master.print(1, 1, "Poses =");
+	}
+	else {
+		master.clear();
+		pros::delay(50);
+		master.print(1, 1, "Poses not =");
+	}
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
 	//chassis.moveToPose(0, -24, 0, 5000);
 	//chassis.moveToPoint(0, 24, 5000);
