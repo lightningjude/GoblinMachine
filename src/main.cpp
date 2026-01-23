@@ -1,6 +1,7 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/chassis.hpp"
+#include "lemlib/pose.hpp"
 #include "liblvgl/misc/lv_types.h"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
@@ -347,6 +348,7 @@ void opcontrol() {
 	bool revlatch=false;
 	delete txt;
 	//lemlib::Chassis* chassisptr2 = &chassis;
+	lemlib::Pose bruh ();
 	chassis.setPose(0,0,0);
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
 	//chassis.moveToPose(0, -24, 0, 5000);
