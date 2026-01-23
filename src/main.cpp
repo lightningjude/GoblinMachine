@@ -370,7 +370,12 @@ void opcontrol() {
 		pros::delay(50);
 		master.clear();
 		pros::delay(50);
-		master.print(0, 0, "Poses X:%f \n Y:%f \n Theta:%f",after2.x,after2.y,after2.theta);
+		master.print(0, 0, "Poses X:%f",after2.x);
+		pros::delay(50);
+		master.print(1, 0, "Y:%f",after2.y);
+		pros::delay(50);
+		master.print(2, 0, "theta:%f",after2.theta);
+		
 	}
 	while (true) {
 	
