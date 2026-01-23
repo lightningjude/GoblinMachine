@@ -218,6 +218,7 @@ void autonomous() {
 	sorm is skills or match(0 for match, 1 for skills)
 	If using paths, pick paths based on these variables, or use them in if statements if doing it by hand instead
 	*/
+	/*
 	if (sorm==0) {
 		//match
 		if (sp==0) {
@@ -247,6 +248,9 @@ void autonomous() {
 		autonskills(chassisptr);
 		//skills
 	}
+		*/
+	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	master.print(0,0,"auton happened");
 	
 }
 
