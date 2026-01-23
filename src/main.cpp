@@ -70,7 +70,7 @@ lemlib::ControllerSettings lateral_controller( 60, // proportional gain (kP)
                                               0, // small error range timeout, in milliseconds: 100
                                               0, // large error range, in inches: 3
                                               0, // large error range timeout, in milliseconds: 500
-                                              0 // maximum acceleration (slew): 20, but tune last starting from 127 down
+                                              100 // maximum acceleration (slew): 20, but tune last starting from 127 down
 );
 
 // angular PID controller
@@ -364,8 +364,8 @@ void opcontrol() {
 	//pros::Task bruh (prtdrive,(void*)chassisptr2,"print task");
 	//chassis.moveToPose(0, -24, 0, 5000);
 	//chassis.moveToPoint(0, 24, 5000);
-	chassis.moveToPose(0, -12,0, 10000,{.forwards=false});
-	//chassis.moveToPose(0,12,0,10000,{.forwards=true});
+	//chassis.moveToPose(0, -12,0, 10000,{.forwards=false});
+	chassis.moveToPose(0,12,0,10000,{.forwards=true});
 	while (chassis.isInMotion()) {
 		lemlib::Pose after2 = chassis.getPose();
 		pros::delay(50);
