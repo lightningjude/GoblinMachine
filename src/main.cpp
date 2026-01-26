@@ -294,6 +294,7 @@ void testgui()	{
 	pros::delay(50);
 
 }
+
 ASSET(skillsp1_txt);
 void opcontrol() {
 	lv_obj_t* txt;
