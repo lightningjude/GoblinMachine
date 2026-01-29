@@ -53,7 +53,7 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
 );
 
 //inertial sensor
-// create an imu on port 10
+// create an imu on port 18
 pros::Imu imu(18);
 
 lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to nullptr
@@ -91,18 +91,20 @@ lemlib::ControllerSettings angular_controller(9.7, // proportional gain (kP)
 
 //Drive curves
 
+//Use this desmos to see changes
+
 //desmos of curves: https://www.desmos.com/calculator/umicbymbnl
 
 // input curve for throttle input during driver control
 lemlib::ExpoDriveCurve throttle_curve(6, // joystick deadband out of 127
-                                     10, // minimum output where drivetrain will move out of 127
+                                     20, // minimum output where drivetrain will move out of 127
                                      1.019 // expo curve gain
 );
 
 // input curve for steer input during driver control
 lemlib::ExpoDriveCurve steer_curve(6, // joystick deadband out of 127
-                                  10, // minimum output where drivetrain will move out of 127
-                                  1.06 // expo curve gain
+                                  25, // minimum output where drivetrain will move out of 127
+                                  1.018 // expo curve gain
 );
 // create the chassis
 lemlib::Chassis chassis(drivetrain, // drivetrain settings
@@ -210,6 +212,11 @@ void competition_initialize() {
  */
 void autonomous() {
 
+	//auton selector is currently DISABLED, uncomment from the if (sorm=0) { to enable it again
+
+	//it currently just runs the autonskillshand() function
+
+
 	/*
 	Key ideas
 	c is the color as pros::Color
@@ -218,7 +225,7 @@ void autonomous() {
 	sorm is skills or match(0 for match, 1 for skills)
 	If using paths, pick paths based on these variables, or use them in if statements if doing it by hand instead
 	*/
-	/*
+	
 	if (sorm==0) {
 		//match
 		if (sp==0) {
@@ -248,10 +255,13 @@ void autonomous() {
 		autonskills(chassisptr);
 		//skills
 	}
-		*/
+		
+
+	//make edits under the autons cpp file
+
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	master.print(0,0,"auton happened");
-	
+	autonskillshand(chassisptr);
 }
 
 /**

@@ -9,6 +9,111 @@
 #include <cstdint>
 #include <ctime>
 
+void autonskillshand(lemlib::Chassis* robot) {
+
+
+    //documentation for lemlib: 
+
+    //all turns(including swing): https://lemlib.readthedocs.io/en/stable/tutorials/5_angular_motion.html
+
+    //all movements that include fwd/bwd: https://lemlib.readthedocs.io/en/stable/tutorials/6_lateral_motion.html
+
+
+    //THIS ONE IS IMPORTANT, READ CAREFULLY
+    //motion chaining: This allows you to do turns around an object 
+    // using multiple movetopose commands without stopping at each one
+    //https://lemlib.readthedocs.io/en/stable/tutorials/8_motion_chaining.html
+
+
+    //to do commands replace . with ->
+    //ex robot->setPose(0,0,0);
+    // or robot->moveToPose(10,10,90,10000);
+
+    /*
+    //there are two way to set the robots pose
+    robot->setPose(0,0,0);
+    //or
+    lemlib::Pose base(0,0,0);
+    robot->setPose(base);
+    */
+
+
+    /*
+    //THERE IS ONLY ONE WAY FOR MOVETOPOSE OR MOVETOPOINT
+    robot->moveToPose(0, 1, 0, 1000);
+    //timeout is in milliseconds
+
+    //move to pose DOES NOT accept lemlib::Pose objects, only the values
+    //so this DOESN'T work
+    lemlib::Pose goal(0,5,0);
+    robot->moveToPose(goal,10000);
+    //DO NOT DO THIS, it will throw an error
+    */
+
+    //movetopose accepts several parameters, which are passed like so:
+
+    //1. max and min speed(out of 127), useful for motion chaining:
+    //for this to work, you need to use params, example:
+    //robot->moveToPose(5, 5, 45, 5000,{.maxSpeed=70,.minSpeed=50});
+
+    //2. 
+    
+
+
+    //All movements happen in a separate task, so you can run other commands here while that happens
+
+    //ex:
+    /*
+    robot->moveToPose(0,20,0,5000);
+    //this runs asynchronously in another task, meaning you can do things like this
+
+    //make intake run 1 second into drive
+    pros::delay(1000);
+    intakein();
+
+    //since the moves are in another task, the previous commands run DURING the drive, 
+    // not after it, if you want to wait till its done you can do this:
+    while (robot->isInMotion()) {
+        pros::delay(20);
+    }
+    //then place code here
+
+    */
+    
+    pros::adi::Pneumatics scorerbruh=pros::adi::Pneumatics('b',true);
+    pros::adi::Pneumatics matchloader=pros::adi::Pneumatics('a',false);
+    //start outside end parking
+    robot->setPose(-47.085,0,0);
+    robot->moveToPose(-47.085,5,0,2000,{.minSpeed=127});
+    matchloader.extend();
+    robot->moveToPose(-40,44,0,5000,{.minSpeed=10});
+    robot->moveToPose(-54.815,46.765,270,5000);
+    while (robot->isInMotion()) {
+        pros::delay(20);
+    }
+    intakein();
+    pros::delay(5000);
+    intakestop();
+    robot->moveToPose(-50.815, 46.765, 270, 5000,{.forwards=false});
+    matchloader.retract();
+    robot->turnToHeading(45, 2000);
+    robot->moveToPose(0, 60, 90, 5000,{.maxSpeed=80});
+    robot->moveToPose(32,56,135,2000,{.minSpeed=80});
+    robot->moveToPose(40,46.765,90,5000);
+    robot->moveToPose(32.625,46.765,90,3000);
+    while(robot->isInMotion()) {
+        pros::delay(20);
+    }
+    outup();
+    pros::delay(5000);
+    intakestop();
+
+
+}
+
+
+
+
 void timefuncdscore(void* delay) {
     int timed=*((int*)delay);
     pros::delay(timed);
@@ -116,11 +221,11 @@ void autonskills(lemlib::Chassis* robot) {
     pros::adi::Pneumatics matchload=pros::adi::Pneumatics('a',false);
     bool revpaths = true;
     //setup
-    robot->setPose(0,0,0);
+    robot->setPose(-47.085,0,0);
     //prep for load
     matchload.extend();
     //drive to match loader
-    robot->follow(skillsp1_txt, 5, 10000);
+    robot->follow(skillsp1_txt, 5, 10000, true);
     //intake in blobks for 5 sec
     intakein();
     pros::delay(5000);

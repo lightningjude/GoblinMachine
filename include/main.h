@@ -82,6 +82,7 @@ void autonrb(lemlib::Chassis*);
 void autonlr(lemlib::Chassis*);
 void autonrr(lemlib::Chassis*);
 void autonskills(lemlib::Chassis*);
+void autonskillshand(lemlib::Chassis*);
 void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::ExpoDriveCurve throttle_curve,lemlib::ExpoDriveCurve steer_curve, std::string type);
 void prtdrive(void*);
 void prtheading(void*);
