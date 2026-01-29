@@ -225,7 +225,7 @@ void autonomous() {
 	sorm is skills or match(0 for match, 1 for skills)
 	If using paths, pick paths based on these variables, or use them in if statements if doing it by hand instead
 	*/
-	
+	 /*
 	if (sorm==0) {
 		//match
 		if (sp==0) {
@@ -255,7 +255,7 @@ void autonomous() {
 		autonskills(chassisptr);
 		//skills
 	}
-		
+	*/
 
 	//make edits under the autons cpp file
 
@@ -307,6 +307,7 @@ void testgui()	{
 
 ASSET(skillsp1_txt);
 void opcontrol() {
+	autonskillshand(chassisptr);
 	lv_obj_t* txt;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
@@ -359,6 +360,8 @@ void opcontrol() {
 	}
 		*/
 	
+	
+
 	pros::delay(50);
 	master.clear();
 

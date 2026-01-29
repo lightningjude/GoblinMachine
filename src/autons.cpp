@@ -79,7 +79,15 @@ void autonskillshand(lemlib::Chassis* robot) {
     //then place code here
 
     */
-    
+    pros::Task task{[=] {
+        pros::Controller mainc(pros::E_CONTROLLER_MASTER);
+        while(pros::competition::is_autonomous()) {
+            if(mainc.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+                robot->cancelAllMotions();
+            }
+        }
+
+    }};
     pros::adi::Pneumatics scorerbruh=pros::adi::Pneumatics('b',true);
     pros::adi::Pneumatics matchloader=pros::adi::Pneumatics('a',false);
     //start outside end parking
