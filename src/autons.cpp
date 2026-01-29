@@ -111,6 +111,7 @@ void autonskillshand(lemlib::Chassis* robot) {
     robot->moveToPose(50.815, -46.765, 270, 5000,{});
     pros::delay(1000);
     matchloader.retract();
+    /*
     counter=0;
     while (robot->isInMotion()) {
         pros::delay(20);
@@ -119,7 +120,7 @@ void autonskillshand(lemlib::Chassis* robot) {
         master.print(0, 0, std::to_string(counter).c_str());
         counter++;
     }
-    /*
+    
     while (robot->isInMotion()) {
         pros::delay(20);
     }
