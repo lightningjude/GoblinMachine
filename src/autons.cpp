@@ -96,7 +96,8 @@ void autonskillshand(lemlib::Chassis* robot) {
         counter++;
     }
     robot->turnToHeading(270, 3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
-    robot->moveToPose(47.85, -50.765, 270, 4000, {.forwards=false, .maxSpeed=80});
+    
+    robot->moveToPose(50.85, -40.765, 270, 4000, {.forwards=false, .maxSpeed=80});
     /*robot->moveToPose(54.815, -46.765, 270, 5000,{.forwards=false});
     intakein();
     pros::delay(5000);
