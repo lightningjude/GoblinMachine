@@ -87,8 +87,7 @@ void autonskillshand(lemlib::Chassis* robot) {
     //start outside end parking
     robot->setPose(47.085,0,0);
     robot->moveToPose(47.085, -40.765,0,5000,{.forwards=false, .maxSpeed=127});
-    //Rest of auton code Andrew was working on
-    /*float counter =0;
+    float counter =0;
     while (robot->isInMotion()) {
         pros::delay(20);
         master.clear();
@@ -97,7 +96,7 @@ void autonskillshand(lemlib::Chassis* robot) {
         counter++;
     }
     robot->turnToHeading(270, 3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
-    */
+    
     /*robot->moveToPose(54.815, -46.765, 270, 5000,{.forwards=false});
     intakein();
     pros::delay(5000);
