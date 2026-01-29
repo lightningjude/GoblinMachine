@@ -8,6 +8,7 @@
 #include "pros/rtos.hpp"
 #include <cstdint>
 #include <ctime>
+#include <string>
 
 void autonskillshand(lemlib::Chassis* robot) {
 
@@ -79,24 +80,21 @@ void autonskillshand(lemlib::Chassis* robot) {
     //then place code here
 
     */
-    pros::Task task{[=] {
-        pros::Controller mainc(pros::E_CONTROLLER_MASTER);
-        while(pros::competition::is_autonomous()) {
-            if(mainc.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
-                robot->cancelAllMotions();
-            }
-            pros::delay(20);
-        }
-
-    }};
+    
+    pros::Controller master(pros::E_CONTROLLER_MASTER);
     pros::adi::Pneumatics scorerbruh=pros::adi::Pneumatics('b',true);
     pros::adi::Pneumatics matchloader=pros::adi::Pneumatics('a',false);
     //start outside end parking
     robot->setPose(47.085,0,0);
-    robot->moveToPose(47.085,-46.765,0,2000,{.forwards=false,.minSpeed=10});
+    robot->moveToPose(47.085,-46.765,0,2000,{.forwards=false,.minSpeed=127});
     matchloader.extend();
+    float counter =0;
     while (robot->isInMotion()) {
         pros::delay(20);
+        master.clear();
+        pros::delay(50);
+        master.print(0, 0, std::to_string(counter).c_str());
+        counter++;
     }
     //robot->moveToPose(40,-44,0,5000,{.forwards=false});
     /*
