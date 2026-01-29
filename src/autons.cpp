@@ -86,7 +86,7 @@ void autonskillshand(lemlib::Chassis* robot) {
     pros::adi::Pneumatics matchloader=pros::adi::Pneumatics('a',false);
     //start outside end parking
     robot->setPose(47.085,0,0);
-    robot->moveToPose(47.085, -24/*-40.765*/,0,5000,{.forwards=false, .maxSpeed=127});
+    robot->moveToPose(47.085, -40.765,0,5000,{.forwards=false, .maxSpeed=127});
     //Rest of auton code Andrew was working on
     /*float counter =0;
     while (robot->isInMotion()) {
