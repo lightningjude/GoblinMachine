@@ -87,8 +87,6 @@ void autonskillshand(lemlib::Chassis* robot) {
     //start outside end parking
     robot->setPose(47.085,0,0);
     robot->moveToPose(47.085,-46.765,0,5000,{.forwards=false});
-    
-    matchloader.extend();
     float counter =0;
     while (robot->isInMotion()) {
         pros::delay(20);
@@ -97,20 +95,15 @@ void autonskillshand(lemlib::Chassis* robot) {
         master.print(0, 0, std::to_string(counter).c_str());
         counter++;
     }
-    //robot->moveToPose(40,-44,0,5000,{.forwards=false});
-    /*
-    while (robot->isInMotion()) {
-        pros::delay(20);
-    }
-    robot->moveToPose(54.815,-46.765,270,5000);
-    while (robot->isInMotion()) {
-        pros::delay(20);
-    }
+    robot->turnToHeading(270, 3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
+    robot->moveToPose(54.815, -46.765, 270, 5000,{.forwards=false});
     intakein();
     pros::delay(5000);
     intakestop();
-    robot->moveToPose(50.815, -46.765, 270, 5000,{.forwards=false});
+    robot->moveToPose(50.815, -46.765, 270, 5000,{.forwards=true});
+    pros::delay(1000);
     matchloader.retract();
+    /*
     while (robot->isInMotion()) {
         pros::delay(20);
     }
