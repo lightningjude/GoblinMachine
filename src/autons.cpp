@@ -92,12 +92,13 @@ void autonskillshand(lemlib::Chassis* robot) {
     pros::adi::Pneumatics matchloader=pros::adi::Pneumatics('a',false);
     //start outside end parking
     robot->setPose(47.085,0,0);
-    robot->moveToPose(47.085,-5,0,2000,{.minSpeed=127});
+    robot->moveToPose(47.085,-5,0,2000,{.forwards=false,.minSpeed=127});
     matchloader.extend();
     while (robot->isInMotion()) {
         pros::delay(20);
     }
-    robot->moveToPose(40,-44,0,5000,{.minSpeed=10});
+    robot->moveToPose(40,-44,0,5000,{.forwards=false,.minSpeed=10});
+    /*
     while (robot->isInMotion()) {
         pros::delay(20);
     }
@@ -136,7 +137,7 @@ void autonskillshand(lemlib::Chassis* robot) {
     outup();
     pros::delay(5000);
     intakestop();
-
+    */
 
 }
 
