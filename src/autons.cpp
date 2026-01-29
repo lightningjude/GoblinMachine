@@ -97,7 +97,7 @@ void autonskillshand(lemlib::Chassis* robot) {
     while (robot->isInMotion()) {
         pros::delay(20);
     }
-    robot->moveToPose(40,-44,0,5000,{.forwards=false,.minSpeed=10});
+    robot->moveToPose(40,-44,0,5000,{.forwards=false,.minSpeed=0});
     /*
     while (robot->isInMotion()) {
         pros::delay(20);
