@@ -102,24 +102,12 @@ auto relmovepoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Mov
     if (wait) {
         waittildone();
         newt=robot->getPose().theta;
-        if (newt>350) {
-            newt=(newt-360)+oldt;
-        }
-        else {
-            newt=newt+oldt;
-        }
         robot->setPose(x,y,newt);
     }
     else {
         pros::Task delay([&]{
             waittildone(false);
             newt=robot->getPose().theta;
-            if (newt>350) {
-                newt=(newt-360)+oldt;
-            }
-            else {
-                newt=newt+oldt;
-            }
             robot->setPose(x,y,newt);
         });
     }
