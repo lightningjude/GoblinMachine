@@ -133,6 +133,7 @@ void initialize() {
 	while (imu.is_calibrating()) {
 		pros::delay(20);
 	}
+	pros::delay(1000);
 	//uncomment below while testing
 	pros::Task intakethread_task(intakethread);
 	//pros::lcd::initialize();
