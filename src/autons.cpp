@@ -266,7 +266,7 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
 
 
     //turning ahead of time
-    relturnpoint(10, 10, 5000,true,{.earlyExitRange=10});
+    relturnpoint(10, 10, 5000,true,{.minSpeed=10,.earlyExitRange=10});
     //ex goal is 30,8, but will hit that way, so need to chain to 10,10
     //so relmove to 10,10 then chainmove to 30,8
     
