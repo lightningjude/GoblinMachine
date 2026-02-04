@@ -2,7 +2,9 @@
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/chassis.hpp"
 #include "lemlib/pose.hpp"
+#include "liblvgl/display/lv_display.h"
 #include "liblvgl/misc/lv_types.h"
+#include "liblvgl/widgets/label/lv_label.h"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 #include "pros/misc.hpp"
@@ -309,14 +311,21 @@ void testgui()	{
 
 ASSET(skillsp1_txt);
 void opcontrol() {
+	lv_obj_t* txt;
+	txt=lv_label_create(lv_screen_active());
 	//autonskillshand(chassisptr);
+	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	chassis.setPose(0,0,0);
 	chassis.moveToPose(0, 12, 0, 5000);
+	std::string volt;
 	while(chassis.isInMotion()){
-		
+		volt=left_front.get_voltage();
+		master.clear();
+		pros::delay(50);
+		master.print(0,0,volt.c_str());
 	}
-	lv_obj_t* txt;
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	
+	
 	//comment out when needed
 	/*
 	if (!pros::competition::is_connected())
