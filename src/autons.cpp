@@ -205,6 +205,7 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
     //waittildone();
     //relmovepose(0, -42.165, 0, 3000,true,{.forwards=false});
     //robot->moveToPose(0, -42.165, 0, 3000,{.forwards=false});
+    chainmovepose(0, -42.165, 0, 10000,false,{.forwards=false});
     robot->moveToPoint(0, -42.165, 10000,{.forwards=false,.minSpeed=10});
     //waittildone();
     robot->turnToHeading(90, 3000,{.direction=AngularDirection::CW_CLOCKWISE});
