@@ -218,10 +218,10 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
     pros::delay(500);
     intakein();
     float oldt=robot->getPose().theta;
-    robot->turnToHeading(oldt+10, 200);
-    robot->turnToHeading(oldt-10, 200);
-    robot->turnToHeading(oldt+10, 200);
-    robot->turnToHeading(oldt-10, 200);
+    robot->turnToHeading(oldt+10, 200,{.minSpeed=30});
+    robot->turnToHeading(oldt-10, 200,{.minSpeed=30});
+    robot->turnToHeading(oldt+10, 200,{.minSpeed=30});
+    robot->turnToHeading(oldt-10, 200,{.minSpeed=30});
     master.clear();
     pros::delay(50);
     master.print(1, 0, "Done shaking");
