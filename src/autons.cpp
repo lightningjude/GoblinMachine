@@ -136,9 +136,6 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
         waittildone();
     }
 };
-auto chainrelpose=[&](float x, float y, float theta, int timeout,bool wait=false, lemlib::MoveToPoseParams bruh ={}, bool async=true) {
-    
-};
     //documentation for lemlib: 
 
     //all turns(including swing): https://lemlib.readthedocs.io/en/stable/tutorials/5_angular_motion.html
