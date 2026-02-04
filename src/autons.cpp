@@ -6,6 +6,7 @@
 #include "pros/misc.h"
 #include "pros/rtos.h"
 #include "pros/rtos.hpp"
+#include <any>
 #include <cstdint>
 #include <ctime>
 #include <functional>
@@ -62,22 +63,70 @@ void autonskillshand(lemlib::Chassis* robot) {
     float oldt=robot->getPose().theta;
     robot->setPose(0,0,oldt);
     robot->moveToPose(x, y, theta, timeout,bruh,async);
+    float newt;
     if (wait) {
         waittildone();
+        newt=robot->getPose().theta;
+        if (newt>350) {
+            newt=(newt-360)+oldt;
+        }
+        else {
+            newt=newt+oldt;
+        }
+        robot->setPose(x,y,newt);
+    }
+    else {
+        pros::Task delay([&]{
+            waittildone(false);
+            newt=robot->getPose().theta;
+            if (newt>350) {
+                newt=(newt-360)+oldt;
+            }
+            else {
+                newt=newt+oldt;
+            }
+            robot->setPose(x,y,newt);
+        });
     }
 };
 auto relmovepoint=[&](float x, float y, int timeout,bool wait=false, lemlib::MoveToPointParams bruh ={}, bool async=true) {
     float oldt=robot->getPose().theta;
     robot->setPose(0,0,oldt);
     robot->moveToPoint(x, y, timeout,bruh,async);
+    float newt;
     if (wait) {
         waittildone();
+        newt=robot->getPose().theta;
+        if (newt>350) {
+            newt=(newt-360)+oldt;
+        }
+        else {
+            newt=newt+oldt;
+        }
+        robot->setPose(x,y,newt);
+    }
+    else {
+        pros::Task delay([&]{
+            waittildone(false);
+            newt=robot->getPose().theta;
+            if (newt>350) {
+                newt=(newt-360)+oldt;
+            }
+            else {
+                newt=newt+oldt;
+            }
+            robot->setPose(x,y,newt);
+        });
     }
 };
-auto relswingpoint = [&](float x, float y, lemlib::DriveSide lockside, int timeout, lemlib::SwingToPointParams bruh={},bool async=true) {
+auto relswingpoint = [&](float x, float y, lemlib::DriveSide lockside, int timeout, bool wait,lemlib::SwingToPointParams bruh={},bool async=true) {
     float oldt=robot->getPose().theta;
     robot->setPose(0,0,oldt);
     robot->swingToPoint(x, y, lockside, timeout,bruh);
+    if (wait) {
+        waittildone();
+    }
+    
 };
 auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::TurnToPointParams bruh ={}, bool async=true) {
     float oldt=robot->getPose().theta;
@@ -86,6 +135,9 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
     if (wait) {
         waittildone();
     }
+};
+auto chainrelpose=[&](float x, float y, float theta, int timeout,bool wait=false, lemlib::MoveToPoseParams bruh ={}, bool async=true) {
+    
 };
     //documentation for lemlib: 
 
@@ -192,9 +244,10 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
     relmovelat(9, 4000,true);
     //oldt=robot->getPose().theta;
     //robot->setPose(0,-42.165,oldt);
-    robot->turnToHeading(215, 2000,{.direction=AngularDirection::CW_CLOCKWISE,.earlyExitRange=10});
+    robot->turnToHeading(225, 2000,{.direction=AngularDirection::CW_CLOCKWISE,.earlyExitRange=10});
     waittildone();
     //robot->moveToPose(30, -35, 270, 5000,{.forwards=false});
+    
     relmovepose(30, 8, 270, 5000,false,{.forwards=false});
     //robot->moveToPose(0, -35, 180, 3000);
     //robot->turnToHeading(270, 2000,{.direction=AngularDirection::CW_CLOCKWISE});
