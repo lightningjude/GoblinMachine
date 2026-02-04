@@ -243,7 +243,7 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
     relturnpoint(5, 10, 5000,true,{.minSpeed=10,.earlyExitRange=10});
     //ex goal is 30,8, but will hit that way, so need to chain to 10,10
     //so relmove to 10,10 then chainmove to 30,8
-    relmovepose(10, 10, 260, 5000,true,{.forwards=false,.minSpeed=30});
+    relmovepose(10, 10, 255, 5000,true,{.forwards=false,.minSpeed=30});
     chainmovepose(30, 15, 270, 5000,true,{.forwards=false});
 
 
