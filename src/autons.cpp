@@ -203,10 +203,7 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
 
     //robot->moveToPose(0, -42.165,0,3000,{.forwards=false});
     //waittildone();
-    robot->arcade(20, 0);
-    pros::delay(50);
-    robot->cancelAllMotions();
-    relmovepose(0, -42.165, 0, 3000,true,{.forwards=false});
+    relmovepose(0, -42.165, 0, 3000,true,{.forwards=true});
     robot->turnToHeading(90, 3000,{.direction=AngularDirection::CW_CLOCKWISE});
     matchloader.extend();
     waittildone();
