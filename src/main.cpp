@@ -9,6 +9,7 @@
 #include "pros/rtos.hpp"
 #include <new>
 
+//bruh
 
 
 //HEYY, replace all tasks(especially in skills) that involve delayed whatver with just that code in main task, as drive tasks run asyn anyway
