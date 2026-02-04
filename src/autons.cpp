@@ -89,6 +89,35 @@ void autonskillshand(lemlib::Chassis* robot) {
         });
     }
 };
+auto chainmovepose=[&](float x, float y, float theta, int timeout,bool wait=false, lemlib::MoveToPoseParams bruh ={}, bool async=true) {
+    float oldt=robot->getPose().theta;
+    robot->moveToPose(x, y, theta, timeout,bruh,async);
+    float newt;
+    if (wait) {
+        waittildone();
+        newt=robot->getPose().theta;
+        if (newt>350) {
+            newt=(newt-360)+oldt;
+        }
+        else {
+            newt=newt+oldt;
+        }
+        robot->setPose(x,y,newt);
+    }
+    else {
+        pros::Task delay([&]{
+            waittildone(false);
+            newt=robot->getPose().theta;
+            if (newt>350) {
+                newt=(newt-360)+oldt;
+            }
+            else {
+                newt=newt+oldt;
+            }
+            robot->setPose(x,y,newt);
+        });
+    }
+};
 auto relmovepoint=[&](float x, float y, int timeout,bool wait=false, lemlib::MoveToPointParams bruh ={}, bool async=true) {
     float oldt=robot->getPose().theta;
     robot->setPose(0,0,oldt);
