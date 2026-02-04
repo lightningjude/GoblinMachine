@@ -110,6 +110,6 @@ void intakethread() {
 		else {
 			mllatch = false;
 		}
-		pros::delay(20);
+		pros::delay(30);
 	}
 }
