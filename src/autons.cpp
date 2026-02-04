@@ -265,7 +265,8 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
 
     //ex goal is 30,8, but will hit that way, so need to chain to 10,10
     //so relmove to 10,10 then chainmove to 30,8
-    relmovepose(10, 10, 270, 5000,false,{.forwards=false,.minSpeed=20});
+    relmovepose(10, 10, 270, 5000,true,{.forwards=false,.minSpeed=30});
+    chainmovepose(30, 8, 270, 5000,true,{.forwards=false});
 
     //robot->moveToPose(0, -35, 180, 3000);
     //robot->turnToHeading(270, 2000,{.direction=AngularDirection::CW_CLOCKWISE});
