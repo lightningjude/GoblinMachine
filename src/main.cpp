@@ -41,7 +41,7 @@ double i=0;
 pros::MotorGroup right_motors({1, 2, 3}, pros::MotorGearset::blue); // left motors use 600 RPM cartridges
 pros::MotorGroup left_motors({-4, -5, -6}, pros::MotorGearset::blue); // right motors use 200 RPM cartridges
  
-pros::Motor left_front(1, pros::MotorGearset::blue);
+
 //intake motors and pneumatics defined intakefunctions.cpp
 //matchload is in intakemain.cpp
 
@@ -319,7 +319,7 @@ void opcontrol() {
 	chassis.moveToPose(0, 12, 0, 5000);
 	std::string volt;
 	while(chassis.isInMotion()){
-		volt=left_front.get_voltage();
+		volt=left_motors.get_voltage();
 		master.clear();
 		pros::delay(50);
 		master.print(0,0,volt.c_str());
