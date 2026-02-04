@@ -324,6 +324,19 @@ void opcontrol() {
 		pros::delay(50);
 		master.print(0,0,volt.c_str());
 	}
+	chassis.arcade(30, 0);
+	int count;
+	while(chassis.isInMotion()){
+		volt=left_motors.get_voltage();
+		master.clear();
+		pros::delay(50);
+		master.print(0,0,volt.c_str());
+		count++;
+		if(count==5000) {
+			chassis.arcade(0, 0);
+	}
+	}
+	
 	
 	
 	//comment out when needed
