@@ -311,7 +311,7 @@ ASSET(skillsp1_txt);
 void opcontrol() {
 	//autonskillshand(chassisptr);
 	chassis.setPose(0,0,0);
-	chassis.moveToPose(0, 12, 0, 5000);
+	chassis.moveToPose(0, 12, 0, 5000,{.minSpeed=50});
 	lv_obj_t* txt;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//comment out when needed
