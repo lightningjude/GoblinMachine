@@ -68,24 +68,12 @@ void autonskillshand(lemlib::Chassis* robot) {
     if (wait) {
         waittildone();
         newt=robot->getPose().theta;
-        if (newt>350) {
-            newt=(newt-360)+oldt;
-        }
-        else {
-            newt=newt+oldt;
-        }
         robot->setPose(x,y,newt);
     }
     else {
         pros::Task delay([&]{
             waittildone(false);
             newt=robot->getPose().theta;
-            if (newt>350) {
-                newt=(newt-360)+oldt;
-            }
-            else {
-                newt=newt+oldt;
-            }
             robot->setPose(x,y,newt);
         });
     }
@@ -95,8 +83,7 @@ auto chainmovepose=[&](float x, float y, float theta, int timeout,bool wait=fals
     float newt;
     if (wait) {
         waittildone();
-        newt=robot->getPose().theta;
-        
+        newt=robot->getPose().theta; 
         robot->setPose(x,y,newt);
     }
     else {
