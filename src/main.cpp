@@ -218,6 +218,7 @@ void piddrive(float goal) {
     float kp=10;
     float kd=0;
     float ki=0;
+	float ir=0;
     float x=1;
     float factor=3.14159*60/36*x;
     float total=goal/factor;
@@ -225,10 +226,22 @@ void piddrive(float goal) {
     float error=goal;
     float preverror=goal;
     float integral=0;
+	float deriv=0;
+	float power=0;
 	left_motors.tare_position();
-	
+	std::string report;
+	pros::Controller master(pros::E_CONTROLLER_MASTER);
     while (!complete) {
         error=goal-left_motors.get_position();
+		if (error<(goal*ir)) {
+			integral+=error;
+		}
+		deriv=error-preverror;
+		power=kp*error+kd*deriv+ki*integral;
+		left_motors.move(power);
+		right_motors.move(-power);
+		master.clear();
+		pros::delay(50);
 
     }
 }
