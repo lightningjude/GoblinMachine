@@ -453,6 +453,7 @@ void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//piddrive(12);
 	pidtest2();
+	//bruh
 	/*
 	chassis.setPose(0,0,0);
 	chassis.moveToPose(0, 12, 0, 5000);
