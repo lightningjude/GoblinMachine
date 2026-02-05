@@ -247,6 +247,7 @@ void piddrive(float goal) {
 		report="Error:%.3f";
 		master.print(0,0,report.c_str(),error);
 		if(abs(error)<srange) {
+			
 		}
 
     }
