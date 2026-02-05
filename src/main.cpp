@@ -215,7 +215,7 @@ void competition_initialize() {
  * from where it left off.
  */
 void piddrive(float goal) {
-    float kp=10;
+    float kp=40;
     float kd=0;
     float ki=0;
 	float ir=0;
