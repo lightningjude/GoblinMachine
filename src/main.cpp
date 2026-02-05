@@ -347,8 +347,8 @@ void opcontrol() {
 	txt=lv_label_create(lv_screen_active());
 	//autonskillshand(chassisptr);
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	
-	
+	piddrive(12);
+	/*
 	chassis.setPose(0,0,0);
 	chassis.moveToPose(0, 12, 0, 5000);
 	std::string volt;
@@ -371,7 +371,7 @@ void opcontrol() {
 	}
 	}
 	
-	
+	*/
 	
 	//comment out when needed
 	/*
