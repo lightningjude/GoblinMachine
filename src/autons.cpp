@@ -10,6 +10,11 @@
 //cgeck
 
 void piddrive(int error,bool dir) {
+    float kp=10;
+    float kd=0;
+    float ki=0;
+    float x=(12/12);
+    float factor=3.14159*60/36*x;
     
 }
 void autonskillshand(lemlib::Chassis* robot) {
