@@ -271,15 +271,16 @@ bool piddrive(float goal,float timeout) {
 }
 void pidtest2() {
 	int index=0;
-	std::string names[4]={"Kp","Kd","Ki","Ir"};
+	float goal=12;
+	std::string names[5]={"Kp","Kd","Ki","Ir","Goal"};
 	std::string top="Test";
-	std::string mid="Kp:%.1f Kd:%.1f Ki:%.1f Ir:%.3f";
+	std::string mid="Kp:%.1f Kd:%.1f Ki:%.1f Ir:%.3f Goal:%f";
 	std::string bot="Selected:%s";
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	std::string combo=top+"\n"+mid+"\n"+bot;
 	master.clear();
 	pros::delay(50);
-	master.print(0,0,combo.c_str(),kp,kd,ki,ir,names[index].c_str());
+	master.print(0,0,combo.c_str(),kp,kd,ki,ir,names[index].c_str(),goal);
 	bool changed=true;
 	bool complete=false;
 	bool done=false;
@@ -304,6 +305,9 @@ void pidtest2() {
 			else if (index==3) {
 				ir+=0.001;
 			}
+			else if (index==4) {
+				goal+=1;
+			}
 			changed=true;
 		}
 		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
@@ -319,18 +323,27 @@ void pidtest2() {
 			else if (index==3) {
 				ir-=0.001;
 			}
+			else if (index==4) {
+				goal-=1;
+			}
 			changed=true;
 		}
 		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-			index=(index+1)%4;
+			index=(index+1);
+			if (index>4) {
+				index=0;
+			}
 			changed=true;
 		}
 		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-			index=(index+3)%4;
+			index=(index-1);
+			if (index<0) {
+				index=4;
+			}
 			changed=true;
 		}
 		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-			complete=true;
+			complete=piddrive(goal,5000);
 		}
 		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
 			done=true;
