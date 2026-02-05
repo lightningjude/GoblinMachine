@@ -218,7 +218,7 @@ float kp=40;
 float kd=0;
 float ki=0;
 float ir=0;
-void piddrive(float goal,float timeout) {
+bool piddrive(float goal,float timeout) {
     float x=1;
     float factor=3.14159*60/36*x;
     //float total=goal/factor;
@@ -267,17 +267,30 @@ void piddrive(float goal,float timeout) {
 
 
     }
+	return true;
 }
 void pidtest2() {
 	int index=0;
 	std::string names[4]={"Kp","Kd","Ki","Ir"};
 	std::string top="Test";
 	std::string mid="Kp:%.1f Kd:%.1f Ki:%.1f Ir:%.3f";
-	std::string bot="Selected:";
+	std::string bot="Selected:%s";
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	std::string combo=top+"\n"+mid+"\n"+bot;
 	master.clear();
-	
-
+	pros::delay(50);
+	master.print(0,0,combo.c_str(),kp,kd,ki,ir,names[index].c_str());
+	bool changed=true;
+	bool complete=false;
+	bool done=false;
+	while (!done) {
+		if(changed) {
+			master.clear();
+			pros::delay(50);
+			master.print(0,0,combo.c_str(),kp,kd,ki,ir,names[index].c_str());
+			changed=false;
+		}
+	}
 }
 void autonomous() {
 
