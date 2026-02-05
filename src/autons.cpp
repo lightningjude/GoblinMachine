@@ -211,7 +211,7 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
     //robot->moveToPoint(-9, -42.165, 4000,{.forwards=false,.minSpeed=20});
 
     //This treats the robot as if it is at "0", and moves fwd or bwd that many inches, so it temporarily sets theta at 0, then factors in any theta changes during driving, and then adds it back in
-    relmovelat(-9, 4000,false,{.forwards=false,.minSpeed=20});
+    relmovelat(-15, 4000,false,{.forwards=false,.minSpeed=20});
     pros::delay(500);
     intakein();
     float oldt=robot->getPose().theta;
@@ -224,6 +224,7 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
     master.print(1, 0, "Done shaking");
     pros::delay(3000-850);
     intakestop();
+    waittildone();
     //oldt=robot->getPose().theta;
     //robot->setPose(-9,-42.165,oldt);
     //robot->moveToPoint(0, -42.165, 4000);
