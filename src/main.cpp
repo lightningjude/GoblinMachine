@@ -225,7 +225,7 @@ void piddrive(float goal) {
     float error=goal;
     float preverror=goal;
     float integral=0;
-	left_motors.set_zero_position(left_motors.get_position());
+	left_motors.tare_position();
     while (!complete) {
         error=left_motors.get_position();
     }
