@@ -214,6 +214,22 @@ void competition_initialize() {
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+void piddrive(float goal) {
+    float kp=10;
+    float kd=0;
+    float ki=0;
+    float x=1;
+    float factor=3.14159*60/36*x;
+    float total=goal/factor;
+    bool complete=false;
+    float error=goal;
+    float preverror=goal;
+    float integral=0;
+	left_motors.set_zero_position(left_motors.get_position());
+    while (!complete) {
+        error=left_motors.get_position();
+    }
+}
 void autonomous() {
 
 	//auton selector is currently DISABLED, uncomment from the if (sorm=0) { to enable it again
