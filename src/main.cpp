@@ -273,14 +273,14 @@ void pidtest2() {
 	int index=0;
 	float goal=12;
 	std::string names[5]={"Kp","Kd","Ki","Ir","Goal"};
-	std::string top="Test";
-	std::string mid="Kp:%.1f Kd:%.1f Ki:%.1f Ir:%.3f Goal:%.1f";
+	std::string top="Test, vals: Kp:%.2f kd:%.2f";
+	std::string mid="Ki:%.2fIr:%.2f Goal:%.2f";
 	std::string bot="Selected:%s";
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	std::string combo=top+"\n"+mid+"\n"+bot;
 	master.clear();
 	pros::delay(50);
-	master.print(0,0,combo.c_str(),kp,kd,ki,ir,names[index].c_str(),goal);
+	master.print(0,0,combo.c_str(),kp,kd,ki,ir,goal,names[index].c_str());
 	bool changed=true;
 	bool complete=false;
 	bool done=false;
@@ -289,7 +289,7 @@ void pidtest2() {
 			std::string combo=top+"\n"+mid+"\n"+bot;
 			master.clear();
 			pros::delay(50);
-			master.print(0,0,combo.c_str(),kp,kd,ki,ir,names[index].c_str(),goal);
+			master.print(0,0,combo.c_str(),kp,kd,ki,ir,goal,names[index].c_str());
 			changed=false;
 		}
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
@@ -303,7 +303,7 @@ void pidtest2() {
 				ki+=0.01;
 			}
 			else if (index==3) {
-				ir+=0.001;
+				ir+=0.01;
 			}
 			else if (index==4) {
 				goal+=1;
@@ -321,7 +321,7 @@ void pidtest2() {
 				ki-=0.01;
 			}
 			else if (index==3) {
-				ir-=0.001;
+				ir-=0.01;
 			}
 			else if (index==4) {
 				goal-=1;
@@ -451,7 +451,8 @@ void opcontrol() {
 	txt=lv_label_create(lv_screen_active());
 	//autonskillshand(chassisptr);
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	piddrive(12);
+	//piddrive(12);
+	pidtest2();
 	/*
 	chassis.setPose(0,0,0);
 	chassis.moveToPose(0, 12, 0, 5000);
