@@ -269,7 +269,7 @@ void piddrive(float goal,float timeout) {
     }
 }
 void pidtest2() {
-	int val[4];
+	int index=0;
 	std::string names[4]={"Kp","Kd","Ki","Ir"};
 	std::string top="Test";
 	std::string mid="Kp:%.1f Kd:%.1f Ki:%.1f Ir:%.3f";
