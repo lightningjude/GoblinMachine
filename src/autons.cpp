@@ -9,7 +9,9 @@
 #include <string>
 //cgeck
 
+void piddrive(int error) {
 
+}
 void autonskillshand(lemlib::Chassis* robot) {
     auto waittildone = [&](bool screen=true) {
     pros::Controller master(pros::E_CONTROLLER_MASTER);
