@@ -86,6 +86,7 @@ void autonskillshand(lemlib::Chassis*);
 void pidtest(lemlib::Drivetrain drivetrain,lemlib::OdomSensors sensors,lemlib::ExpoDriveCurve throttle_curve,lemlib::ExpoDriveCurve steer_curve, std::string type);
 void prtdrive(void*);
 void prtheading(void*);
+void piddrive();
 std::tuple<pros::Color,int,int,int,lv_obj_t*> selectgui(void);
 
 #ifdef __cplusplus
