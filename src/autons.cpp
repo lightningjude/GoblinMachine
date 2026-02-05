@@ -9,8 +9,8 @@
 #include <string>
 //cgeck
 
-void piddrive(int error) {
-
+void piddrive(int error,bool dir) {
+    
 }
 void autonskillshand(lemlib::Chassis* robot) {
     auto waittildone = [&](bool screen=true) {
