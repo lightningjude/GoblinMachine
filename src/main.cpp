@@ -229,6 +229,7 @@ void piddrive(float goal) {
     float integral=0;
 	float deriv=0;
 	float power=0;
+	float srange=0.01;
 	left_motors.tare_position();
 	std::string report;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
@@ -245,6 +246,9 @@ void piddrive(float goal) {
 		pros::delay(50);
 		report="Error:%.3f";
 		master.print(0,0,report.c_str(),error);
+		if(abs(error)<srange) {
+		}
+
     }
 }
 void autonomous() {
