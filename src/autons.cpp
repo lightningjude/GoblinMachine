@@ -9,13 +9,13 @@
 #include <string>
 //cgeck
 
-void piddrive(int error,bool dir) {
+void piddrive(float goal,bool dir) {
     float kp=10;
     float kd=0;
     float ki=0;
     float x=(12/12);
     float factor=3.14159*60/36*x;
-    
+    float total=goal/factor;
 }
 void autonskillshand(lemlib::Chassis* robot) {
     auto waittildone = [&](bool screen=true) {
