@@ -214,11 +214,11 @@ void competition_initialize() {
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+float kp=40;
+float kd=0;
+float ki=0;
+float ir=0;
 void piddrive(float goal,float timeout) {
-    float kp=40;
-    float kd=0;
-    float ki=0;
-	float ir=0;
     float x=1;
     float factor=3.14159*60/36*x;
     //float total=goal/factor;
