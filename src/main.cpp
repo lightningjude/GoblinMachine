@@ -289,7 +289,7 @@ void pidtest2() {
 			std::string combo=top+"\n"+mid+"\n"+bot;
 			master.clear();
 			pros::delay(50);
-			master.print(0,0,combo.c_str(),kp,kd,ki,ir,names[index].c_str());
+			master.print(0,0,combo.c_str(),kp,kd,ki,ir,names[index].c_str(),goal);
 			changed=false;
 		}
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
