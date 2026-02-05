@@ -313,8 +313,10 @@ ASSET(skillsp1_txt);
 void opcontrol() {
 	lv_obj_t* txt;
 	txt=lv_label_create(lv_screen_active());
-	//autonskillshand(chassisptr);
+	autonskillshand(chassisptr);
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	/*
+	
 	chassis.setPose(0,0,0);
 	chassis.moveToPose(0, 12, 0, 5000);
 	std::string volt;
@@ -336,7 +338,7 @@ void opcontrol() {
 			chassis.arcade(0, 0);
 	}
 	}
-	
+	*/
 	
 	
 	//comment out when needed
