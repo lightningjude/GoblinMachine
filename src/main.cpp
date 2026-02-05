@@ -229,7 +229,8 @@ void piddrive(float goal,float timeout) {
     float integral=0;
 	float deriv=0;
 	float power=0;
-	float srange=0.01;
+	float sranged=0.01;
+	float sranget=300;
 	float t1;
 	float timeoutend=timeout+pros::millis();
 	bool c1=false;
@@ -249,9 +250,17 @@ void piddrive(float goal,float timeout) {
 		pros::delay(50);
 		report="Error:%.3f";
 		master.print(0,0,report.c_str(),error);
-		if(abs(error)<srange) {
+		if(abs(error)<sranged) {
 			t1=pros::millis();
 			c1=true;
+		}
+		else {
+			c1=false;
+		}
+		if(c1 && abs(error)<sranged) {
+			if (pros::millis()>t1+sranget) {
+				complete=true;
+			}
 		}
 		
 
