@@ -242,7 +242,8 @@ void piddrive(float goal) {
 		right_motors.move(-power);
 		master.clear();
 		pros::delay(50);
-		report="Error:"+std::to_string(error);
+		report="Error:%.3f";
+		master.print(0,0,report.c_str(),error);
     }
 }
 void autonomous() {
