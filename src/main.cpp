@@ -285,10 +285,55 @@ void pidtest2() {
 	bool done=false;
 	while (!done) {
 		if(changed) {
+			std::string combo=top+"\n"+mid+"\n"+bot;
 			master.clear();
 			pros::delay(50);
 			master.print(0,0,combo.c_str(),kp,kd,ki,ir,names[index].c_str());
 			changed=false;
+		}
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+			if (index==0) {
+				kp+=0.1;
+			}
+			else if (index==1) {
+				kd+=0.1;
+			}
+			else if (index==2) {
+				ki+=0.01;
+			}
+			else if (index==3) {
+				ir+=0.001;
+			}
+			changed=true;
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+			if (index==0) {
+				kp-=0.1;
+			}
+			else if (index==1) {
+				kd-=0.1;
+			}
+			else if (index==2) {
+				ki-=0.01;
+			}
+			else if (index==3) {
+				ir-=0.001;
+			}
+			changed=true;
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+			index=(index+1)%4;
+			changed=true;
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+			index=(index+3)%4;
+			changed=true;
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+			complete=true;
+		}
+		else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+			done=true;
 		}
 	}
 }
