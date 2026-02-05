@@ -240,7 +240,7 @@ void piddrive(float goal) {
 		deriv=error-preverror;
 		power=kp*error+kd*deriv+ki*integral;
 		left_motors.move(power);
-		right_motors.move(-power);
+		right_motors.move(power);
 		master.clear();
 		pros::delay(50);
 		report="Error:%.3f";
