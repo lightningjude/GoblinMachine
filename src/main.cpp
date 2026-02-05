@@ -230,11 +230,12 @@ void piddrive(float goal,float timeout) {
 	float deriv=0;
 	float power=0;
 	float srange=0.01;
-	float t1=pros::millis();
+	float t1;
+	float timeoutend=timeout+pros::millis();
 	left_motors.tare_position();
 	std::string report;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-    while (!complete) {
+    while (!complete && timeoutend>pros::millis()) {
         error=goal-left_motors.get_position();
 		if (error<(goal*ir)) {
 			integral+=error;
@@ -248,8 +249,9 @@ void piddrive(float goal,float timeout) {
 		report="Error:%.3f";
 		master.print(0,0,report.c_str(),error);
 		if(abs(error)<srange) {
-
+			t1=pros::millis();
 		}
+		
 
     }
 }
