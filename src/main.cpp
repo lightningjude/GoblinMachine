@@ -233,7 +233,7 @@ void piddrive(float goal,float timeout) {
 	float t1;
 	float timeoutend=timeout+pros::millis();
 	bool c1=false;
-	left_motors.tare_position();
+	left_motors.get_position();
 	std::string report;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
     while (!complete && timeoutend>pros::millis()) {
