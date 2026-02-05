@@ -221,7 +221,8 @@ void piddrive(float goal) {
 	float ir=0;
     float x=1;
     float factor=3.14159*60/36*x;
-    float total=goal/factor;
+    //float total=goal/factor;
+	float total=1;
     bool complete=false;
     float error=goal;
     float preverror=goal;
