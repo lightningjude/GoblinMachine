@@ -214,7 +214,7 @@ void competition_initialize() {
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void piddrive(float goal) {
+void piddrive(float goal,float timeout) {
     float kp=40;
     float kd=0;
     float ki=0;
@@ -230,6 +230,7 @@ void piddrive(float goal) {
 	float deriv=0;
 	float power=0;
 	float srange=0.01;
+	float t1=pros::millis();
 	left_motors.tare_position();
 	std::string report;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
@@ -247,7 +248,7 @@ void piddrive(float goal) {
 		report="Error:%.3f";
 		master.print(0,0,report.c_str(),error);
 		if(abs(error)<srange) {
-			
+
 		}
 
     }
