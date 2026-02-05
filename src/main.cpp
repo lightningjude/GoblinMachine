@@ -250,7 +250,7 @@ void piddrive(float goal,float timeout) {
 		pros::delay(50);
 		report="Error:%.3f";
 		master.print(0,0,report.c_str(),error);
-		if(abs(error)<sranged) {
+		if(std::abs(error)<sranged) {
 			t1=pros::millis();
 			c1=true;
 		}
@@ -258,7 +258,7 @@ void piddrive(float goal,float timeout) {
 			c1=false;
 			t1=0;
 		}
-		if(c1 && abs(error)<sranged) {
+		if(c1 && std::abs(error)<sranged) {
 			if (pros::millis()>t1+sranget && t1!=0) {
 				complete=true;
 			}
