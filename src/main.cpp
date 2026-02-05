@@ -256,9 +256,10 @@ void piddrive(float goal,float timeout) {
 		}
 		else {
 			c1=false;
+			t1=0;
 		}
 		if(c1 && abs(error)<sranged) {
-			if (pros::millis()>t1+sranget) {
+			if (pros::millis()>t1+sranget && t1!=0) {
 				complete=true;
 			}
 		}
