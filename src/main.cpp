@@ -232,6 +232,7 @@ void piddrive(float goal,float timeout) {
 	float srange=0.01;
 	float t1;
 	float timeoutend=timeout+pros::millis();
+	bool c1=false;
 	left_motors.tare_position();
 	std::string report;
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
@@ -250,6 +251,7 @@ void piddrive(float goal,float timeout) {
 		master.print(0,0,report.c_str(),error);
 		if(abs(error)<srange) {
 			t1=pros::millis();
+			c1=true;
 		}
 		
 
