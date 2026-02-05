@@ -228,12 +228,8 @@ void piddrive(float goal) {
 	left_motors.tare_position();
 	
     while (!complete) {
-		if (goal>0) {
         error=goal-left_motors.get_position();
-		}
-		else {
-			error=goal+left_motors.get_position();
-		}
+
     }
 }
 void autonomous() {
