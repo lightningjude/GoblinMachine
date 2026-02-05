@@ -274,7 +274,7 @@ void pidtest2() {
 	float goal=12;
 	std::string names[5]={"Kp","Kd","Ki","Ir","Goal"};
 	std::string top="Test";
-	std::string mid="Kp:%.1f Kd:%.1f Ki:%.1f Ir:%.3f Goal:%f";
+	std::string mid="Kp:%.1f Kd:%.1f Ki:%.1f Ir:%.3f Goal:%.1f";
 	std::string bot="Selected:%s";
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	std::string combo=top+"\n"+mid+"\n"+bot;
