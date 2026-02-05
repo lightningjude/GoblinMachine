@@ -222,7 +222,7 @@ void piddrive(float goal,float timeout) {
     float x=1;
     float factor=3.14159*60/36*x;
     //float total=goal/factor;
-	float total=1;
+	float total=goal;
     bool complete=false;
     float error=goal;
     float preverror=goal;
@@ -267,6 +267,17 @@ void piddrive(float goal,float timeout) {
 
 
     }
+}
+void pidtest2() {
+	int val[4];
+	std::string names[4]={"Kp","Kd","Ki","Ir"};
+	std::string top="Test";
+	std::string mid="Kp:%.1f Kd:%.1f Ki:%.1f Ir:%.3f";
+	std::string bot="Selected:";
+	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	master.clear();
+	
+
 }
 void autonomous() {
 
