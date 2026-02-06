@@ -201,6 +201,7 @@ auto posreset=[&]() {
     intakein();
     pros::delay(500);
     //stop move to prevent ovelap with jiggle
+    //bruh
     move2.suspend();
     delete &move2;
     //jiggle to get blocks in
