@@ -24,6 +24,9 @@
  * E_CONTROLLER_MASTER is pedantically correct within the PROS styleguide, but
  * not convenient for most student programmers.
  */
+
+#include "lemlib/api.hpp" // IWYU pragma: keep
+#include "liblvgl/misc/lv_types.h"
 #define PROS_USE_SIMPLE_NAMES
 
 /**
@@ -35,10 +38,10 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
-#include "lemlib/api.hpp"
 
-/**
- * You should add more #includes here
+
+/*
+  You should add more #includes here
  */
 //#include "okapi/api.hpp"
 
