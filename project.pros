@@ -1276,7 +1276,7 @@
     },
     "upload_options": {
       "description": "GOBLIN",
-      "icon": "alien",
+      "icon": "pizza",
       "after": "none"
     },
     "use_early_access": false

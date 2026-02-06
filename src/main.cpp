@@ -1,14 +1,19 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib/chassis/chassis.hpp"
+#include "lemlib/chassis/trackingWheel.hpp"
 #include "lemlib/pose.hpp"
+#include "lemlib/util.hpp"
+#include "liblvgl/display/lv_display.h"
 #include "liblvgl/misc/lv_types.h"
+#include "liblvgl/widgets/label/lv_label.h"
 #include "pros/adi.hpp"
 #include "pros/misc.h"
 #include "pros/misc.hpp"
 #include "pros/rtos.hpp"
 #include <new>
 
+//bruh
 
 
 //HEYY, replace all tasks(especially in skills) that involve delayed whatver with just that code in main task, as drive tasks run asyn anyway
@@ -38,7 +43,7 @@ double i=0;
 pros::MotorGroup right_motors({1, 2, 3}, pros::MotorGearset::blue); // left motors use 600 RPM cartridges
 pros::MotorGroup left_motors({-4, -5, -6}, pros::MotorGearset::blue); // right motors use 200 RPM cartridges
  
-pros::Motor left_front(1, pros::MotorGearset::blue);
+
 //intake motors and pneumatics defined intakefunctions.cpp
 //matchload is in intakemain.cpp
 
@@ -73,7 +78,7 @@ lemlib::ControllerSettings lateral_controller( 60, // proportional gain (kP)
                                               100, // small error range timeout, in milliseconds: 100
                                               0, // large error range, in inches: 3
                                               0, // large error range timeout, in milliseconds: 500
-                                              10 // maximum acceleration (slew): 20, but tune last starting from 127 down
+                                              50 // maximum acceleration (slew): 20, but tune last starting from 127 down
 );
 
 // angular PID controller
@@ -132,6 +137,7 @@ void initialize() {
 	while (imu.is_calibrating()) {
 		pros::delay(20);
 	}
+	pros::delay(1000);
 	//uncomment below while testing
 	pros::Task intakethread_task(intakethread);
 	//pros::lcd::initialize();
@@ -210,6 +216,173 @@ void competition_initialize() {
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+float kp=70;
+float kd=1;
+float ki=0.1;
+float ir=0.01;
+bool piddrive(float goal,float timeout, float maxspeed) {
+	goal=-goal;
+    float x=(5.0625)/12;
+    float factor=3.14159*lemlib::Omniwheel::NEW_325*60/36*x;
+    goal=goal/factor;
+	//float total=goal;
+    bool complete=false;
+    float error=goal;
+    float preverror=goal;
+    float integral=0;
+	float deriv=0;
+	float power=0;
+	float sranged=0.05;;
+	float sranget=300;
+	float t1;
+	float slewrate=30;
+	float timeoutend=timeout+pros::millis();
+	bool c1=false;
+	left_motors.tare_position();
+	std::string report;
+	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	int counts=0;
+    while (!complete && timeoutend>pros::millis()) {
+        error=goal-left_motors.get_position();
+		if (error<(goal*ir)) {
+			integral+=error;
+		}
+		deriv=error-preverror;
+		power=kp*error+kd*deriv+ki*integral;
+		
+		left_motors.move(power);
+		right_motors.move(power);
+		master.clear();
+		pros::delay(50);
+		report="Error:%.3f";
+		master.print(0,0,report.c_str(),error);
+		power=lemlib::slew(power, std::abs(left_motors.get_actual_velocity()*127/600), slewrate);
+		if (power>maxspeed) {
+			power=maxspeed;
+		}
+		if(std::abs(error)<sranged) {
+			t1=pros::millis();
+			c1=true;
+		}
+		else {
+			c1=false;
+			t1=0;
+		}
+		if(c1 && std::abs(error)<sranged) {
+			if (pros::millis()>t1+sranget && t1!=0) {
+				complete=true;
+			}
+		preverror=error;
+		}
+		left_motors.move(0);
+		right_motors.move(0);
+
+
+    }
+	return true;
+}
+void pidtest2() {
+	int index=0;
+	float goal=1;
+	std::string names[5]={"Kp","Kd","Ki","Ir","Goal"};
+	std::string top="Kp:%.2f kd:%.2f";
+	std::string mid="Ki:%.2fIr:%.2f Goal:%.2f";
+	std::string bot="Selected:%s";
+	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	std::string combo=top+"\n"+mid+"\n"+bot;
+	master.clear();
+	pros::delay(50);
+	master.print(0,0,top.c_str(),kp,kd);
+	pros::delay(50);
+	master.print(1,0,mid.c_str(),ki,ir,goal);
+	pros::delay(50);
+	master.print(2,0,bot.c_str(),names[index].c_str());
+	bool changed=true;
+	bool complete=false;
+	bool done=false;
+	bool latch=false;
+	while (!done) {
+		if(changed) {
+			std::string combo=top+"\n"+mid+"\n"+bot;
+			master.clear();
+			pros::delay(50);
+			master.print(0,0,top.c_str(),kp,kd);
+			pros::delay(50);
+			master.print(1,0,mid.c_str(),ki,ir,goal);
+			pros::delay(50);
+			master.print(2,0,bot.c_str(),names[index].c_str());
+			
+			changed=false;
+		}
+		if(!latch) {
+			if (master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+				if (index==0) {
+					kp+=5;
+				}
+				else if (index==1) {
+					kd+=0.1;
+				}
+				else if (index==2) {
+					ki+=0.05;
+				}
+				else if (index==3) {
+					ir+=0.01;
+				}
+				else if (index==4) {
+					goal+=1;
+				}
+				changed=true;
+				latch=true;
+			}
+			else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+				if (index==0) {
+					kp-=5;
+				}
+				else if (index==1) {
+					kd-=0.1;
+				}
+				else if (index==2) {
+					ki-=0.05;
+				}
+				else if (index==3) {
+					ir-=0.01;
+				}
+				else if (index==4) {
+					goal-=1;
+				}
+				changed=true;
+				latch=true;
+			}
+			else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+				index=(index+1);
+				if (index>4) {
+					index=0;
+				}
+				changed=true;
+				latch=true;
+			}
+			else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+				index=(index-1);
+				if (index<0) {
+					index=4;
+				}
+				changed=true;
+				latch=true;
+			}
+			else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+				complete=piddrive(goal,5000);
+				latch=true;
+			}
+			else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+				done=true;
+				latch=true;
+			}
+		}
+		if (!master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)&!master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)&!master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)&!master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)&!master.get_digital(pros::E_CONTROLLER_DIGITAL_A)&!master.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+				latch=false;
+			}
+	}
+}
 void autonomous() {
 
 	//auton selector is currently DISABLED, uncomment from the if (sorm=0) { to enable it again
@@ -307,9 +480,39 @@ void testgui()	{
 
 ASSET(skillsp1_txt);
 void opcontrol() {
-	autonskillshand(chassisptr);
 	lv_obj_t* txt;
+	txt=lv_label_create(lv_screen_active());
+	autonskillshand(chassisptr);
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	//piddrive(12,5000);
+	//pidtest2();
+	//bruh
+	//dude
+	/*
+	chassis.setPose(0,0,0);
+	chassis.moveToPose(0, 12, 0, 5000);
+	std::string volt;
+	while(chassis.isInMotion()){
+		volt=left_motors.get_voltage();
+		master.clear();
+		pros::delay(50);
+		master.print(0,0,volt.c_str());
+	}
+	chassis.arcade(30, 0);
+	int count;
+	while(chassis.isInMotion()){
+		volt=left_motors.get_voltage();
+		master.clear();
+		pros::delay(50);
+		master.print(0,0,volt.c_str());
+		count++;
+		if(count==5000) {
+			chassis.arcade(0, 0);
+	}
+	}
+	
+	*/
+	
 	//comment out when needed
 	/*
 	if (!pros::competition::is_connected())

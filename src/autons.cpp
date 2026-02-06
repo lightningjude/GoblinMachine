@@ -9,7 +9,6 @@
 #include <string>
 //cgeck
 
-
 void autonskillshand(lemlib::Chassis* robot) {
     auto waittildone = [&](bool screen=true) {
     pros::Controller master(pros::E_CONTROLLER_MASTER);
@@ -124,175 +123,161 @@ auto relturnpoint=[&](float x, float y, int timeout,bool wait=false, lemlib::Tur
         waittildone();
     }
 };
+auto posreset=[&]() {
+    float oldt=robot->getPose().theta;
+    robot->setPose(0,0,oldt);
+};
     //documentation for lemlib: 
-
+    //before any turn run this command:
+    //posreset();
+    
     //all turns(including swing): https://lemlib.readthedocs.io/en/stable/tutorials/5_angular_motion.html
 
-    //all movements that include fwd/bwd: https://lemlib.readthedocs.io/en/stable/tutorials/6_lateral_motion.html
+    //piddrive documentation
+    //It works like this:
+    //first arg is distance, positive or negative, positive is intake faces direction of motion, negative is aligner faces direction of motion
+    //second arg is timeout, in milliseconds
+    //optional third arg is maxspeed, used for low-speed drives or when you need to go slow, it is out of 127
 
-
-    //THIS ONE IS IMPORTANT, READ CAREFULLY
-    //motion chaining: This allows you to do turns around an object 
-    // using multiple movetopose commands without stopping at each one
-    //https://lemlib.readthedocs.io/en/stable/tutorials/8_motion_chaining.html
-
-
-    //to do commands replace . with ->
-    //ex robot->setPose(0,0,0);
-    // or robot->moveToPose(10,10,90,10000);
-
+    //Plan A
     /*
-    //there are two way to set the robots pose
-    robot->setPose(0,0,0);
-    //or
-    lemlib::Pose base(0,0,0);
-    robot->setPose(base);
-    */
+    1. start on the side of parking
+    2. drive straight down to even with mobile goal
+    3. drive to mobile goal, intake, jiggle, back up
+    4. Drive across to other side
+    5. Get even with mobile goal/ long goal
+    6. Backup into long goal, up score
+    7. Extend match loader, drive to mobile goal, intake, jiggle, back up
+    8. Back up to long goal, up score
+    9. Back up, turn to face parking, drive through parking to other side, then even with other side mobile goal
+    10. Repeat 3-9
+    11. Clear other parking, then park
+    12. Celebrate
 
+    //Plan B(More complex, but higher scoring)-Max this is the instagram video
+    1. Do steps 1-10 of plan A, but stop at step 8 on repeat
+    2. On step 9, intake from the parking, 
+    3. go to middle and low score
+    4. Park in red parking
+    5. Celebrate harder
 
-    /*
-    //THERE IS ONLY ONE WAY FOR MOVETOPOSE OR MOVETOPOINT
-    robot->moveToPose(0, 1, 0, 1000);
-    //timeout is in milliseconds
+    
+    
+    
+    */    
 
-    //move to pose DOES NOT accept lemlib::Pose objects, only the values
-    //so this DOESN'T work
-    lemlib::Pose goal(0,5,0);
-    robot->moveToPose(goal,10000);
-    //DO NOT DO THIS, it will throw an error
-    */
-
-    //movetopose accepts several parameters, which are passed like so:
-
-    //1. max and min speed(out of 127), useful for motion chaining:
-    //for this to work, you need to use params, example:
-    //robot->moveToPose(5, 5, 45, 5000,{.maxSpeed=70,.minSpeed=50});
-
-    //2. 
     
 
 
-    //All movements happen in a separate task, so you can run other commands here while that happens
+  
 
-    //ex:
-    /*
-    robot->moveToPose(0,20,0,5000);
-    //this runs asynchronously in another task, meaning you can do things like this
-
-    //make intake run 1 second into drive
-    pros::delay(1000);
-    intakein();
-
-    //since the moves are in another task, the previous commands run DURING the drive, 
-    // not after it, if you want to wait till its done you can do this:
-    while (robot->isInMotion()) {
-        pros::delay(20);
-    }
-    //then place code here
-
-    */
+   
     
+    int done;
     pros::Controller master(pros::E_CONTROLLER_MASTER);
     pros::adi::Pneumatics scorerbruh=pros::adi::Pneumatics('b',true);
     pros::adi::Pneumatics matchloader=pros::adi::Pneumatics('a',false);
     //start outside end parking, center axel centered on center nut of parking
     robot->setPose(0,0,0);
     pros::delay(20);
-    //robot->moveToPose(0, -42.165,0,3000,{.forwards=false});
-    //waittildone();
-    relmovepose(0, -42.165, 0, 3000,true,{.forwards=false});
-    robot->turnToHeading(90, 3000,{.direction=AngularDirection::CW_CLOCKWISE});
+    done=0;
+    //Drive to be even with match loader
+    pros::Task move ([&] {
+        done=piddrive(51,2000);
+    });
+    while (done==0) {
+        pros::delay(20);
+    }
+    delete &move;
+    //turn to face match loader w/ intake, extend match loader
+    robot->turnToHeading(90, 1500,{.direction=AngularDirection::CW_CLOCKWISE});
     matchloader.extend();
     waittildone();
-    //float oldt=robot->getPose().theta;
-    //robot->setPose(0,-42.165,oldt);
-    //robot->moveToPoint(-9, -42.165, 4000,{.forwards=false,.minSpeed=20});
-
-    //This treats the robot as if it is at "0", and moves fwd or bwd that many inches, so it temporarily sets theta at 0, then factors in any theta changes during driving, and then adds it back in
-    relmovelat(-9, 4000,false,{.forwards=false,.minSpeed=20});
-    pros::delay(500);
+    done=0;
+    //drive forward to match loader while intaking
+    pros::Task move2 ([&] {
+        done=piddrive(12,1000);
+    });
     intakein();
-    float oldt=robot->getPose().theta;
-    robot->turnToHeading(oldt+10, 200,{.minSpeed=30});
-    robot->turnToHeading(oldt-10, 200,{.minSpeed=30});
-    robot->turnToHeading(oldt+10, 200,{.minSpeed=30});
-    robot->turnToHeading(oldt-10, 200,{.minSpeed=30});
+    pros::delay(500);
+    //stop move to prevent ovelap with jiggle
+    move2.suspend();
+    delete &move2;
+    //jiggle to get blocks in
+    for(int i=0;i<2;i++) {
+    done=piddrive(4, 800);
+    pros::delay(100);
+    done=piddrive(-2,800);
+    pros::delay(100);
+    }
+    //report that jiggle is done
     master.clear();
     pros::delay(50);
     master.print(1, 0, "Done shaking");
-    pros::delay(3000-850);
+    pros::delay(500);
+    //stop intake
     intakestop();
-    //oldt=robot->getPose().theta;
-    //robot->setPose(-9,-42.165,oldt);
-    //robot->moveToPoint(0, -42.165, 4000);
-    relmovelat(9, 4000,true);
-    //oldt=robot->getPose().theta;
-    //robot->setPose(0,-42.165,oldt);
-    robot->turnToHeading(225, 2000,{.direction=AngularDirection::CW_CLOCKWISE,.minSpeed=20,.earlyExitRange=10});
+    //just in case
     waittildone();
-    //robot->moveToPose(30, -35, 270, 5000,{.forwards=false});
-
-    //use chainpose to avoid reseting position, so use a relmove then a chainmove
-
-    //turning ahead of time
-    relturnpoint(5, 10, 5000,true,{.minSpeed=20,.earlyExitRange=10});
-    //ex goal is 30,8, but will hit that way, so need to chain to 10,10
-    //so relmove to 10,10 then chainmove to 30,8
-    relmovepose(10, 10, 255, 5000,true,{.forwards=false,.minSpeed=30,.earlyExitRange=2});
-    chainmovepose(30, 15, 270, 5000,true,{.forwards=false});
-
-
-    //robot->moveToPose(0, -35, 180, 3000);
-    //robot->turnToHeading(270, 2000,{.direction=AngularDirection::CW_CLOCKWISE});
-    /*
-    counter =0;
-    while (robot->isInMotion()) {
-        pros::delay(20);
-        master.clear();
-        pros::delay(50);
-        master.print(0, 0, std::to_string(counter).c_str());
-        counter++;
-    }
-    robot->moveToPose(50.815, -46.765, 270, 5000,{});
-    pros::delay(1000);
+    //Backup from matchloader
+    done=piddrive(-10, 2000);
+    //retract pneumatic
     matchloader.retract();
-    counter=0;
-    while (robot->isInMotion()) {
-        pros::delay(20);
-        master.clear();
-        pros::delay(50);
-        master.print(0, 0, std::to_string(counter).c_str());
-        counter++;
-    }
-    
-    while (robot->isInMotion()) {
-        pros::delay(20);
-    }
-    robot->turnToHeading(45, 2000);
-    while (robot->isInMotion()) {
-        pros::delay(20);
-    }
-    robot->moveToPose(0, -60, 90, 5000,{.maxSpeed=80});
-    while (robot->isInMotion()) {
-        pros::delay(20);
-    }
-    robot->moveToPose(-32,-56,135,2000,{.minSpeed=80});
-    while (robot->isInMotion()) {
-        pros::delay(20);
-    }
-    robot->moveToPose(-40,-46.765,90,5000);
-    while (robot->isInMotion()) {
-        pros::delay(20);
-    }
-    robot->moveToPose(-32.625,-46.765,90,3000);
-    while(robot->isInMotion()) {
-        pros::delay(20);
-    }
+    //turn to face diagonally across the square, wait for turn to finish
+    robot->turnToHeading(225, 2000,{.direction=AngularDirection::CW_CLOCKWISE});
+    waittildone();
+    //drive across square
+    piddrive(24*sqrt(2)-0.5, 2000);
+    //turn to face 270, MAY NEED TO CHANGE
+    robot->turnToHeading(270, 2000,{.direction=AngularDirection::CW_CLOCKWISE});
+    waittildone();
+    //drive across to other side
+    piddrive(53,4000);
+    //turn to face diagonally across the otherside square
+    robot->turnToHeading(315, 2000,{.direction=AngularDirection::CW_CLOCKWISE});
+    waittildone();
+    //drive across square
+    piddrive(24*sqrt(2)+0.25, 2000);
+    //turn to face up score to long goal
+    robot->turnToHeading(270, 2000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
+    waittildone();
+    //drive into longgoal, then add small lowspeed drive 
+    piddrive(-20, 3000);
+    piddrive(-5,1000,20);
+    //up score into long goal for 5 seconds(could be reduced later)
     outup();
     pros::delay(5000);
     intakestop();
-    */
-
+    //extend matchloader facing the other way
+    matchloader.extend();
+    //wait for it to finish
+    pros::delay(200);
+    //drive into other mobile goal
+    done=false;
+    done=piddrive(15,2000);
+    //after its done do same routine as before, but opposite direction jitter
+    intakein();
+    for(int i=0;i<2;i++) {
+    done=piddrive(-4, 800);
+    pros::delay(100);
+    done=piddrive(2,800);
+    pros::delay(100);
+    }
+    //report done
+    master.clear();
+    pros::delay(50);
+    master.print(1, 0, "Done shaking");
+    pros::delay(500);
+    //stop intake, drive back to long-goal
+    intakestop();
+    piddrive(-42, 3000);
+    //do slow drive into long-goal
+    piddrive(-4, 1000,30);
+    //up score for 4 secs
+    outup();
+    pros::delay(4000);
+    intakestop();
+    //done for now
 }
 
 
