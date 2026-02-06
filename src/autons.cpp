@@ -203,6 +203,7 @@ auto posreset=[&]() {
     //stop move to prevent ovelap with jiggle
     move2.suspend();
     delete &move2;
+    //delete thread just in case
     //jiggle to get blocks in
     for(int i=0;i<2;i++) {
     done=piddrive(4, 800);
