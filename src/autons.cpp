@@ -331,6 +331,9 @@ auto posreset=[&]() {
     piddrive(30,2000);
     robot->turnToHeading(315, 1000,{.direction=AngularDirection::CW_CLOCKWISE});
     piddrive(30,2000);
+    robot->turnToHeading(315, 1000,{.direction=AngularDirection::CW_CLOCKWISE});
+    piddrive(30,2000);
+    robot->turnToHeading(315, 1000,{.direction=AngularDirection::CW_CLOCKWISE});
     //done for now
 }
 
