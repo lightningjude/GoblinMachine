@@ -236,11 +236,11 @@ auto posreset=[&]() {
     //drive across square
     piddrive(24*sqrt(2)-0.5, 1600);
     //turn to face 270, MAY NEED TO CHANGE
-    robot->turnToHeading(267, 1350,{.direction=AngularDirection::CW_CLOCKWISE});
+    robot->turnToHeading(267, 1200,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
     //drive across to other side
-    piddrive(53.0/2.0,1750);
-    robot->turnToHeading(270,900);
+    piddrive(53.0/2.0,1600);
+    robot->turnToHeading(270,800);
     waittildone();
     piddrive(53.0/2.0,1800);
     //turn to face diagonally across the otherside square
