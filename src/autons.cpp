@@ -327,7 +327,7 @@ auto posreset=[&]() {
     //back up
     piddrive(12, 1000);
     //turn to face parking
-    robot->turnToHeading(315, 1000,{.direction=AngularDirection::CW_CLOCKWISE});
+    robot->turnToHeading(135, 1000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
     piddrive(30,2000);
     robot->turnToHeading(315, 1000,{.direction=AngularDirection::CW_CLOCKWISE});
     piddrive(30,2000);
