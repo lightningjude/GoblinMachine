@@ -282,10 +282,10 @@ auto posreset=[&]() {
     pros::delay(200);
     //correct heading and drive away from high score
     done=false;
-    robot ->turnToHeading(267, 800);
+    robot ->turnToHeading(267, 700);
     piddrive(5, 1400, 70);
     //correct heading
-    robot->turnToHeading(267, 1000);
+    robot->turnToHeading(267, 600);
     //extend matchloader
     matchloader.extend();
     //drive into match loader
