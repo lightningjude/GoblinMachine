@@ -482,7 +482,8 @@ ASSET(skillsp1_txt);
 void opcontrol() {
 	lv_obj_t* txt;
 	txt=lv_label_create(lv_screen_active());
-	//autonskillshand(chassisptr);
+	//Line below 
+	autonskillshand(chassisptr);
 	//piddrive(48,2000);
 	//pros::delay(1000);
 	//piddrive(-48,2000);
