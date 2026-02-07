@@ -279,13 +279,13 @@ auto posreset=[&]() {
     //drive away from high score
     done=false;
     robot ->turnToHeading(267, 800);
-    piddrive(24, 1400, 70);
+    piddrive(10, 1400, 70);
     //correct heading
     robot->turnToHeading(267, 1000);
     //extend matchloader
     matchloader.extend();
     //drive into match loader
-    done=piddrive(24,2000, 60);
+    done=piddrive(38,2000, 60);
 
     //after its done do same routine as before, but opposite direction jitter
     intakein();
