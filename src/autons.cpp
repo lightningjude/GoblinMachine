@@ -262,7 +262,7 @@ auto posreset=[&]() {
     pros::Task delaymd ([&] {
         done=piddrive(-40, 5000,70);
     });
-    //up score into long goal for 5 seconds(could be reduced later)
+    //match load to catch downscore and up score into long goal for 5 seconds(could be reduced later)
     outdown();
     pros::delay(10);
     outup();
