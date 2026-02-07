@@ -215,7 +215,7 @@ auto posreset=[&]() {
     pros::delay(130);
     //highscore pulse to let 6th ball in
     outup();
-    pros::delay(15);
+    pros::delay(30);
     intakein();
     done=piddrive(-2, 800);
     pros::delay(10);
