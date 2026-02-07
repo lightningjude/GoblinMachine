@@ -305,7 +305,7 @@ auto posreset=[&]() {
     pros::delay(500);
     //stop intake, drive back to long-goal
     
-    piddrive(-5, 1400);
+    piddrive(-5, 1200);
     //correct heading
     robot->turnToHeading(267, 800);
     //drive to long goal
