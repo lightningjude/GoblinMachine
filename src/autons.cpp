@@ -263,6 +263,7 @@ auto posreset=[&]() {
         done=piddrive(-40, 5000,70);
     });
     //match load to catch downscore and up score into long goal for 5 seconds(could be reduced later)
+    matchloader.extend();
     outdown();
     pros::delay(10);
     outup();
