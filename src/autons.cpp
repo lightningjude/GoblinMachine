@@ -318,7 +318,10 @@ auto posreset=[&]() {
     outup();
     piddrive(-40, 1000,30);
     //up score for 4 secs
-    pros::delay(4000);
+    pros::delay(2000);
+    outdown();
+    pros::delay(80);
+    outup();
     intakestop();
     //done for now
 }
