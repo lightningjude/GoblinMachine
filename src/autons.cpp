@@ -285,8 +285,6 @@ auto posreset=[&]() {
     piddrive(5, 1400, 70);
     //correct heading
     robot->turnToHeading(267, 600);
-    //extend matchloader
-    matchloader.extend();
     //drive into match loader
     done=piddrive(20,1500, 70);
 
