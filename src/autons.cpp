@@ -256,7 +256,7 @@ auto posreset=[&]() {
     piddrive(-20, 1500);
     done=0;
     pros::Task delaymd ([&] {
-        done=piddrive(-20, 5000,70);
+        done=piddrive(-40, 5000,70);
     });
     //up score into long goal for 5 seconds(could be reduced later)
     outdown();
