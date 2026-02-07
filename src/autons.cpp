@@ -270,14 +270,16 @@ auto posreset=[&]() {
         i++;    
     }
     intakestop();
-    //extend matchloader facing the other way
-    matchloader.extend();
+    
     //wait for it to finish
     pros::delay(200);
-    //drive into other mobile goal
+    //drive away from high score
     done=false;
     piddrive(24, 1400, 70);
+    //correct heading
     robot->turnToHeading(267, 1000);
+    //extend matchloader
+    matchloader.extend();
     done=piddrive(24,2000, 70);
 
     //after its done do same routine as before, but opposite direction jitter
