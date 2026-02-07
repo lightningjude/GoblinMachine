@@ -258,6 +258,8 @@ auto posreset=[&]() {
         done=piddrive(-10, 5000,30);
     });
     //up score into long goal for 5 seconds(could be reduced later)
+    outdown();
+    pros::delay(30);
     outup();
     int i=0;
     while (i<2) {
