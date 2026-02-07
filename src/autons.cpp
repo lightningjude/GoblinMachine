@@ -289,7 +289,7 @@ auto posreset=[&]() {
     //extend matchloader
     matchloader.extend();
     //drive into match loader
-    done=piddrive(40,2000, 55);
+    done=piddrive(40,2000, 30);
 
     //after its done do same routine as before, but opposite direction jitter
     intakein();
