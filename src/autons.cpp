@@ -252,7 +252,7 @@ auto posreset=[&]() {
     robot->turnToHeading(267, 1350,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
     waittildone();
     //drive into longgoal, then add small lowspeed drive 
-    piddrive(-20, 3000);
+    piddrive(-20, 1500);
     done=0;
     pros::Task delaymd ([&] {
         done=piddrive(-10, 5000,30);
