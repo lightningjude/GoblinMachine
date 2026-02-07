@@ -195,7 +195,7 @@ auto posreset=[&]() {
     
     
     //turn to face match loader w/ intake, extend match loader
-    robot->turnToHeading(90, 1300,{.direction=AngularDirection::CW_CLOCKWISE});
+    robot->turnToHeading(90, 1350,{.direction=AngularDirection::CW_CLOCKWISE});
     matchloader.extend();
     waittildone();
     done=0;
