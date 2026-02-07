@@ -288,8 +288,8 @@ auto posreset=[&]() {
     piddrive(10, 2000); 
     for(int i=0;i<2;i++) {
     done=piddrive(4, 800);
-    pros::delay(120);
-    done=piddrive(2,800);
+    pros::delay(130);
+    done=piddrive(-2,800);
     pros::delay(15);
     }
     //report done
