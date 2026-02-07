@@ -235,10 +235,10 @@ auto posreset=[&]() {
     //retract pneumatic
     matchloader.retract();
     //turn to face diagonally across the square, wait for turn to finish
-    robot->turnToHeading(225, 1400,{.direction=AngularDirection::CW_CLOCKWISE});
+    robot->turnToHeading(225, 1450,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
     //drive across square
-    piddrive(24*sqrt(2)-0.5, 1600);
+    piddrive(24*sqrt(2)-0.5, 1700);
     //turn to face 270, MAY NEED TO CHANGE
     robot->turnToHeading(266, 1300,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
