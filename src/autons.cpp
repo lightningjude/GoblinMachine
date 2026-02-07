@@ -247,15 +247,15 @@ auto posreset=[&]() {
     robot->turnToHeading(315, 300,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
     //drive across square
-    piddrive(24*sqrt(2)+0, 2000);
+    piddrive(32, 2000);
     //turn to face up score to long goal
-    robot->turnToHeading(270, 1500,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
+    robot->turnToHeading(270, 1350,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
     waittildone();
     //drive into longgoal, then add small lowspeed drive 
     piddrive(-20, 3000);
     done=0;
     pros::Task delaymd ([&] {
-        done=piddrive(-10, 5000,15);
+        done=piddrive(-10, 5000,30);
     });
     //up score into long goal for 5 seconds(could be reduced later)
     outup();
