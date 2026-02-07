@@ -312,7 +312,7 @@ auto posreset=[&]() {
     piddrive(-40, 1800,50);
     //do slow drive into long-goal and score for 4 seconds
     outdown();
-    pros::delay(100);
+    pros::delay(50);
     outup();
     piddrive(-40, 1000,30);
     //up score for 4 secs
