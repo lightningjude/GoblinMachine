@@ -250,7 +250,7 @@ auto posreset=[&]() {
     robot->turnToHeading(315, 300,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
     //drive across square
-    piddrive(30, 1900);
+    piddrive(29, 1900);
     //turn to face up score to long goal
     robot->turnToHeading(267, 1350,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
     waittildone();
