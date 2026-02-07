@@ -217,7 +217,7 @@ auto posreset=[&]() {
     outup();
     pros::delay(30);
     intakein();
-    done=piddrive(-2, 800);
+    done=piddrive(-2, 500);
     pros::delay(10);
     }
     //report that jiggle is done
