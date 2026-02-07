@@ -226,7 +226,7 @@ auto posreset=[&]() {
     //just in case
     waittildone();
     //Backup from matchloader
-    done=piddrive(-10, 1500);
+    done=piddrive(-10, 1400);
     intakestop();
     //retract pneumatic
     matchloader.retract();
