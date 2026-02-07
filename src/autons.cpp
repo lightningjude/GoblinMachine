@@ -278,6 +278,7 @@ auto posreset=[&]() {
     pros::delay(200);
     //drive away from high score
     done=false;
+    robot ->turnToHeading(267, 800);
     piddrive(24, 1400, 70);
     //correct heading
     robot->turnToHeading(267, 1000);
