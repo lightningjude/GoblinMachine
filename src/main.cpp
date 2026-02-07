@@ -235,7 +235,7 @@ bool piddrive(float goal,float timeout, float maxspeed) {
 	float sranged=0.05;;
 	float sranget=300;
 	float t1;
-	float slewrate=30;
+	float slewrate=10;
 	float timeoutend=timeout+pros::millis();
 	bool c1=false;
 	left_motors.tare_position();
@@ -482,7 +482,10 @@ ASSET(skillsp1_txt);
 void opcontrol() {
 	lv_obj_t* txt;
 	txt=lv_label_create(lv_screen_active());
-	autonskillshand(chassisptr);
+	//autonskillshand(chassisptr);
+	//piddrive(48,2000);
+	//pros::delay(1000);
+	//piddrive(-48,2000);
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	//piddrive(12,5000);
 	//pidtest2();
@@ -570,7 +573,6 @@ void opcontrol() {
 
 	bool reversed=false;
 	bool revlatch=false;
-	delete txt;
 	
 	//this checks the chassis is actually setting position right
 

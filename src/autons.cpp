@@ -130,6 +130,10 @@ auto posreset=[&]() {
     //documentation for lemlib: 
     //before any turn run this command:
     //posreset();
+
+
+    //robot->TurnToHeading(angle in degrees, timeout in ms, optional parameters);
+
     
     //all turns(including swing): https://lemlib.readthedocs.io/en/stable/tutorials/5_angular_motion.html
 
@@ -182,13 +186,14 @@ auto posreset=[&]() {
     pros::delay(20);
     done=0;
     //Drive to be even with match loader
-    pros::Task move ([&] {
+    pros::Task moved ([&] {
         done=piddrive(51,2000);
     });
     while (done==0) {
         pros::delay(20);
     }
-    delete &move;
+    
+    
     //turn to face match loader w/ intake, extend match loader
     robot->turnToHeading(90, 1500,{.direction=AngularDirection::CW_CLOCKWISE});
     matchloader.extend();
@@ -202,7 +207,7 @@ auto posreset=[&]() {
     pros::delay(500);
     //stop move to prevent ovelap with jiggle
     move2.suspend();
-    delete &move2;
+    
     //delete thread just in case
     //jiggle to get blocks in
     for(int i=0;i<2;i++) {
@@ -217,45 +222,61 @@ auto posreset=[&]() {
     master.print(1, 0, "Done shaking");
     pros::delay(500);
     //stop intake
-    intakestop();
+    
     //just in case
     waittildone();
     //Backup from matchloader
     done=piddrive(-10, 2000);
+    intakestop();
     //retract pneumatic
     matchloader.retract();
     //turn to face diagonally across the square, wait for turn to finish
-    robot->turnToHeading(225, 2000,{.direction=AngularDirection::CW_CLOCKWISE});
+    robot->turnToHeading(225, 1500,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
     //drive across square
     piddrive(24*sqrt(2)-0.5, 2000);
     //turn to face 270, MAY NEED TO CHANGE
-    robot->turnToHeading(270, 2000,{.direction=AngularDirection::CW_CLOCKWISE});
+    robot->turnToHeading(270, 1500,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
     //drive across to other side
-    piddrive(53,4000);
+    piddrive(53.0/2.0,2000);
+    robot->turnToHeading(270,1500);
+    waittildone();
+    piddrive(53.0/2.0,2000);
     //turn to face diagonally across the otherside square
-    robot->turnToHeading(315, 2000,{.direction=AngularDirection::CW_CLOCKWISE});
+    robot->turnToHeading(315, 300,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
     //drive across square
-    piddrive(24*sqrt(2)+0.25, 2000);
+    piddrive(24*sqrt(2)+0, 2000);
     //turn to face up score to long goal
-    robot->turnToHeading(270, 2000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
+    robot->turnToHeading(270, 1500,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
     waittildone();
     //drive into longgoal, then add small lowspeed drive 
     piddrive(-20, 3000);
-    piddrive(-5,1000,20);
+    done=0;
+    pros::Task delaymd ([&] {
+        done=piddrive(-10, 5000,15);
+    });
     //up score into long goal for 5 seconds(could be reduced later)
     outup();
-    pros::delay(5000);
+    int i=0;
+    while (i<2) {
+        pros::delay(2000);
+        outdown();
+        pros::delay(500);
+        outup();
+        i++;    
+    }
     intakestop();
     //extend matchloader facing the other way
     matchloader.extend();
     //wait for it to finish
     pros::delay(200);
     //drive into other mobile goal
+    delaymd.suspend();
     done=false;
-    done=piddrive(15,2000);
+    done=piddrive(48,2000);
+
     //after its done do same routine as before, but opposite direction jitter
     intakein();
     for(int i=0;i<2;i++) {
@@ -270,7 +291,7 @@ auto posreset=[&]() {
     master.print(1, 0, "Done shaking");
     pros::delay(500);
     //stop intake, drive back to long-goal
-    intakestop();
+    
     piddrive(-42, 3000);
     //do slow drive into long-goal
     piddrive(-4, 1000,30);
