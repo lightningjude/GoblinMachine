@@ -291,7 +291,7 @@ auto posreset=[&]() {
     //drive into match loader
     done=piddrive(20,1500, 70);
 
-    //move to match load and jitter for far side match load
+    //Intake, move to match load and jitter for far side match load
     intakein();
     piddrive(10, 2000); 
     for(int i=0;i<2;i++) {
