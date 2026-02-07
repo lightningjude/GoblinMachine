@@ -321,8 +321,11 @@ auto posreset=[&]() {
     outup();
     piddrive(-40, 1000,30);
     intakestop();
+    //push in for control
     piddrive(4, 700,20);
     piddrive(-4, 700,20);
+    //back up
+    piddrive(12, 1000);
     
     //done for now
 }
