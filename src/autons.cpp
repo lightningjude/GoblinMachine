@@ -309,7 +309,7 @@ auto posreset=[&]() {
     
     piddrive(-5, 1400);
     //correct heading
-    robot->turnToHeading(267, 7000);
+    robot->turnToHeading(267, 800);
     //drive to long goal
     piddrive(-40, 5000,50);
     //do slow drive into long-goal
