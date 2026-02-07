@@ -265,7 +265,7 @@ auto posreset=[&]() {
     //match load to catch downscore and up score into long goal for 5 seconds(could be reduced later)
     matchloader.extend();
     outdown();
-    pros::delay(10);
+    pros::delay(8);
     outup();
     int i=0;
     while (i<2) {
