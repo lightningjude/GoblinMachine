@@ -187,7 +187,7 @@ auto posreset=[&]() {
     done=0;
     //Drive to be even with match loader
     pros::Task moved ([&] {
-        done=piddrive(51,2000);
+        done=piddrive(51,1000);
     });
     while (done==0) {
         pros::delay(20);
@@ -195,13 +195,13 @@ auto posreset=[&]() {
     
     
     //turn to face match loader w/ intake, extend match loader
-    robot->turnToHeading(90, 1500,{.direction=AngularDirection::CW_CLOCKWISE});
+    robot->turnToHeading(90, 1300,{.direction=AngularDirection::CW_CLOCKWISE});
     matchloader.extend();
     waittildone();
     done=0;
     //drive forward to match loader while intaking
     pros::Task move2 ([&] {
-        done=piddrive(12,1000, 120);
+        done=piddrive(12, 1000, 120);
     });
     intakein();
     pros::delay(500);
