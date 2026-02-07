@@ -215,7 +215,7 @@ auto posreset=[&]() {
     pros::delay(130);
     //highscore pulse to let 6th ball in
     outup();
-    pros::delay(30);
+    pros::delay(100);
     intakein();
     done=piddrive(-2, 500);
     pros::delay(10);
@@ -311,11 +311,13 @@ auto posreset=[&]() {
     //correct heading
     robot->turnToHeading(267, 800);
     //drive to long goal
-    piddrive(-40, 5000,50);
-    //do slow drive into long-goal
+    piddrive(-40, 1800,50);
+    //do slow drive into long-goal and score for 4 seconds
+    outdown();
+    pros::delay(100);
+    outup();
     piddrive(-40, 1000,30);
     //up score for 4 secs
-    outup();
     pros::delay(4000);
     intakestop();
     //done for now
