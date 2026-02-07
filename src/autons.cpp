@@ -239,8 +239,8 @@ auto posreset=[&]() {
     robot->turnToHeading(267, 1350,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
     //drive across to other side
-    piddrive(53.0/2.0,2000);
-    robot->turnToHeading(270,1300);
+    piddrive(53.0/2.0,1900);
+    robot->turnToHeading(270,900);
     waittildone();
     piddrive(53.0/2.0,2000);
     //turn to face diagonally across the otherside square
