@@ -322,6 +322,7 @@ auto posreset=[&]() {
     outdown();
     pros::delay(80);
     outup();
+    piddrive(-40, 1000,30);
     intakestop();
     //done for now
 }
