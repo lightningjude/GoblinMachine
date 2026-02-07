@@ -201,7 +201,7 @@ auto posreset=[&]() {
     done=0;
     //drive forward to match loader while intaking
     pros::Task move2 ([&] {
-        done=piddrive(12,1000);
+        done=piddrive(12,1000, 120);
     });
     intakein();
     pros::delay(500);
