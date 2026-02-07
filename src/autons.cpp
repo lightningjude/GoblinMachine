@@ -249,7 +249,7 @@ auto posreset=[&]() {
     //drive across square
     piddrive(30, 1900);
     //turn to face up score to long goal
-    robot->turnToHeading(270, 1350,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
+    robot->turnToHeading(267, 1350,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
     waittildone();
     //drive into longgoal, then add small lowspeed drive 
     piddrive(-20, 3000);
