@@ -262,7 +262,7 @@ auto posreset=[&]() {
     });
     //up score into long goal for 5 seconds(could be reduced later)
     outdown();
-    pros::delay(30);
+    pros::delay(15);
     outup();
     int i=0;
     while (i<2) {
