@@ -236,7 +236,7 @@ auto posreset=[&]() {
     //drive across square
     piddrive(24*sqrt(2)-0.5, 2000);
     //turn to face 270, MAY NEED TO CHANGE
-    robot->turnToHeading(270, 1500,{.direction=AngularDirection::CW_CLOCKWISE});
+    robot->turnToHeading(267, 1500,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
     //drive across to other side
     piddrive(53.0/2.0,2000);
