@@ -289,9 +289,9 @@ auto posreset=[&]() {
     //extend matchloader
     matchloader.extend();
     //drive into match loader
-    done=piddrive(40,2000, 30);
+    done=piddrive(20,1500, 70);
 
-    //after its done do same routine as before, but opposite direction jitter
+    //Jitter for far side match load
     intakein();
     piddrive(10, 2000); 
     for(int i=0;i<2;i++) {
