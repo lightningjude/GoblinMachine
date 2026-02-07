@@ -275,7 +275,6 @@ auto posreset=[&]() {
     //wait for it to finish
     pros::delay(200);
     //drive into other mobile goal
-    delaymd.suspend();
     done=false;
     done=piddrive(48,2000);
 
