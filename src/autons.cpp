@@ -212,7 +212,7 @@ auto posreset=[&]() {
     //jiggle to get blocks in
     for(int i=0;i<2;i++) {
     done=piddrive(4, 800);
-    pros::delay(100);
+    pros::delay(120);
     done=piddrive(-2,800);
     pros::delay(100);
     }
