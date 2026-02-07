@@ -187,7 +187,7 @@ auto posreset=[&]() {
     done=0;
     //Drive to be even with match loader
     pros::Task moved ([&] {
-        done=piddrive(51,1000);
+        done=piddrive(51,1900);
     });
     while (done==0) {
         pros::delay(20);
@@ -230,12 +230,12 @@ auto posreset=[&]() {
     //just in case
     waittildone();
     //Backup from matchloader
-    done=piddrive(-10, 1450);
+    done=piddrive(-10, 1350);
     intakestop();
     //retract pneumatic
     matchloader.retract();
     //turn to face diagonally across the square, wait for turn to finish
-    robot->turnToHeading(225, 1500,{.direction=AngularDirection::CW_CLOCKWISE});
+    robot->turnToHeading(225, 1400,{.direction=AngularDirection::CW_CLOCKWISE});
     waittildone();
     //drive across square
     piddrive(24*sqrt(2)-0.5, 1600);
