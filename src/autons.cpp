@@ -276,7 +276,9 @@ auto posreset=[&]() {
     pros::delay(200);
     //drive into other mobile goal
     done=false;
-    done=piddrive(48,2000, 70);
+    piddrive(24, 1400, 70);
+    robot->turnToHeading(90, 300);
+    done=piddrive(24,2000, 70);
 
     //after its done do same routine as before, but opposite direction jitter
     intakein();
