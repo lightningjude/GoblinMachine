@@ -213,7 +213,11 @@ auto posreset=[&]() {
     for(int i=0;i<2;i++) {
     done=piddrive(4, 800);
     pros::delay(130);
-    done=piddrive(-2,800);
+    //highscore pulse to let 6th ball in
+    outup();
+    pros::delay(15);
+    intakein();
+    done=piddrive(-2, 800);
     pros::delay(10);
     }
     //report that jiggle is done
@@ -254,7 +258,7 @@ auto posreset=[&]() {
     //turn to face up score to long goal
     robot->turnToHeading(267, 1350,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
     waittildone();
-    //drive into longgoal, then add small lowspeed drive 
+    //drive into longgoal, then add lowspeed drive 
     piddrive(-20, 1500);
     done=0;
     pros::Task delaymd ([&] {
@@ -262,7 +266,7 @@ auto posreset=[&]() {
     });
     //up score into long goal for 5 seconds(could be reduced later)
     outdown();
-    pros::delay(15);
+    pros::delay(10);
     outup();
     int i=0;
     while (i<2) {
@@ -276,16 +280,16 @@ auto posreset=[&]() {
     
     //wait for it to finish
     pros::delay(200);
-    //drive away from high score
+    //correct heading and drive away from high score
     done=false;
     robot ->turnToHeading(267, 800);
-    piddrive(10, 1400, 70);
+    piddrive(5, 1400, 70);
     //correct heading
     robot->turnToHeading(267, 1000);
     //extend matchloader
     matchloader.extend();
     //drive into match loader
-    done=piddrive(38,2000, 60);
+    done=piddrive(40,2000, 55);
 
     //after its done do same routine as before, but opposite direction jitter
     intakein();
@@ -293,7 +297,7 @@ auto posreset=[&]() {
     for(int i=0;i<2;i++) {
     done=piddrive(4, 800);
     pros::delay(130);
-    done=piddrive(-2,800);
+    done=piddrive(-2,400);
     pros::delay(15);
     }
     //report done
@@ -303,9 +307,13 @@ auto posreset=[&]() {
     pros::delay(500);
     //stop intake, drive back to long-goal
     
-    piddrive(-42, 3000);
+    piddrive(-5, 1400);
+    //correct heading
+    robot->turnToHeading(267, 7000);
+    //drive to long goal
+    piddrive(-40, 5000,50);
     //do slow drive into long-goal
-    piddrive(-4, 1000,30);
+    piddrive(-40, 1000,30);
     //up score for 4 secs
     outup();
     pros::delay(4000);
