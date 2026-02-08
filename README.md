@@ -4,10 +4,15 @@ This is the code for VEX Robotics Team 99371A, otherwise known as Goblin Machine
 We are a high school VEX Team from Oak Park Illinois, based out of OPRF HS. We have a mix of experience levels, from six years to zero.
 ## Team members
 99371A has five members:
+
 Jude, Main coder and Skills Planner
+
 Andrew, Head Builder and Secondary Coder, Skills Driver
+
 Max, Main Journaler and Concept/Ideas Lead
+
 Tony, Builder and Assistant Journaler, Backup Driver
+
 Amani, Builder and Match Driver
 
 # The Code
