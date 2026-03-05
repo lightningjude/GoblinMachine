@@ -230,7 +230,7 @@ auto posreset=[&]() {
     //just in case
     waittildone();
     //Backup from matchloader
-    done=piddrive(-10, 1300);
+    done=piddrive(-10.5, 1300);
     intakestop();
     //retract pneumatic
     matchloader.retract();
@@ -260,18 +260,18 @@ auto posreset=[&]() {
     piddrive(-20, 1200);
     done=0;
     pros::Task delaymd ([&] {
-        done=piddrive(-40, 5000,70);
+        done=piddrive(-40, 5000);
     });
     //match load to catch downscore and up score into long goal for 5 seconds(could be reduced later)
     matchloader.extend();
     outdown();
-    pros::delay(100);
+    pros::delay(200);
     outup();
     int i=0;
     while (i<2) {
         pros::delay(2000);
         outdown();
-        pros::delay(100);
+        pros::delay(300);
         outup();
         i++;    
     }
@@ -290,7 +290,7 @@ auto posreset=[&]() {
 
     //Intake, move to match load and jitter for far side match load
     intakein();
-    piddrive(10, 2000); 
+    done=piddrive(11, 2000); 
     for(int i=0;i<2;i++) {
     done=piddrive(4, 800);
     pros::delay(130);
@@ -308,16 +308,16 @@ auto posreset=[&]() {
     //correct heading
     robot->turnToHeading(267, 800);
     //drive to long goal
-    piddrive(-40, 1800,50);
+    piddrive(-40.5, 1800,50);
     //do slow drive into long-goal and score for 4 seconds
     outdown();
-    pros::delay(50);
+    pros::delay(150);
     outup();
     piddrive(-40, 1000,30);
     //up score for 4 secs
     pros::delay(2000);
     outdown();
-    pros::delay(80);
+    pros::delay(150);
     outup();
     piddrive(-40, 1000,30);
     intakestop();
@@ -329,12 +329,16 @@ auto posreset=[&]() {
     //turn to face parking
     matchloader.retract();
     robot->turnToHeading(135, 1000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
+    waittildone();
     piddrive(29.5,2000);
     robot->turnToHeading(90, 1000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
+    waittildone();
     piddrive(30,2000);
     robot->turnToHeading(135, 1000);
-    piddrive(40,2000);
+    waittildone();
+    piddrive(39,2000);
     robot->turnToHeading(90, 1000);
+    waittildone();
     piddrive(48,1500);
     //done for now
 }
